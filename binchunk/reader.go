@@ -120,7 +120,7 @@ func (self *reader) readCode() []uint32 {
 func (self *reader) readConstants() []interface{} {
 	constants := make([]interface{}, self.readUint32())
 	for i := range constants {
-		constants[i] = self.readUint32()
+		constants[i] = self.readConstant()
 	}
 	return constants
 }
@@ -142,5 +142,18 @@ func (self *reader) readLineInfo() []uint32 {
 }
 
 func (self *reader) readUpValueNames() []string {
+
+}
+
+func (self *reader) readConstant() interface{} {
+	//switch self.readByte() {
+	//case LUA_TNIL:
+	//	return nil
+	//case LUA_TBOOLEAN:
+	//	return self.readByte() != 0
+	//case :
+	//
+	//}
+	//
 
 }

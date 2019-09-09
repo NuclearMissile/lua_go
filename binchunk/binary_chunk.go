@@ -12,12 +12,6 @@ const (
 	LUA_NUMBER_SIZE  = 8
 	LUAC_INT         = 0x5678
 	LUAC_NUM         = 370.5
-	TAG_NIL          = 0x00
-	TAG_BOOLEAN      = 0x01
-	TAG_NUMBER       = 0x03
-	TAG_INTEGER      = 0x13
-	TAG_SHORT_STR    = 0x04
-	TAG_LONG_STR     = 0x14
 )
 
 type Upvalue struct {

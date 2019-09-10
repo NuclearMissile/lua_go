@@ -126,34 +126,65 @@ func (self *reader) readConstants() []interface{} {
 }
 
 func (self *reader) readUpvalues() []Upvalue {
-
+	upvalues := make([]Upvalue, self.readUint32())
+	for i := range upvalues {
+		upvalues[i] = Upvalue{
+			Instack: self.readByte(),
+			Idx:     self.readByte(),
+		}
+	}
+	return upvalues
 }
 
-func (self *reader) readProtos(s string) []*Prototype {
-
+func (self *reader) readProtos(parentSource string) []*Prototype {
+	protos := make([]*Prototype, self.readUint32())
+	for i := range protos {
+		protos[i] = self.readProto(parentSource)
+	}
+	return protos
 }
 
 func (self *reader) readLocVars() []LocVar {
-
+	locVars := make([]LocVar, self.readUint32())
+	for i := range locVars {
+		locVars[i] = LocVar{
+			VarName: self.readString(),
+			StartPC: self.readUint32(),
+			EndPC:   self.readUint32(),
+		}
+	}
+	return locVars
 }
 
 func (self *reader) readLineInfo() []uint32 {
-
+	lineInfo := make([]uint32, self.readUint32())
+	for i := range lineInfo {
+		lineInfo[i] = self.readUint32()
+	}
+	return lineInfo
 }
 
 func (self *reader) readUpValueNames() []string {
-
+	names := make([]string, self.readUint32())
+	for i := range names {
+		names[i] = self.readString()
+	}
+	return names
 }
 
 func (self *reader) readConstant() interface{} {
-	//switch self.readByte() {
-	//case LUA_TNIL:
-	//	return nil
-	//case LUA_TBOOLEAN:
-	//	return self.readByte() != 0
-	//case :
-	//
-	//}
-	//
-
+	switch self.readByte() {
+	case TAG_NIL:
+		return nil
+	case TAG_BOOLEAN:
+		return self.readByte() != 0
+	case TAG_INTEGER:
+		return self.readLuaInteger()
+	case TAG_NUMBER:
+		return self.readLuaNumber()
+	case TAG_SHORT_STR, TAG_LONG_STR:
+		return self.readString()
+	default:
+		panic("corrupted")
+	}
 }

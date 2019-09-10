@@ -8,10 +8,19 @@ const (
 	CINT_SIZE        = 4
 	CSIZET_SIZE      = 8
 	INSTRUCTION_SIZE = 4
-	LUA_INTEGER_SIZE = 4
+	LUA_INTEGER_SIZE = 8
 	LUA_NUMBER_SIZE  = 8
 	LUAC_INT         = 0x5678
 	LUAC_NUM         = 370.5
+)
+
+const (
+	TAG_NIL       = 0x00
+	TAG_BOOLEAN   = 0x01
+	TAG_NUMBER    = 0x03
+	TAG_INTEGER   = 0x13
+	TAG_SHORT_STR = 0x04
+	TAG_LONG_STR  = 0x14
 )
 
 type Upvalue struct {
@@ -53,9 +62,8 @@ type header struct {
 }
 
 func Undump(data []byte) *Prototype {
-
-}
-
-func Dump(protp *Prototype) []byte {
-
+	reader := &reader{data}
+	reader.checkHeader()
+	reader.readByte() // size_upvalues
+	return reader.readProto("")
 }

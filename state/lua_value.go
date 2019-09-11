@@ -20,3 +20,14 @@ func typeOf(val luaValue) api.LuaType {
 		panic("unknown type of luaValue")
 	}
 }
+
+func convertToBoolean(val luaValue) bool {
+	switch x := val.(type) {
+	case nil:
+		return false
+	case bool:
+		return x
+	default:
+		return true
+	}
+}

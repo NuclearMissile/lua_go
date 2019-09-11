@@ -12,6 +12,15 @@ func newLuaStack(size int) *luaStack {
 	}
 }
 
+func (self *luaStack) reverse(from, to int) {
+	slots := self.slots
+	for from < to {
+		slots[from], slots[to] = slots[to], slots[from]
+		from++
+		to--
+	}
+}
+
 func (self *luaStack) set(idx int, val luaValue) {
 	absIdx := self.absIndex(idx)
 	if absIdx > 0 && absIdx <= self.top {

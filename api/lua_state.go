@@ -13,6 +13,7 @@ type LuaState interface {
 	Replace(idx int)
 	Insert(idx int)
 	Remove(idx int)
+	// circular shift
 	Rotate(idx, n int)
 	SetTop(idx int)
 	// access functions (stack -> go)

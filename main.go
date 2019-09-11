@@ -2,29 +2,71 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"lua_go/api"
 	"lua_go/binchunk"
+	"lua_go/state"
 	"lua_go/vm"
-	"os"
 )
 
 func main() {
-	if len(os.Args) > 1 {
-		data, err := ioutil.ReadFile(os.Args[1])
-		if err != nil {
-			panic(err)
-		}
-		proto := binchunk.Undump(data)
-		list(proto)
-	}
+	ls := state.New()
+	printStack(ls)
+	ls.PushBoolean(true)
+	printStack(ls)
+	ls.PushInteger(10)
+	printStack(ls)
+	ls.PushNil()
+	printStack(ls)
+	ls.PushString("hello")
+	printStack(ls)
+	ls.PushValue(-4)
+	printStack(ls)
+	ls.Replace(3)
+	printStack(ls)
+	ls.SetTop(6)
+	printStack(ls)
+	ls.Remove(-3)
+	printStack(ls)
+	ls.SetTop(-5)
+	printStack(ls)
 }
 
-func list(proto *binchunk.Prototype) {
+func printStack(ls api.LuaState) {
+	top := ls.GetTop()
+	for i := 1; i <= top; i++ {
+		t := ls.Type(i)
+		switch t {
+		case api.LUA_TBOOLEAN:
+			fmt.Printf("[%t]", ls.ToBoolean(i))
+		case api.LUA_TNUMBER:
+			fmt.Printf("[%g]", ls.ToNumber(i))
+		case api.LUA_TSTRING:
+			fmt.Printf("[%q]", ls.ToString(i))
+		default:
+			fmt.Printf("[%s]", ls.TypeName(t))
+		}
+	}
+	fmt.Println()
+}
+
+// decompiler main()
+//func main() {
+//	if len(os.Args) > 1 {
+//		data, err := ioutil.ReadFile(os.Args[1])
+//		if err != nil {
+//			panic(err)
+//		}
+//		proto := binchunk.Undump(data)
+//		printProto(proto)
+//	}
+//}
+
+func printProto(proto *binchunk.Prototype) {
 	printHeader(proto)
 	printCode(proto)
 	printDetail(proto)
 	for _, p := range proto.Protos {
-		list(p)
+		printProto(p)
 	}
 }
 

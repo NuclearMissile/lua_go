@@ -1,6 +1,9 @@
 package api
 
 type LuaType = int
+type ArithOp = int
+type CompareOp = int
+type ThreadStatus = int
 
 type LuaState interface {
 	// stack manipulations
@@ -39,4 +42,9 @@ type LuaState interface {
 	PushInteger(i int64)
 	PushNumber(f float64)
 	PushString(s string)
+	// arithmetic functions
+	Arith(op ArithOp)
+	Compare(idx1, idx2 int, op CompareOp) bool
+	Len(idx int)
+	Concat(n int)
 }

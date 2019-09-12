@@ -1,9 +1,17 @@
 package state
 
+import "lua_go/binchunk"
+
 type luaState struct {
 	stack *luaStack
+	proto *binchunk.Prototype
+	pc    int
 }
 
-func New() *luaState {
-	return &luaState{stack: newLuaStack(20)}
+func New(stackSize int, proto *binchunk.Prototype) *luaState {
+	return &luaState{
+		stack: newLuaStack(stackSize),
+		proto: proto,
+		pc:    0,
+	}
 }

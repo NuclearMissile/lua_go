@@ -1,5 +1,7 @@
 package vm
 
+import "lua_go/api"
+
 const MAXARG_Bx = 1<<18 - 1       // 2^18 - 1 = 262143
 const MAXARG_sBx = MAXARG_Bx >> 1 // 262143 / 2 = 131071
 
@@ -18,6 +20,15 @@ const MAXARG_sBx = MAXARG_Bx >> 1 // 262143 / 2 = 131071
 */
 
 type Instruction uint32
+
+func (self Instruction) Execute(vm api.LuaVM) {
+	action := opcodes[self.Opcode()].action
+	if action != nil {
+		action(self, vm)
+	} else {
+		panic(self.OpName())
+	}
+}
 
 func (self Instruction) Opcode() int {
 	return int(self & 0x3F)

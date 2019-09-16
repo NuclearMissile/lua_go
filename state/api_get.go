@@ -30,7 +30,7 @@ func (self *luaState) GetField(idx int, k string) api.LuaType {
 	return self.getTable(t, k)
 }
 
-func (self *luaState) Get(idx int, i int64) api.LuaType {
+func (self *luaState) GetI(idx int, i int64) api.LuaType {
 	t := self.stack.get(idx)
 	return self.getTable(t, i)
 }

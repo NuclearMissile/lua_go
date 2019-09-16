@@ -1,6 +1,6 @@
 package state
 
-func (self *luaState) SetTAble(idx int) {
+func (self *luaState) SetTable(idx int) {
 	self.setTable(self.stack.get(idx), self.stack.pop(), self.stack.pop())
 }
 

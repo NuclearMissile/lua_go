@@ -1,8 +1,13 @@
 package state
 
+// stack frame of lua
 type luaStack struct {
-	slots []luaValue
-	top   int
+	slots   []luaValue
+	top     int
+	pc      int
+	prev    *luaStack
+	closure *luaClosure
+	varargs []luaValue
 }
 
 func newLuaStack(size int) *luaStack {
@@ -66,6 +71,28 @@ func (self *luaStack) push(val luaValue) {
 	}
 	self.slots[self.top] = val
 	self.top++
+}
+
+func (self *luaStack) popN(n int) []luaValue {
+	vals := make([]luaValue, n)
+	for i := n - 1; i >= 0; i-- {
+		vals[i] = self.pop()
+	}
+	return vals
+}
+
+func (self *luaStack) pushN(vals []luaValue, n int) {
+	nVals := len(vals)
+	if n < 0 {
+		n = nVals
+	}
+	for i := 0; i < n; i++ {
+		if i < nVals {
+			self.push(vals[i])
+		} else {
+			self.push(nil)
+		}
+	}
 }
 
 func (self *luaStack) check(n int) {

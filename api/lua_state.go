@@ -57,4 +57,7 @@ type LuaState interface {
 	SetTable(idx int)
 	SetField(idx int, k string)
 	SetI(idx int, i int64)
+	// function api
+	Load(chunk []byte, name, mode string) int
+	Call(nArgs, nResults int)
 }

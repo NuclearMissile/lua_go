@@ -21,6 +21,8 @@ func typeOf(val luaValue) api.LuaType {
 		return api.LUA_TSTRING
 	case *luaTable:
 		return api.LUA_TTABLE
+	case luaClosure:
+		return api.LUA_TFUNCTION
 	default:
 		panic("unknown type of luaValue")
 	}

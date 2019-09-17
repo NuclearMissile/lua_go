@@ -5,6 +5,8 @@ type ArithOp = int
 type CompareOp = int
 type ThreadStatus = int
 
+type GoFunction func(LuaState) int
+
 type LuaState interface {
 	// stack manipulations
 	GetTop() int
@@ -57,7 +59,16 @@ type LuaState interface {
 	SetTable(idx int)
 	SetField(idx int, k string)
 	SetI(idx int, i int64)
-	// function api
+	// lua function api
 	Load(chunk []byte, name, mode string) int
 	Call(nArgs, nResults int)
+	// go function api
+	PushGoFunction(f GoFunction)
+	IsGoFunction(idx int) bool
+	ToGoFunction(idx int) GoFunction
+	// global table api
+	PushGlobalTable()
+	GetGlobal(name string) LuaType
+	SetGlobal(name string)
+	Register(name string, f GoFunction)
 }

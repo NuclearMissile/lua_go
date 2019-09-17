@@ -87,6 +87,18 @@ func (self *luaState) IsBoolean(idx int) bool {
 	return self.Type(idx) == api.LUA_TBOOLEAN
 }
 
+func (self *luaState) ToGoFunction(idx int) api.GoFunction {
+	val := self.stack.get(idx)
+	if c, ok := val.(*closure); ok {
+		return c.goFunc
+	}
+	return nil
+}
+
+func (self *luaState) IsGoFunction(idx int) bool {
+	return self.ToGoFunction(idx) != nil
+}
+
 func (self *luaState) TypeName(tp api.LuaType) string {
 	switch tp {
 	case api.LUA_TNONE:

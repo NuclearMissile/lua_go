@@ -13,18 +13,18 @@ func typeOf(val luaValue) api.LuaType {
 		return api.LUA_TNIL
 	case bool:
 		return api.LUA_TBOOLEAN
-	case int64:
-		return api.LUA_TNUMBER
-	case float64:
+	case int64, float64:
 		return api.LUA_TNUMBER
 	case string:
 		return api.LUA_TSTRING
 	case *luaTable:
 		return api.LUA_TTABLE
-	case luaClosure:
+	case *closure:
 		return api.LUA_TFUNCTION
+	case *luaState:
+		return api.LUA_TTHREAD
 	default:
-		panic("unknown type of luaValue")
+		panic("unkonwn type!")
 	}
 }
 

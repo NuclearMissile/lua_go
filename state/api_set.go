@@ -1,7 +1,9 @@
 package state
 
 func (self *luaState) SetTable(idx int) {
-	self.setTable(self.stack.get(idx), self.stack.pop(), self.stack.pop())
+	v := self.stack.pop()
+	k := self.stack.pop()
+	self.setTable(self.stack.get(idx), k, v)
 }
 
 func (self *luaState) setTable(t, k, v luaValue) {

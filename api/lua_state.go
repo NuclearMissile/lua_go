@@ -71,4 +71,7 @@ type LuaState interface {
 	GetGlobal(name string) LuaType
 	SetGlobal(name string)
 	Register(name string, f GoFunction)
+	// go upvalue support
+	PushGoClosure(f GoFunction, n int)
+	UpvalueIndex(idx int) int
 }

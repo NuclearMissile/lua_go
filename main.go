@@ -29,7 +29,7 @@ func print(ls api.LuaState) int {
 		if ls.IsBoolean(i) {
 			fmt.Printf("%t", ls.ToBoolean(i))
 		} else if ls.IsString(i) {
-			fmt.Printf("%s", ls.ToString(i))
+			fmt.Print(ls.ToString(i))
 		} else {
 			fmt.Print(ls.TypeName(ls.Type(i)))
 		}

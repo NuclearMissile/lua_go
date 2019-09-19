@@ -10,6 +10,10 @@ func (self *luaState) Load(chunk []byte, name, mode string) int {
 	proto := binchunk.Undump(chunk)
 	c := newLuaClosure(proto)
 	self.stack.push(c)
+	if len(proto.Upvalues) > 0 {
+		env := self.registry.get(api.LUA_RIDX_GLOBALS)
+		c.upvals[0] = &upvalue{&env}
+	}
 	return 0
 }
 
@@ -18,10 +22,10 @@ func (self *luaState) Call(nArgs, nResults int) {
 	if c, ok := val.(*closure); ok {
 		if c.proto != nil {
 			self.callLuaClosure(nArgs, nResults, c)
+			//fmt.Printf("call lua closure: %s<%d, %d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
 		} else {
 			self.callGoClosure(nArgs, nResults, c)
 		}
-		// fmt.Printf("call %s<%d, %d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
 	} else {
 		panic("not a function")
 	}

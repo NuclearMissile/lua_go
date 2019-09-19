@@ -15,12 +15,12 @@ const (
 const (
 	OpArgN = iota /* argument is not used */
 	OpArgU        /* argument is used */
-	OpArgR        /* argument is a register or a jump offset */
+	OpArgR        /* argument is a register or a jmp offset */
 	OpArgK        /* argument is a constant or register/constant */
 )
 
 type opcode struct {
-	testFlag byte // operator is a test (next instruction must be a jump)
+	testFlag byte // operator is a test (next instruction must be a jmp)
 	setAFlag byte // instruction set register A
 	argBMode byte // B arg mode
 	argCMode byte // C arg mode
@@ -36,11 +36,11 @@ var opcodes = []opcode{
 	{0, 1, OpArgN, OpArgN, IABx /* */, "LOADKX  ", loadKX},   // R(A) := Kst(extra arg)
 	{0, 1, OpArgU, OpArgU, IABC /* */, "LOADBOOL", loadBool}, // R(A) := (bool)B; if (C) pc++
 	{0, 1, OpArgU, OpArgN, IABC /* */, "LOADNIL ", loadNil},  // R(A), R(A+1), ..., R(A+B) := nil
-	{0, 1, OpArgU, OpArgN, IABC /* */, "GETUPVAL", nil},      // R(A) := UpValue[B]
+	{0, 1, OpArgU, OpArgN, IABC /* */, "GETUPVAL", getUpVal}, // R(A) := UpValue[B]
 	{0, 1, OpArgU, OpArgK, IABC /* */, "GETTABUP", getTabUp}, // R(A) := UpValue[B][RK(C)]
 	{0, 1, OpArgR, OpArgK, IABC /* */, "GETTABLE", getTable}, // R(A) := R(B)[RK(C)]
-	{0, 0, OpArgK, OpArgK, IABC /* */, "SETTABUP", nil},      // UpValue[A][RK(B)] := RK(C)
-	{0, 0, OpArgU, OpArgN, IABC /* */, "SETUPVAL", nil},      // UpValue[B] := R(A)
+	{0, 0, OpArgK, OpArgK, IABC /* */, "SETTABUP", setTabUp}, // UpValue[A][RK(B)] := RK(C)
+	{0, 0, OpArgU, OpArgN, IABC /* */, "SETUPVAL", setUpVal}, // UpValue[B] := R(A)
 	{0, 0, OpArgK, OpArgK, IABC /* */, "SETTABLE", setTable}, // R(A)[RK(B)] := RK(C)
 	{0, 1, OpArgU, OpArgU, IABC /* */, "NEWTABLE", newTable}, // R(A) := {} (size = B,C)
 	{0, 1, OpArgR, OpArgK, IABC /* */, "SELF    ", self},     // R(A+1) := R(B); R(A) := R(B)[RK(C)]
@@ -61,7 +61,7 @@ var opcodes = []opcode{
 	{0, 1, OpArgR, OpArgN, IABC /* */, "NOT     ", not},      // R(A) := not R(B)
 	{0, 1, OpArgR, OpArgN, IABC /* */, "LEN     ", length},   // R(A) := length of R(B)
 	{0, 1, OpArgR, OpArgR, IABC /* */, "CONCAT  ", concat},   // R(A) := R(B).. ... ..R(C)
-	{0, 0, OpArgR, OpArgN, IAsBx /**/, "JMP     ", jump},     // pc+=sBx; if (A) close all upvalues >= R(A - 1)
+	{0, 0, OpArgR, OpArgN, IAsBx /**/, "JMP     ", jmp},      // pc+=sBx; if (A) close all upvalues >= R(A - 1)
 	{1, 0, OpArgK, OpArgK, IABC /* */, "EQ      ", eq},       // if ((RK(B) == RK(C)) ~= A) then pc++
 	{1, 0, OpArgK, OpArgK, IABC /* */, "LT      ", lt},       // if ((RK(B) <  RK(C)) ~= A) then pc++
 	{1, 0, OpArgK, OpArgK, IABC /* */, "LE      ", le},       // if ((RK(B) <= RK(C)) ~= A) then pc++

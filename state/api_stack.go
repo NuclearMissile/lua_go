@@ -1,5 +1,7 @@
 package state
 
+import "lua_go/api"
+
 func (self *luaState) GetTop() int {
 	return self.stack.top
 }
@@ -73,4 +75,8 @@ func (self *luaState) Copy(fromIdx, toIdx int) {
 func (self *luaState) PushValue(idx int) {
 	val := self.stack.get(idx)
 	self.stack.push(val)
+}
+
+func (self *luaState) UpvalueIndex(i int) int {
+	return api.LUA_REGISTRYINDEX - i
 }

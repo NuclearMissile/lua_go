@@ -63,7 +63,7 @@ func _return(i Instruction, vm api.LuaVM) {
 }
 
 func pushFuncAndArgs(a, b int, vm api.LuaVM) (nArgs int) {
-	if b > 0 {
+	if b >= 1 {
 		vm.CheckStack(b)
 		for i := a; i < a+b; i++ {
 			vm.PushValue(i)
@@ -77,7 +77,7 @@ func pushFuncAndArgs(a, b int, vm api.LuaVM) (nArgs int) {
 
 func fixStack(a int, vm api.LuaVM) {
 	x := int(vm.ToInteger(-1))
-	vm.Pop(-1)
+	vm.Pop(1)
 	vm.CheckStack(x - a)
 	for i := a; i < x; i++ {
 		vm.PushValue(i)

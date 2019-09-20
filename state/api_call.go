@@ -19,15 +19,23 @@ func (self *luaState) Load(chunk []byte, name, mode string) int {
 
 func (self *luaState) Call(nArgs, nResults int) {
 	val := self.stack.get(-(nArgs + 1))
-	if c, ok := val.(*closure); ok {
+	c, ok := val.(*closure)
+	if !ok {
+		if mf := getMetaField(val, "__call", self); mf != nil {
+			if c, ok = mf.(*closure); ok {
+				self.stack.push(val)
+				self.Insert(-(nArgs + 2))
+				nArgs++
+			}
+		}
+	}
+	if ok {
 		if c.proto != nil {
 			self.callLuaClosure(nArgs, nResults, c)
 			//fmt.Printf("call lua closure: %s<%d, %d>\n", c.proto.Source, c.proto.LineDefined, c.proto.LastLineDefined)
 		} else {
 			self.callGoClosure(nArgs, nResults, c)
 		}
-	} else {
-		panic("not a function")
 	}
 }
 

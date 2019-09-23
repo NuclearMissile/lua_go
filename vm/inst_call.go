@@ -21,6 +21,23 @@ func self(i Instruction, vm api.LuaVM) {
 	vm.Replace(a)
 }
 
+func tForCall(i Instruction, vm api.LuaVM) {
+	a, _, c := i.ABC()
+	a++
+	pushFuncAndArgs(a, 3, vm)
+	vm.Call(2, c)
+	popResults(a+3, c+1, vm)
+}
+
+func tForLoop(i Instruction, vm api.LuaVM) {
+	a, sBx := i.AsBx()
+	a++
+	if !vm.IsNil(a + 1) {
+		vm.Copy(a+1, a)
+		vm.AddPC(sBx)
+	}
+}
+
 // todo tail call optimization
 func tailCall(i Instruction, vm api.LuaVM) {
 	a, b, c := i.ABC()

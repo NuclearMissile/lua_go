@@ -38,7 +38,7 @@ func tForLoop(i Instruction, vm api.LuaVM) {
 	}
 }
 
-// todo tail call optimization
+// todo tail call optimization?
 func tailCall(i Instruction, vm api.LuaVM) {
 	a, b, c := i.ABC()
 	a++

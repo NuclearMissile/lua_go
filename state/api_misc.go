@@ -1,5 +1,7 @@
 package state
 
+import "lua_go/api"
+
 func (self *luaState) Len(idx int) {
 	val := self.stack.get(idx)
 	if s, ok := val.(string); ok {
@@ -11,6 +13,27 @@ func (self *luaState) Len(idx int) {
 	} else {
 		panic("length error")
 	}
+}
+
+func (self *luaState) Error() int {
+	err := self.stack.pop()
+	panic(err)
+}
+
+func (self *luaState) PCall(nArgs, nRes, msgh int) (status int) {
+	caller := self.stack
+	status = api.LUA_ERRRUN
+	defer func() {
+		if err := recover(); err != nil {
+			for self.stack != caller {
+				self.popLuaStack()
+			}
+			self.stack.push(err)
+		}
+	}()
+	self.Call(nArgs, nRes)
+	status = api.LUA_OK
+	return
 }
 
 func (self *luaState) RawLen(idx int) uint {

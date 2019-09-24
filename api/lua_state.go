@@ -85,4 +85,7 @@ type LuaState interface {
 	RawSetI(idx int, i int64)
 	// iterator
 	Next(idx int) bool
+	// error handling
+	Error() int
+	PCall(nArgs, nRes, msgh int) int
 }

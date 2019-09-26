@@ -22,7 +22,7 @@ func main() {
 		ls.Register("setmetatable", setMetatable)
 		ls.Register("next", next)
 		ls.Register("pairs", pairs)
-		ls.Register("ipairs", iPairs)
+
 		ls.Register("pcall", pCall)
 		ls.Register("error", _error)
 		ls.Load(data, os.Args[1], "b")

@@ -97,17 +97,52 @@
 --print(v2 == vector(3, 4))
 --v4()
 
---t = { a = 1, b = 2, c = 3 }
+--t = { b = 2, a = 1, c = 3 }
 --for k, v in pairs(t) do
 --    print(k, v)
 --end
-
+--print("")
+--
+--t.d = 4
+--t.e = 5
+--
+--for k, v in pairs(t) do
+--    print(k, v)
+--end
+--
+--print("")
+--
+--for k, v in ipairs(t) do
+--    print(k, v)
+--end
+--
+--print("")
+--
 --t = { "a", "b", "c" }
 --for k, v in ipairs(t) do
 --    print(k, v)
 --end
 
-function div0()
-    if b
+function div0(a, b)
+    if b == 0 then
+        error("div by 0")
+    else
+        return a / b
+    end
 end
+
+function div1(a, b)
+    return div0(a, b)
+end
+
+function div2(a, b)
+    return div1(a, b)
+end
+
+ok, res = pcall(div2, 4, 2); print(ok, res)
+ok, res = pcall(div2, 5, 0); print(ok, res)
+ok, res = pcall(div2, {}, {}); print(ok, res)
+
+
+
 

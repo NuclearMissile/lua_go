@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"lua_go/api"
 	"lua_go/binchunk"
-	"lua_go/state"
+	. "lua_go/complier/lexer"
 	"lua_go/vm"
 	"os"
 )
@@ -16,19 +16,61 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		ls := state.New()
-		ls.Register("print", print)
-		ls.Register("getmetatable", getMetatable)
-		ls.Register("setmetatable", setMetatable)
-		ls.Register("next", next)
-		ls.Register("pairs", pairs)
-
-		ls.Register("pcall", pCall)
-		ls.Register("error", _error)
-		ls.Load(data, os.Args[1], "b")
-		ls.Call(0, 0)
+		testLexer(string(data), os.Args[1])
 	}
 }
+
+func testLexer(chunk, chunkName string) {
+	lexer := NewLexer(chunk, chunkName)
+	for {
+		line, kind, token := lexer.NextToken()
+		fmt.Printf("[%2d] [%-10s] %s\n", line, kindToCat(kind), token)
+		if kind == TOKEN_EOF {
+			break
+		}
+	}
+}
+
+func kindToCat(kind int) string {
+	switch {
+	case kind < TOKEN_SEP_SEMI:
+		return "other"
+	case kind <= TOKEN_SEP_RCURLY:
+		return "separator"
+	case kind <= TOKEN_OP_NOT:
+		return "operator"
+	case kind <= TOKEN_KW_WHILE:
+		return "keyword"
+	case kind <= TOKEN_IDENTIFIER:
+		return "identifier"
+	case kind <= TOKEN_NUMBER:
+		return "number"
+	case kind <= TOKEN_STRING:
+		return "string"
+	default:
+		return "other"
+	}
+}
+
+//func main() {
+//	if len(os.Args) > 1 {
+//		data, err := ioutil.ReadFile(os.Args[1])
+//		if err != nil {
+//			panic(err)
+//		}
+//		ls := state.New()
+//		ls.Register("print", print)
+//		ls.Register("getmetatable", getMetatable)
+//		ls.Register("setmetatable", setMetatable)
+//		ls.Register("next", next)
+//		ls.Register("pairs", pairs)
+//		ls.Register("ipairs", iPairs)
+//		ls.Register("pcall", pCall)
+//		ls.Register("error", _error)
+//		ls.Load(data, os.Args[1], "b")
+//		ls.Call(0, 0)
+//	}
+//}
 
 func pCall(ls api.LuaState) int {
 	nArgs := ls.GetTop() - 1

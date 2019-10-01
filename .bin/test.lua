@@ -125,7 +125,7 @@
 
 function div0(a, b)
     if b == 0 then
-        error("div by 0")
+        error "div by 0"
     else
         return a / b
     end
@@ -139,9 +139,12 @@ function div2(a, b)
     return div1(a, b)
 end
 
-ok, res = pcall(div2, 4, 2); print(ok, res)
-ok, res = pcall(div2, 5, 0); print(ok, res)
-ok, res = pcall(div2, {}, {}); print(ok, res)
+ok, res = pcall(div2, 4, 2);
+print(ok, res)
+ok, res = pcall(div2, 5, 0);
+print(ok, res)
+ok, res = pcall(div2, {}, {});
+print(ok, res)
 
 
 

@@ -33,24 +33,6 @@ func parseRetExps(lexer *Lexer) []Exp {
 	}
 }
 
-func parseExpList(lexer *Lexer) []Exp {
-	exps := make([]Exp, 0, 4)
-	exps = append(exps, parseExp(lexer))
-	for lexer.LookAhead() == TOKEN_SEP_COMMA {
-		lexer.NextToken()
-		exps = append(exps, parseRetExps(lexer))
-	}
-	return exps
-}
-
-func parseExp(lexer *Lexer) Exp {
-
-}
-
-func parseStat(lexer *Lexer) Stat {
-
-}
-
 func parseStates(lexer *Lexer) []Stat {
 	stats := make([]Stat, 0, 8)
 	for !isReturnOrBlockEnd(lexer.LookAhead()) {

@@ -7,29 +7,35 @@ import (
 )
 
 type funcInfo struct {
-	constants         map[interface{}]int
-	usedRegs, maxRegs int
-	scopeLV           int
-	locVars           []*localVarInfo
-	locNames          map[string]*localVarInfo
-	breaks            [][]int
-	insts             []uint32
-	parent            *funcInfo
-	upvalues          map[string]upvalInfo
-	subFuncs          []*funcInfo
-	numParams         int
-	isVararg          bool
+	parent    *funcInfo
+	subFuncs  []*funcInfo
+	usedRegs  int
+	maxRegs   int
+	scopeLV   int
+	locVars   []*locVarInfo
+	locNames  map[string]*locVarInfo
+	upvalues  map[string]upvalInfo
+	constants map[interface{}]int
+	breaks    [][]int
+	insts     []uint32
+	lineNums  []uint32
+	line      int
+	lastLine  int
+	numParams int
+	isVararg  bool
 }
 
 type upvalInfo struct {
 	localVarSlot, upvalIndex, index int
 }
 
-type localVarInfo struct {
-	prev     *localVarInfo
+type locVarInfo struct {
+	prev     *locVarInfo
 	name     string
 	scopeLV  int
 	slot     int
+	startPC  int
+	endPC    int
 	captured bool
 }
 
@@ -51,8 +57,8 @@ var arithAndBitwiseBinops = map[int]int{
 func newFuncInfo(parent *funcInfo, fd *FuncDefExp) *funcInfo {
 	return &funcInfo{
 		constants: map[interface{}]int{},
-		locVars:   make([]*localVarInfo, 0, 8),
-		locNames:  map[string]*localVarInfo{},
+		locVars:   make([]*locVarInfo, 0, 8),
+		locNames:  map[string]*locVarInfo{},
 		breaks:    make([][]int, 1),
 		insts:     make([]uint32, 0, 16),
 		parent:    parent,
@@ -82,7 +88,7 @@ func (self *funcInfo) enterScope(breakable bool) {
 	}
 }
 
-func (self *funcInfo) exitScope() {
+func (self *funcInfo) exitScope(endPC int) {
 	pendingBreakJmps := self.breaks[len(self.breaks)-1]
 	self.breaks = self.breaks[:len(self.breaks)-1]
 	a := self.getJmpArgA()
@@ -92,15 +98,17 @@ func (self *funcInfo) exitScope() {
 		self.insts[pc] = uint32(i)
 	}
 
+	self.fixGotoJmps()
 	self.scopeLV--
-	for _, locVar := range self.locVars {
+	for _, locVar := range self.locNames {
 		if locVar.scopeLV > self.scopeLV {
+			locVar.endPC = endPC
 			self.removeLocalVar(locVar)
 		}
 	}
 }
 
-func (self *funcInfo) removeLocalVar(locVar *localVarInfo) {
+func (self *funcInfo) removeLocalVar(locVar *locVarInfo) {
 	self.freeReg()
 	if locVar.prev == nil {
 		delete(self.locNames, locVar.name)
@@ -119,7 +127,7 @@ func (self *funcInfo) slotOfLocalVar(name string) int {
 }
 
 func (self *funcInfo) addLocalVar(name string) int {
-	newVar := &localVarInfo{
+	newVar := &locVarInfo{
 		prev:    self.locNames[name],
 		name:    name,
 		scopeLV: self.scopeLV,
@@ -141,15 +149,27 @@ func (self *funcInfo) allocReg() int {
 	return self.usedRegs - 1
 }
 
-func (self *funcInfo) freeReg() {
-	self.usedRegs--
-}
-
 func (self *funcInfo) allocRegs(n int) int {
+	if n <= 0 {
+		panic("n <= 0")
+	}
 	for i := 0; i < n; i++ {
 		self.allocReg()
 	}
 	return self.usedRegs - n
+}
+
+func (self *funcInfo) freeReg() {
+	self.usedRegs--
+}
+
+func (self *funcInfo) freeRegs(n int) {
+	if n < 0 {
+		panic("n < 0")
+	}
+	for i := 0; i < n; i++ {
+		self.freeReg()
+	}
 }
 
 func (self *funcInfo) indexOfConstant(k interface{}) int {
@@ -176,7 +196,7 @@ func (self *funcInfo) indexOfUpval(name string) int {
 			locVar.captured = true
 			return idx
 		}
-		if uvIdx := (self).indexOfUpval(name); uvIdx > 0 {
+		if uvIdx := self.parent.indexOfUpval(name); uvIdx >= 0 {
 			idx := len(self.upvalues)
 			self.upvalues[name] = upvalInfo{
 				localVarSlot: -1,
@@ -191,8 +211,8 @@ func (self *funcInfo) indexOfUpval(name string) int {
 
 func (self *funcInfo) fixSbx(pc, sBx int) {
 	i := self.insts[pc]
-	i = i << 18 >> 18
-	i = i | uint32(sBx+MAXARG_sBx)<<14
+	i = i << 18 >> 18                  // clear sBx
+	i = i | uint32(sBx+MAXARG_sBx)<<14 // reset sBx
 	self.insts[pc] = i
 }
 
@@ -201,5 +221,34 @@ func (self *funcInfo) pc() int {
 }
 
 func (self *funcInfo) getJmpArgA() int {
+	hasCapturedLocVars := false
+	minSlotOfLocVars := self.maxRegs
+	for _, locVar := range self.locNames {
+		if locVar.scopeLV == self.scopeLV {
+			for v := locVar; v != nil && v.scopeLV == self.scopeLV; v = v.prev {
+				if v.captured {
+					hasCapturedLocVars = true
+				}
+				if v.slot < minSlotOfLocVars && v.name[0] != '(' {
+					minSlotOfLocVars = v.slot
+				}
+			}
+		}
+	}
+	if hasCapturedLocVars {
+		return minSlotOfLocVars + 1
+	} else {
+		return 0
+	}
+}
+
+func (self *funcInfo) closeOpenUpvals(line int) {
+	a := self.getJmpArgA()
+	if a > 0 {
+		self.emitJmp(line, a, 0)
+	}
+}
+
+func (self *funcInfo) fixGotoJmps() {
 
 }

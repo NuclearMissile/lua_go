@@ -25,7 +25,7 @@ var (
 	reOpeningLongBracket = regexp.MustCompile(`^\[=*\[`)
 	reDecEscapeSeq       = regexp.MustCompile(`^\\[0-9]{1,3}`)
 	reHexEscapeSeq       = regexp.MustCompile(`^\\x[0-9a-fA-F]{2}`)
-	reUnicodeEscapeSeq   = regexp.MustCompile(`^\\u\{[0-9a-fA-F]+\}`)
+	reUnicodeEscapeSeq   = regexp.MustCompile(`^\\u{[0-9a-fA-F]+}`)
 )
 
 func (self *Lexer) next(n int) {

@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"lua_go/api"
 	"lua_go/binchunk"
-	"lua_go/complier/parser"
+	"lua_go/compiler/parser"
 	"lua_go/vm"
 	"os"
 )

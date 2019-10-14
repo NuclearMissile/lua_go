@@ -139,6 +139,12 @@ function div2(a, b)
     return div1(a, b)
 end
 
+aa = 5.0;
+bb = 0x3f.5ap+9;
+cc = 0xabc.defp-100;
+print(bb)
+print(cc)
+
 ok, res = pcall(div2, 4, 2);
 print(ok, res)
 ok, res = pcall(div2, 5, 0);

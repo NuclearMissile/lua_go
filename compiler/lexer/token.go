@@ -1,7 +1,7 @@
 package lexer
 
 const (
-	TOKEN_EOF         = iota           // end-of-file
+	TOKEN_EOF         = iota           //
 	TOKEN_VARARG                       // ...
 	TOKEN_SEP_SEMI                     // ;
 	TOKEN_SEP_COMMA                    // ,

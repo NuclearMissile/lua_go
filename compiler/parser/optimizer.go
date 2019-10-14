@@ -7,10 +7,10 @@ import . "lua_go/compiler/lexer"
 
 func optimizeLogicalOr(exp *BinopExp) Exp {
 	if isTrue(exp.Exp1) {
-		return exp.Exp1 // true or x => true
+		return exp.Exp1
 	}
 	if isFalse(exp.Exp1) && !isVarargOrFuncCall(exp.Exp2) {
-		return exp.Exp2 // false or x => x
+		return exp.Exp2
 	}
 	return exp
 }
@@ -30,15 +30,15 @@ func optimizeBitwiseBinaryOp(exp *BinopExp) Exp {
 		if j, ok := castToInt(exp.Exp2); ok {
 			switch exp.Op {
 			case TOKEN_OP_BAND:
-				return &IntegerExp{exp.Line, i & j}
+				return &IntegerExp{Line: exp.Line, Val: i & j}
 			case TOKEN_OP_BOR:
-				return &IntegerExp{exp.Line, i | j}
+				return &IntegerExp{Line: exp.Line, Val: i | j}
 			case TOKEN_OP_BXOR:
-				return &IntegerExp{exp.Line, i ^ j}
+				return &IntegerExp{Line: exp.Line, Val: i ^ j}
 			case TOKEN_OP_SHL:
-				return &IntegerExp{exp.Line, number.ShiftLeft(i, j)}
+				return &IntegerExp{Line: exp.Line, Val: number.ShiftLeft(i, j)}
 			case TOKEN_OP_SHR:
-				return &IntegerExp{exp.Line, number.ShiftRight(i, j)}
+				return &IntegerExp{Line: exp.Line, Val: number.ShiftRight(i, j)}
 			}
 		}
 	}
@@ -50,18 +50,18 @@ func optimizeArithBinaryOp(exp *BinopExp) Exp {
 		if y, ok := exp.Exp2.(*IntegerExp); ok {
 			switch exp.Op {
 			case TOKEN_OP_ADD:
-				return &IntegerExp{exp.Line, x.Val + y.Val}
+				return &IntegerExp{Line: exp.Line, Val: x.Val + y.Val}
 			case TOKEN_OP_SUB:
-				return &IntegerExp{exp.Line, x.Val - y.Val}
+				return &IntegerExp{Line: exp.Line, Val: x.Val - y.Val}
 			case TOKEN_OP_MUL:
-				return &IntegerExp{exp.Line, x.Val * y.Val}
+				return &IntegerExp{Line: exp.Line, Val: x.Val * y.Val}
 			case TOKEN_OP_IDIV:
 				if y.Val != 0 {
-					return &IntegerExp{exp.Line, number.IFloorDiv(x.Val, y.Val)}
+					return &IntegerExp{Line: exp.Line, Val: number.IFloorDiv(x.Val, y.Val)}
 				}
 			case TOKEN_OP_MOD:
 				if y.Val != 0 {
-					return &IntegerExp{exp.Line, number.IMod(x.Val, y.Val)}
+					return &IntegerExp{Line: exp.Line, Val: number.IMod(x.Val, y.Val)}
 				}
 			}
 		}
@@ -70,25 +70,25 @@ func optimizeArithBinaryOp(exp *BinopExp) Exp {
 		if g, ok := castToFloat(exp.Exp2); ok {
 			switch exp.Op {
 			case TOKEN_OP_ADD:
-				return &FloatExp{exp.Line, f + g}
+				return &FloatExp{Line: exp.Line, Val: f + g}
 			case TOKEN_OP_SUB:
-				return &FloatExp{exp.Line, f - g}
+				return &FloatExp{Line: exp.Line, Val: f - g}
 			case TOKEN_OP_MUL:
-				return &FloatExp{exp.Line, f * g}
+				return &FloatExp{Line: exp.Line, Val: f * g}
 			case TOKEN_OP_DIV:
 				if g != 0 {
-					return &FloatExp{exp.Line, f / g}
+					return &FloatExp{Line: exp.Line, Val: f / g}
 				}
 			case TOKEN_OP_IDIV:
 				if g != 0 {
-					return &FloatExp{exp.Line, number.FFloorDiv(f, g)}
+					return &FloatExp{Line: exp.Line, Val: number.FFloorDiv(f, g)}
 				}
 			case TOKEN_OP_MOD:
 				if g != 0 {
-					return &FloatExp{exp.Line, number.FMod(f, g)}
+					return &FloatExp{Line: exp.Line, Val: number.FMod(f, g)}
 				}
 			case TOKEN_OP_POW:
-				return &FloatExp{exp.Line, math.Pow(f, g)}
+				return &FloatExp{Line: exp.Line, Val: math.Pow(f, g)}
 			}
 		}
 	}
@@ -135,9 +135,9 @@ func optimizeUnm(exp *UnopExp) Exp {
 func optimizeNot(exp *UnopExp) Exp {
 	switch exp.Exp.(type) {
 	case *NilExp, *FalseExp: // false
-		return &TrueExp{exp.Line}
+		return &TrueExp{Line: exp.Line}
 	case *TrueExp, *IntegerExp, *FloatExp, *StringExp: // true
-		return &FalseExp{exp.Line}
+		return &FalseExp{Line: exp.Line}
 	default:
 		return exp
 	}
@@ -150,7 +150,7 @@ func optimizeBnot(exp *UnopExp) Exp {
 		return x
 	case *FloatExp:
 		if i, ok := number.FloatToInteger(x.Val); ok {
-			return &IntegerExp{x.Line, ^i}
+			return &IntegerExp{Line: x.Line, Val: ^i}
 		}
 	}
 	return exp

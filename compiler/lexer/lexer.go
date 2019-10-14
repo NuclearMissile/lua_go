@@ -28,7 +28,15 @@ var (
 	reUnicodeEscapeSeq   = regexp.MustCompile(`^\\u{[0-9a-fA-F]+}`)
 )
 
-func (self *Lexer) next(n int) {
+func NewLexer(chunk, chunkName string) *Lexer {
+	return &Lexer{
+		chunk:     chunk,
+		chunkName: chunkName,
+		line:      1,
+	}
+}
+
+func (self *Lexer) skip(n int) {
 	self.chunk = self.chunk[n:]
 }
 
@@ -53,13 +61,13 @@ func (self *Lexer) skipWhiteSpaces() {
 		if self.test("--") {
 			self.skipComment()
 		} else if self.test("\r\n") || self.test("\n\r") {
-			self.next(2)
+			self.skip(2)
 			self.line++
 		} else if isNewLine(self.chunk[0]) {
-			self.next(1)
+			self.skip(1)
 			self.line++
 		} else if isWhiteSpace(self.chunk[0]) {
-			self.next(1)
+			self.skip(1)
 		} else {
 			break
 		}
@@ -67,7 +75,7 @@ func (self *Lexer) skipWhiteSpaces() {
 }
 
 func (self *Lexer) skipComment() {
-	self.next(2)
+	self.skip(2)
 	if self.test("[") {
 		if reOpeningLongBracket.FindString(self.chunk) != "" {
 			self.scanLongString()
@@ -75,7 +83,7 @@ func (self *Lexer) skipComment() {
 		}
 	}
 	for len(self.chunk) > 0 && !isNewLine(self.chunk[0]) {
-		self.next(1)
+		self.skip(1)
 	}
 }
 
@@ -95,21 +103,13 @@ func (self *Lexer) scanLongString() string {
 		self.error("unfinished long string or comment")
 	}
 	str := self.chunk[len(openingLongBracket):closingLongBracketIndex]
-	self.next(closingLongBracketIndex + len(closingLongBracket))
+	self.skip(closingLongBracketIndex + len(closingLongBracket))
 	reNewLine.ReplaceAllString(str, "\n")
 	self.line += strings.Count(str, "\n")
 	if len(str) > 0 && str[0] == '\n' {
 		str = str[1:]
 	}
 	return str
-}
-
-func NewLexer(chunk, chunkName string) *Lexer {
-	return &Lexer{
-		chunk:     chunk,
-		chunkName: chunkName,
-		line:      1,
-	}
 }
 
 func (self *Lexer) NextTokenOfKind(kind int) (line int, token string) {
@@ -145,120 +145,120 @@ func (self *Lexer) NextToken() (line, kind int, token string) {
 
 	switch self.chunk[0] {
 	case ';':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_SEMI, ";"
 	case ',':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_COMMA, ","
 	case '(':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_LPAREN, "("
 	case ')':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_RPAREN, ")"
 	case ']':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_RBRACK, "]"
 	case '{':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_LCURLY, "{"
 	case '}':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_SEP_RCURLY, "}"
 	case '+':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_ADD, "+"
 	case '-':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_MINUS, "-"
 	case '*':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_MUL, "*"
 	case '^':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_POW, "^"
 	case '%':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_MOD, "%"
 	case '&':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_BAND, "&"
 	case '|':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_BOR, "|"
 	case '#':
-		self.next(1)
+		self.skip(1)
 		return self.line, TOKEN_OP_LEN, "#"
 	case ':':
 		if self.test("::") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_SEP_LABEL, "::"
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_SEP_COLON, ":"
 		}
 	case '/':
 		if self.test("//") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_IDIV, "//"
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_OP_DIV, "/"
 		}
 	case '~':
 		if self.test("~=") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_NE, "~="
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_OP_WAVE, "~"
 		}
 	case '=':
 		if self.test("==") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_EQ, "=="
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_OP_ASSIGN, "="
 		}
 	case '<':
 		if self.test("<<") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_SHL, "<<"
 		} else if self.test("<=") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_LE, "<="
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_OP_LT, "<"
 		}
 	case '>':
 		if self.test(">>") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_SHR, ">>"
 		} else if self.test(">=") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_GE, ">="
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_OP_GT, ">"
 		}
 	case '.':
 		if self.test("...") {
-			self.next(3)
+			self.skip(3)
 			return self.line, TOKEN_VARARG, "..."
 		} else if self.test("..") {
-			self.next(2)
+			self.skip(2)
 			return self.line, TOKEN_OP_CONCAT, ".."
 		} else if len(self.chunk) == 1 || !isDigit(self.chunk[1]) {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_SEP_DOT, "."
 		}
 	case '[':
 		if self.test("[[") || self.test("[=") {
 			return self.line, TOKEN_STRING, self.scanLongString()
 		} else {
-			self.next(1)
+			self.skip(1)
 			return self.line, TOKEN_SEP_LBRACK, "["
 		}
 	case '\'', '"':
@@ -267,7 +267,7 @@ func (self *Lexer) NextToken() (line, kind int, token string) {
 
 	c := self.chunk[0]
 	if c == '.' || isDigit(c) {
-		token := self.scanNumber()
+		token := self.scan(reNumber)
 		return self.line, TOKEN_NUMBER, token
 	}
 	if c == '_' || isLetter(c) {
@@ -292,7 +292,7 @@ func isDigit(c byte) bool {
 
 func (self *Lexer) scanShortString() string {
 	if str := reShortStr.FindString(self.chunk); str != "" {
-		self.next(len(str))
+		self.skip(len(str))
 		str = str[1 : len(str)-1]
 		if strings.Index(str, `\`) >= 0 {
 			self.line += len(reNewLine.FindAllString(str, -1))
@@ -403,13 +403,9 @@ func (self *Lexer) escape(str string) string {
 	return buf.String()
 }
 
-func (self *Lexer) scanNumber() string {
-	return self.scan(reNumber)
-}
-
 func (self *Lexer) scan(re *regexp.Regexp) string {
 	if token := re.FindString(self.chunk); token != "" {
-		self.next(len(token))
+		self.skip(len(token))
 		return token
 	}
 	panic("unreachable")

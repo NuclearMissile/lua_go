@@ -4,9 +4,8 @@ import . "lua_go/compiler/ast"
 import . "lua_go/compiler/lexer"
 import "lua_go/number"
 
-// explist ::= exp {‘,’ exp}
 func parseExpList(lexer *Lexer) []Exp {
-	exps := make([]Exp, 0, 4)
+	exps := make([]Exp, 0, 8)
 	exps = append(exps, parseExp(lexer))
 	for lexer.LookAhead() == TOKEN_SEP_COMMA {
 		lexer.NextToken()
@@ -207,9 +206,8 @@ func parseNumberExp(lexer *Lexer) Exp {
 		return &IntegerExp{Line: line, Val: i}
 	} else if f, ok := number.ParseFloat(token); ok {
 		return &FloatExp{Line: line, Val: f}
-	} else { // todo
-		panic("not a number: " + token)
 	}
+	panic("not a number: " + token)
 }
 
 // functiondef ::= function funcbody

@@ -144,6 +144,8 @@ bb = 0x3f.5ap+9;
 cc = 0xabc.defp-100;
 print(bb)
 print(cc)
+dd = { a = 1, b = 2., aa = 3, 6};
+print(dd[4])
 
 ok, res = pcall(div2, 4, 2);
 print(ok, res)

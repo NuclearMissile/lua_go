@@ -23,11 +23,15 @@ func main() {
 
 func testParser(chunk, chunkName string) {
 	ast := parser.Parse(chunk, chunkName)
-	s, err := json.MarshalIndent(ast, "", "\t")
+	d, err := json.MarshalIndent(ast, "", "\t")
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(s))
+	err = ioutil.WriteFile("ast.json", d, 0644)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(d))
 }
 
 //func testLexer(chunk, chunkName string) {

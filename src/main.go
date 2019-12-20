@@ -3,36 +3,35 @@ package main
 import (
 	"api"
 	"binchunk"
-	"compiler/parser"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
+	"state"
 	"vm"
 )
 
-func main() {
-	if len(os.Args) > 1 {
-		data, err := ioutil.ReadFile(os.Args[1])
-		if err != nil {
-			panic(err)
-		}
-		testParser(string(data), os.Args[1])
-	}
-}
+//func main() {
+//	if len(os.Args) > 1 {
+//		data, err := ioutil.ReadFile(os.Args[1])
+//		if err != nil {
+//			panic(err)
+//		}
+//		testParser(string(data), os.Args[1])
+//	}
+//}
 
-func testParser(chunk, chunkName string) {
-	ast := parser.Parse(chunk, chunkName)
-	d, err := json.MarshalIndent(ast, "", "\t")
-	if err != nil {
-		panic(err)
-	}
-	err = ioutil.WriteFile("ast.json", d, 0644)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(d))
-}
+//func testParser(chunk, chunkName string) {
+//	ast := parser.Parse(chunk, chunkName)
+//	d, err := json.MarshalIndent(ast, "", "\t")
+//	if err != nil {
+//		panic(err)
+//	}
+//	err = ioutil.WriteFile("ast.json", d, 0644)
+//	if err != nil {
+//		panic(err)
+//	}
+//	fmt.Println(string(d))
+//}
 
 //func testLexer(chunk, chunkName string) {
 //	lexer := NewLexer(chunk, chunkName)
@@ -66,25 +65,25 @@ func testParser(chunk, chunkName string) {
 //	}
 //}
 
-//func main() {
-//	if len(os.Args) > 1 {
-//		data, err := ioutil.ReadFile(os.Args[1])
-//		if err != nil {
-//			panic(err)
-//		}
-//		ls := state.New()
-//		ls.Register("print", print)
-//		ls.Register("getmetatable", getMetatable)
-//		ls.Register("setmetatable", setMetatable)
-//		ls.Register("next", next)
-//		ls.Register("pairs", pairs)
-//		ls.Register("ipairs", iPairs)
-//		ls.Register("pcall", pCall)
-//		ls.Register("error", _error)
-//		ls.Load(data, os.Args[1], "b")
-//		ls.Call(0, 0)
-//	}
-//}
+func main() {
+	if len(os.Args) > 1 {
+		data, err := ioutil.ReadFile(os.Args[1])
+		if err != nil {
+			panic(err)
+		}
+		ls := state.New()
+		ls.Register("print", print)
+		ls.Register("getmetatable", getMetatable)
+		ls.Register("setmetatable", setMetatable)
+		ls.Register("next", next)
+		ls.Register("pairs", pairs)
+		ls.Register("ipairs", iPairs)
+		ls.Register("pcall", pCall)
+		ls.Register("error", _error)
+		ls.Load(data, os.Args[1], "b")
+		ls.Call(0, 0)
+	}
+}
 
 func pCall(ls api.LuaState) int {
 	nArgs := ls.GetTop() - 1

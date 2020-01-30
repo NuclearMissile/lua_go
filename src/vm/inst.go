@@ -2,8 +2,10 @@ package vm
 
 import "api"
 
-const MAXARG_Bx = 1<<18 - 1       // 2^18 - 1 = 262143
-const MAXARG_sBx = MAXARG_Bx >> 1 // 262143 / 2 = 131071
+const (
+	MAXARG_Bx  = 1<<18 - 1      // 2^18 - 1 = 262143
+	MAXARG_sBx = MAXARG_Bx >> 1 // 262143 / 2 = 131071
+)
 
 /*
  31       22       13       5    0

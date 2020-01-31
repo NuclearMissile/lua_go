@@ -64,6 +64,10 @@ type header struct {
 func Undump(data []byte) *Prototype {
 	reader := &reader{data}
 	reader.checkHeader()
-	reader.readByte() // size_upvalues
+	reader.readByte()
 	return reader.readProto("")
+}
+
+func IsBinaryChunk(data []byte) bool {
+	return len(data) > 4 && string(data[:4]) == LUA_SIGNATURE
 }

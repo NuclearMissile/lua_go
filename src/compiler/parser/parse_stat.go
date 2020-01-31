@@ -60,7 +60,7 @@ func parseEmptyStat(lexer *Lexer) *EmptyStat {
 // break
 func parseBreakStat(lexer *Lexer) *BreakStat {
 	lexer.NextTokenOfKind(TOKEN_KW_BREAK)
-	return &BreakStat{lexer.Line()}
+	return &BreakStat{Line: lexer.Line()}
 }
 
 // ‘::’ Name ‘::’
@@ -68,14 +68,14 @@ func parseLabelStat(lexer *Lexer) *LabelStat {
 	lexer.NextTokenOfKind(TOKEN_SEP_LABEL) // ::
 	_, name := lexer.NextIdentifier()      // name
 	lexer.NextTokenOfKind(TOKEN_SEP_LABEL) // ::
-	return &LabelStat{name}
+	return &LabelStat{Name: name}
 }
 
 // goto Name
 func parseGotoStat(lexer *Lexer) *GotoStat {
 	lexer.NextTokenOfKind(TOKEN_KW_GOTO) // goto
 	_, name := lexer.NextIdentifier()    // name
-	return &GotoStat{name}
+	return &GotoStat{Name: name}
 }
 
 // do block end

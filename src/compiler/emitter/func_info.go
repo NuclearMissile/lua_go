@@ -6,31 +6,18 @@ import (
 )
 
 type funcInfo struct {
-	constantMap                           map[interface{}]int
-	usedRegs, maxRegs, scopeLv, numParams int
-	localVars                             []*localVarInfo
-	localVarMap                           map[string]*localVarInfo
-	breakTable                            [][]int
-	parent                                *funcInfo
-	upvalMap                              map[string]upvalInfo
-	insts                                 []uint32
-	subFuncs                              []*funcInfo
-	isVararg                              bool
-}
-
-func newFuncInfo(parent *funcInfo, funcDefExp *ast.FuncDefExp) *funcInfo {
-	return &funcInfo{
-		constantMap: map[interface{}]int{},
-		numParams:   len(funcDefExp.ParList),
-		localVars:   make([]*localVarInfo, 0, 8),
-		localVarMap: map[string]*localVarInfo{},
-		breakTable:  make([][]int, 0, 1),
-		parent:      parent,
-		upvalMap:    map[string]upvalInfo{},
-		insts:       make([]uint32, 0, 8),
-		subFuncs:    []*funcInfo{},
-		isVararg:    funcDefExp.IsVararg,
-	}
+	constants                  map[interface{}]int
+	usedRegs, maxRegs, scopeLv int
+	line, lastLine, numParams  int
+	locVars                    []*localVarInfo
+	locVarNames                map[string]*localVarInfo
+	breakTable                 [][]int
+	parent                     *funcInfo
+	upvalues                   map[string]upvalInfo
+	insts                      []uint32
+	subFuncs                   []*funcInfo
+	isVararg                   bool
+	lineNums                   []uint32
 }
 
 type localVarInfo struct {
@@ -44,98 +31,41 @@ type upvalInfo struct {
 	locValSlot, upvalIndex, index int
 }
 
-func (self *funcInfo) indexOfUpval(name string) int {
-	if upval, ok := self.upvalMap[name]; ok {
-		return upval.index
-	}
-	if self.parent != nil {
-		if localVar, ok := self.parent.localVarMap[name]; ok {
-			idx := len(self.upvalMap)
-			self.upvalMap[name] = upvalInfo{
-				locValSlot: localVar.slot,
-				upvalIndex: -1,
-				index:      idx,
-			}
-			return idx
-		}
-		if upvalIdx, ok := self.upvalMap[name]; ok {
-			idx := len(self.upvalMap)
-			self.upvalMap[name] = upvalInfo{
-				locValSlot: -1,
-				upvalIndex: upvalIdx.index,
-				index:      idx,
-			}
-			return idx
-		}
-	}
-	return -1
+type labelInfo struct {
 }
 
-func (self *funcInfo) addLocalVar(name string) int {
-	newVar := &localVarInfo{
-		prev:       self.localVarMap[name],
-		scopeLv:    self.scopeLv,
-		slot:       self.allocReg(),
-		name:       name,
-		isCaptured: false,
-	}
-	self.localVars = append(self.localVars, newVar)
-	self.localVarMap[name] = newVar
-	return newVar.slot
+type gotoInfo struct {
 }
 
-func (self *funcInfo) slotOfLocalVar(name string) int {
-	if localVar, ok := self.localVarMap[name]; ok {
-		return localVar.slot
-	}
-	return -1
-}
-
-func (self *funcInfo) enterScope(breakable bool) {
-	self.scopeLv++
-	if breakable {
-		self.breakTable = append(self.breakTable, []int{})
-	} else {
-		self.breakTable = append(self.breakTable, nil)
+func newFuncInfo(parent *funcInfo, funcDefExp *ast.FuncDefExp) *funcInfo {
+	return &funcInfo{
+		constants:   map[interface{}]int{},
+		locVars:     make([]*localVarInfo, 0, 8),
+		locVarNames: map[string]*localVarInfo{},
+		breakTable:  make([][]int, 1),
+		parent:      parent,
+		upvalues:    map[string]upvalInfo{},
+		insts:       make([]uint32, 0, 8),
+		subFuncs:    make([]*funcInfo, 0, 8),
+		isVararg:    funcDefExp.IsVararg,
+		lineNums:    make([]uint32, 0, 8),
+		line:        funcDefExp.Line,
+		lastLine:    funcDefExp.LastLine,
+		numParams:   len(funcDefExp.ParList),
 	}
 }
 
-func (self *funcInfo) exitScope() {
-	tempBreakJmps := self.breakTable[len(self.breakTable)-1]
-	self.breakTable = self.breakTable[:len(self.breakTable)-1]
-	a := self.getJmpArgA()
-	for _, pc := range tempBreakJmps {
-		sBx := self.pc() - pc
-		i := (sBx+vm.MAXARG_sBx)<<14 | a<<6 | vm.OP_JMP
-		self.insts[pc] = uint32(i)
-	}
-	self.scopeLv--
-	for _, localVar := range self.localVars {
-		if self.scopeLv < localVar.scopeLv {
-			self.removeLocalVar(localVar)
-		}
-	}
-}
-
-func (self *funcInfo) addBreakJmp(pc int) {
-	for i := self.scopeLv; i >= 0; i-- {
-		if self.breakTable[i] != nil {
-			self.breakTable[i] = append(self.breakTable[i], pc)
-			return
-		}
-	}
-	panic("<break> not inside a loop")
-}
-
+// Constants
 func (self *funcInfo) indexOfConstant(konst interface{}) int {
-	if idx, ok := self.constantMap[konst]; ok {
+	if idx, ok := self.constants[konst]; ok {
 		return idx
 	}
-	idx := len(self.constantMap)
-	self.constantMap[konst] = idx
+	idx := len(self.constants)
+	self.constants[konst] = idx
 	return idx
 }
 
+// Registers
 func (self *funcInfo) allocReg() int {
 	self.usedRegs++
 	if self.usedRegs >= 255 {
@@ -164,21 +94,45 @@ func (self *funcInfo) freeRegs(n int) {
 	}
 }
 
-func (self *funcInfo) removeLocalVar(localVar *localVarInfo) {
-	self.freeReg()
-	if localVar.prev == nil {
-		delete(self.localVarMap, localVar.name)
-	} else if localVar.prev.scopeLv == localVar.scopeLv {
-		self.removeLocalVar(localVar.prev)
-	} else {
-		self.localVarMap[localVar.name] = localVar.prev
+// Upvalues
+func (self *funcInfo) indexOfUpval(name string) int {
+	if upval, ok := self.upvalues[name]; ok {
+		return upval.index
+	}
+	if self.parent != nil {
+		if localVar, ok := self.parent.locVarNames[name]; ok {
+			idx := len(self.upvalues)
+			self.upvalues[name] = upvalInfo{
+				locValSlot: localVar.slot,
+				upvalIndex: -1,
+				index:      idx,
+			}
+			return idx
+		}
+		if upvalIdx, ok := self.upvalues[name]; ok {
+			idx := len(self.upvalues)
+			self.upvalues[name] = upvalInfo{
+				locValSlot: -1,
+				upvalIndex: upvalIdx.index,
+				index:      idx,
+			}
+			return idx
+		}
+	}
+	return -1
+}
+
+func (self *funcInfo) closeOpenUpvals(line int) {
+	a := self.getJmpArgA()
+	if a > 0 {
+		self.emitJmp(line, a, 0)
 	}
 }
 
 func (self *funcInfo) getJmpArgA() int {
 	hasLocalVarCaptured := false
 	minSlotOfLocalVars := self.maxRegs
-	for _, locVar := range self.localVarMap {
+	for _, locVar := range self.locVarNames {
 		if locVar.scopeLv == self.scopeLv {
 			for v := locVar; v != nil && v.scopeLv == self.scopeLv; v = v.prev {
 				if v.isCaptured {
@@ -194,5 +148,75 @@ func (self *funcInfo) getJmpArgA() int {
 		return minSlotOfLocalVars + 1
 	} else {
 		return 0
+	}
+}
+
+// scope
+func (self *funcInfo) addLocVar(name string, startPC int) int {
+	newVar := &localVarInfo{
+		prev:    self.locVarNames[name],
+		scopeLv: self.scopeLv,
+		slot:    self.allocReg(),
+		name:    name,
+		startPC: startPC,
+		endPC:   0,
+	}
+	self.locVars = append(self.locVars, newVar)
+	self.locVarNames[name] = newVar
+	return newVar.slot
+}
+
+func (self *funcInfo) slotOfLocalVar(name string) int {
+	if localVar, ok := self.locVarNames[name]; ok {
+		return localVar.slot
+	}
+	return -1
+}
+
+func (self *funcInfo) enterScope(breakable bool) {
+	self.scopeLv++
+	if breakable {
+		self.breakTable = append(self.breakTable, []int{})
+	} else {
+		self.breakTable = append(self.breakTable, nil)
+	}
+}
+
+func (self *funcInfo) exitScope(endPC int) {
+	tempBreakJmps := self.breakTable[len(self.breakTable)-1]
+	self.breakTable = self.breakTable[:len(self.breakTable)-1]
+	a := self.getJmpArgA()
+	for _, pc := range tempBreakJmps {
+		sBx := self.pc() - pc
+		i := (sBx+vm.MAXARG_sBx)<<14 | a<<6 | vm.OP_JMP
+		self.insts[pc] = uint32(i)
+	}
+	self.scopeLv--
+	for _, localVar := range self.locVars {
+		if self.scopeLv < localVar.scopeLv {
+			localVar.endPC = endPC
+			self.removeLocalVar(localVar)
+		}
+	}
+}
+
+func (self *funcInfo) addBreakJmp(pc int) {
+	for i := self.scopeLv; i >= 0; i-- {
+		if self.breakTable[i] != nil {
+			self.breakTable[i] = append(self.breakTable[i], pc)
+			return
+		}
+	}
+	panic("<break> not inside a loop")
+}
+
+func (self *funcInfo) removeLocalVar(localVar *localVarInfo) {
+	self.freeReg()
+	if localVar.prev == nil {
+		delete(self.locVarNames, localVar.name)
+	} else if localVar.prev.scopeLv == localVar.scopeLv {
+		self.removeLocalVar(localVar.prev)
+	} else {
+		self.locVarNames[localVar.name] = localVar.prev
 	}
 }

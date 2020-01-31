@@ -3,11 +3,17 @@ package state
 import (
 	"api"
 	"binchunk"
+	"compiler"
 	"vm"
 )
 
 func (self *luaState) Load(chunk []byte, name, mode string) int {
-	proto := binchunk.Undump(chunk)
+	var proto *binchunk.Prototype
+	if binchunk.IsBinaryChunk(chunk) {
+		proto = binchunk.Undump(chunk)
+	} else {
+		proto = compiler.Compile(string(chunk), name)
+	}
 	c := newLuaClosure(proto)
 	self.stack.push(c)
 	if len(proto.Upvalues) > 0 {

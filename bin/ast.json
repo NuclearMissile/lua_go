@@ -1,502 +1,5577 @@
 {
-	"LastLine": 155,
+	"LastLine": 469,
 	"States": [
 		{
-			"LastLine": 126,
-			"VarList": [
+			"Line": 4,
+			"LastLine": 4,
+			"PrefixExp": {
+				"Line": 4,
+				"Name": "print"
+			},
+			"NameExp": null,
+			"Args": [
 				{
-					"Line": 126,
-					"Name": "div0"
+					"Line": 4,
+					"Str": "testing require"
 				}
-			],
-			"ExpList": [
+			]
+		},
+		{
+			"Line": 6,
+			"LastLine": 6,
+			"PrefixExp": {
+				"Line": 6,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
 				{
-					"Line": 126,
-					"LastLine": 132,
-					"ParList": [
-						"a",
-						"b"
-					],
-					"IsVararg": false,
-					"Block": {
-						"LastLine": 131,
-						"States": [
+					"Line": 6,
+					"Op": 31,
+					"Exp1": {
+						"Line": 6,
+						"LastLine": 6,
+						"PrefixExp": {
+							"Line": 6,
+							"Name": "require"
+						},
+						"NameExp": null,
+						"Args": [
 							{
-								"ExpList": [
-									{
-										"Line": 127,
-										"Op": 31,
-										"Exp1": {
-											"Line": 127,
-											"Name": "b"
-										},
-										"Exp2": {
-											"Line": 127,
-											"Val": 0
+								"Line": 6,
+								"Str": "string"
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 6,
+						"Name": "string"
+					}
+				}
+			]
+		},
+		{
+			"Line": 7,
+			"LastLine": 7,
+			"PrefixExp": {
+				"Line": 7,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 7,
+					"Op": 31,
+					"Exp1": {
+						"Line": 7,
+						"LastLine": 7,
+						"PrefixExp": {
+							"Line": 7,
+							"Name": "require"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 7,
+								"Str": "math"
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 7,
+						"Name": "math"
+					}
+				}
+			]
+		},
+		{
+			"Line": 8,
+			"LastLine": 8,
+			"PrefixExp": {
+				"Line": 8,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 8,
+					"Op": 31,
+					"Exp1": {
+						"Line": 8,
+						"LastLine": 8,
+						"PrefixExp": {
+							"Line": 8,
+							"Name": "require"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 8,
+								"Str": "table"
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 8,
+						"Name": "table"
+					}
+				}
+			]
+		},
+		{
+			"Line": 9,
+			"LastLine": 9,
+			"PrefixExp": {
+				"Line": 9,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 9,
+					"Op": 31,
+					"Exp1": {
+						"Line": 9,
+						"LastLine": 9,
+						"PrefixExp": {
+							"Line": 9,
+							"Name": "require"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 9,
+								"Str": "io"
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 9,
+						"Name": "io"
+					}
+				}
+			]
+		},
+		{
+			"Line": 10,
+			"LastLine": 10,
+			"PrefixExp": {
+				"Line": 10,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 10,
+					"Op": 31,
+					"Exp1": {
+						"Line": 10,
+						"LastLine": 10,
+						"PrefixExp": {
+							"Line": 10,
+							"Name": "require"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 10,
+								"Str": "os"
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 10,
+						"Name": "os"
+					}
+				}
+			]
+		},
+		{
+			"Line": 11,
+			"LastLine": 11,
+			"PrefixExp": {
+				"Line": 11,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 11,
+					"Op": 31,
+					"Exp1": {
+						"Line": 11,
+						"LastLine": 11,
+						"PrefixExp": {
+							"Line": 11,
+							"Name": "require"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 11,
+								"Str": "coroutine"
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 11,
+						"Name": "coroutine"
+					}
+				}
+			]
+		},
+		{
+			"Line": 13,
+			"LastLine": 13,
+			"PrefixExp": {
+				"Line": 13,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 13,
+					"Op": 31,
+					"Exp1": {
+						"Line": 13,
+						"LastLine": 13,
+						"PrefixExp": {
+							"Line": 13,
+							"Name": "type"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"LastLine": 13,
+								"PrefixExp": {
+									"Line": 13,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 13,
+									"Str": "path"
+								}
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 13,
+						"Str": "string"
+					}
+				}
+			]
+		},
+		{
+			"Line": 14,
+			"LastLine": 14,
+			"PrefixExp": {
+				"Line": 14,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 14,
+					"Op": 31,
+					"Exp1": {
+						"Line": 14,
+						"LastLine": 14,
+						"PrefixExp": {
+							"Line": 14,
+							"Name": "type"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"LastLine": 14,
+								"PrefixExp": {
+									"Line": 14,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 14,
+									"Str": "cpath"
+								}
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 14,
+						"Str": "string"
+					}
+				}
+			]
+		},
+		{
+			"Line": 15,
+			"LastLine": 15,
+			"PrefixExp": {
+				"Line": 15,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 15,
+					"Op": 31,
+					"Exp1": {
+						"Line": 15,
+						"LastLine": 15,
+						"PrefixExp": {
+							"Line": 15,
+							"Name": "type"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"LastLine": 15,
+								"PrefixExp": {
+									"Line": 15,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 15,
+									"Str": "loaded"
+								}
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 15,
+						"Str": "table"
+					}
+				}
+			]
+		},
+		{
+			"Line": 16,
+			"LastLine": 16,
+			"PrefixExp": {
+				"Line": 16,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 16,
+					"Op": 31,
+					"Exp1": {
+						"Line": 16,
+						"LastLine": 16,
+						"PrefixExp": {
+							"Line": 16,
+							"Name": "type"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"LastLine": 16,
+								"PrefixExp": {
+									"Line": 16,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 16,
+									"Str": "preload"
+								}
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 16,
+						"Str": "table"
+					}
+				}
+			]
+		},
+		{
+			"Line": 18,
+			"LastLine": 18,
+			"PrefixExp": {
+				"Line": 18,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 18,
+					"Op": 31,
+					"Exp1": {
+						"Line": 18,
+						"LastLine": 18,
+						"PrefixExp": {
+							"Line": 18,
+							"Name": "type"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"LastLine": 18,
+								"PrefixExp": {
+									"Line": 18,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 18,
+									"Str": "config"
+								}
+							}
+						]
+					},
+					"Exp2": {
+						"Line": 18,
+						"Str": "string"
+					}
+				}
+			]
+		},
+		{
+			"Line": 19,
+			"LastLine": 19,
+			"PrefixExp": {
+				"Line": 19,
+				"Name": "print"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 19,
+					"ExpList": [
+						{
+							"Line": 19,
+							"Str": "package config: "
+						},
+						{
+							"Line": 19,
+							"LastLine": 19,
+							"PrefixExp": {
+								"LastLine": 19,
+								"PrefixExp": {
+									"Line": 19,
+									"Name": "string"
+								},
+								"KeyExp": {
+									"Line": 19,
+									"Str": "gsub"
+								}
+							},
+							"NameExp": null,
+							"Args": [
+								{
+									"LastLine": 19,
+									"PrefixExp": {
+										"Line": 19,
+										"Name": "package"
+									},
+									"KeyExp": {
+										"Line": 19,
+										"Str": "config"
+									}
+								},
+								{
+									"Line": 19,
+									"Str": "\n"
+								},
+								{
+									"Line": 19,
+									"Str": "|"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"Block": {
+				"LastLine": 39,
+				"States": [
+					{
+						"LastLine": 24,
+						"NameList": [
+							"max"
+						],
+						"ExpList": [
+							{
+								"Line": 24,
+								"Op": 35,
+								"Exp1": {
+									"Line": 24,
+									"Op": 34,
+									"Exp1": {
+										"Line": 24,
+										"Name": "_soft"
+									},
+									"Exp2": {
+										"Line": 24,
+										"Val": 100
+									}
+								},
+								"Exp2": {
+									"Line": 24,
+									"Val": 2000
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 25,
+						"NameList": [
+							"t"
+						],
+						"ExpList": [
+							{
+								"Line": 25,
+								"LastLine": 25,
+								"KeyExpList": null,
+								"ValExpList": null
+							}
+						]
+					},
+					{
+						"LineOfFor": 26,
+						"LineOfDo": 26,
+						"VarName": "i",
+						"InitExp": {
+							"Line": 26,
+							"Val": 1
+						},
+						"LimitExp": {
+							"Line": 26,
+							"Name": "max"
+						},
+						"StepExp": {
+							"Line": 26,
+							"Val": 1
+						},
+						"Block": {
+							"LastLine": 26,
+							"States": [
+								{
+									"LastLine": 26,
+									"VarList": [
+										{
+											"LastLine": 26,
+											"PrefixExp": {
+												"Line": 26,
+												"Name": "t"
+											},
+											"KeyExp": {
+												"Line": 26,
+												"Name": "i"
+											}
+										}
+									],
+									"ExpList": [
+										{
+											"Line": 26,
+											"LastLine": 26,
+											"PrefixExp": {
+												"LastLine": 26,
+												"PrefixExp": {
+													"Line": 26,
+													"Name": "string"
+												},
+												"KeyExp": {
+													"Line": 26,
+													"Str": "rep"
+												}
+											},
+											"NameExp": null,
+											"Args": [
+												{
+													"Line": 26,
+													"Str": "?"
+												},
+												{
+													"Line": 26,
+													"Op": 16,
+													"Exp1": {
+														"Line": 26,
+														"Op": 21,
+														"Exp1": {
+															"Line": 26,
+															"Name": "i"
+														},
+														"Exp2": {
+															"Line": 26,
+															"Val": 10
+														}
+													},
+													"Exp2": {
+														"Line": 26,
+														"Val": 1
+													}
+												}
+											]
+										}
+									]
+								}
+							],
+							"RetExps": null
+						}
+					},
+					{
+						"LastLine": 27,
+						"VarList": [
+							{
+								"LastLine": 27,
+								"PrefixExp": {
+									"Line": 27,
+									"Name": "t"
+								},
+								"KeyExp": {
+									"Line": 27,
+									"Op": 16,
+									"Exp1": {
+										"Line": 27,
+										"Op": 33,
+										"Exp": {
+											"Line": 27,
+											"Name": "t"
 										}
 									},
-									{
-										"Line": 129
+									"Exp2": {
+										"Line": 27,
+										"Val": 1
 									}
-								],
-								"BlockList": [
+								}
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 27,
+								"Str": ";"
+							}
+						]
+					},
+					{
+						"LastLine": 28,
+						"NameList": [
+							"path"
+						],
+						"ExpList": [
+							{
+								"Line": 28,
+								"LastLine": 28,
+								"PrefixExp": {
+									"LastLine": 28,
+									"PrefixExp": {
+										"Line": 28,
+										"Name": "table"
+									},
+									"KeyExp": {
+										"Line": 28,
+										"Str": "concat"
+									}
+								},
+								"NameExp": null,
+								"Args": [
 									{
-										"LastLine": 128,
-										"States": [
+										"Line": 28,
+										"Name": "t"
+									},
+									{
+										"Line": 28,
+										"Str": ";"
+									}
+								]
+							}
+						]
+					},
+					{
+						"LastLine": 30,
+						"NameList": [
+							"s",
+							"err"
+						],
+						"ExpList": [
+							{
+								"Line": 30,
+								"LastLine": 30,
+								"PrefixExp": {
+									"LastLine": 30,
+									"PrefixExp": {
+										"Line": 30,
+										"Name": "package"
+									},
+									"KeyExp": {
+										"Line": 30,
+										"Str": "searchpath"
+									}
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 30,
+										"Str": "xuxu"
+									},
+									{
+										"Line": 30,
+										"Name": "path"
+									}
+								]
+							}
+						]
+					},
+					{
+						"Line": 33,
+						"LastLine": 35,
+						"PrefixExp": {
+							"Line": 33,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 34,
+								"Op": 34,
+								"Exp1": {
+									"Line": 33,
+									"Op": 34,
+									"Exp1": {
+										"Line": 33,
+										"Op": 36,
+										"Exp": {
+											"Line": 33,
+											"Name": "s"
+										}
+									},
+									"Exp2": {
+										"Line": 34,
+										"LastLine": 34,
+										"PrefixExp": {
+											"LastLine": 34,
+											"PrefixExp": {
+												"Line": 34,
+												"Name": "string"
+											},
+											"KeyExp": {
+												"Line": 34,
+												"Str": "find"
+											}
+										},
+										"NameExp": null,
+										"Args": [
 											{
-												"Line": 128,
-												"LastLine": 128,
+												"Line": 34,
+												"Name": "err"
+											},
+											{
+												"Line": 34,
+												"LastLine": 34,
 												"PrefixExp": {
-													"Line": 128,
-													"Name": "error"
+													"LastLine": 34,
+													"PrefixExp": {
+														"Line": 34,
+														"Name": "string"
+													},
+													"KeyExp": {
+														"Line": 34,
+														"Str": "rep"
+													}
 												},
 												"NameExp": null,
 												"Args": [
 													{
-														"Line": 128,
-														"Str": "div by 0"
+														"Line": 34,
+														"Str": "xuxu"
+													},
+													{
+														"Line": 34,
+														"Val": 10
 													}
 												]
 											}
-										],
-										"RetExps": null
-									},
-									{
-										"LastLine": 130,
-										"States": [],
-										"RetExps": [
-											{
-												"Line": 130,
-												"Op": 18,
-												"Exp1": {
-													"Line": 130,
-													"Name": "a"
-												},
-												"Exp2": {
-													"Line": 130,
-													"Name": "b"
-												}
-											}
 										]
 									}
+								},
+								"Exp2": {
+									"Line": 35,
+									"Op": 30,
+									"Exp1": {
+										"Line": 35,
+										"Op": 33,
+										"Exp": {
+											"Line": 35,
+											"LastLine": 35,
+											"PrefixExp": {
+												"LastLine": 35,
+												"PrefixExp": {
+													"Line": 35,
+													"Name": "string"
+												},
+												"KeyExp": {
+													"Line": 35,
+													"Str": "gsub"
+												}
+											},
+											"NameExp": null,
+											"Args": [
+												{
+													"Line": 35,
+													"Name": "err"
+												},
+												{
+													"Line": 35,
+													"Str": "[^\n]"
+												},
+												{
+													"Line": 35,
+													"Str": ""
+												}
+											]
+										}
+									},
+									"Exp2": {
+										"Line": 35,
+										"Name": "max"
+									}
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 37,
+						"NameList": [
+							"path"
+						],
+						"ExpList": [
+							{
+								"Line": 37,
+								"LastLine": 37,
+								"PrefixExp": {
+									"LastLine": 37,
+									"PrefixExp": {
+										"Line": 37,
+										"Name": "string"
+									},
+									"KeyExp": {
+										"Line": 37,
+										"Str": "rep"
+									}
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 37,
+										"Str": "?"
+									},
+									{
+										"Line": 37,
+										"Name": "max"
+									}
 								]
+							}
+						]
+					},
+					{
+						"LastLine": 38,
+						"NameList": [
+							"s",
+							"err"
+						],
+						"ExpList": [
+							{
+								"Line": 38,
+								"LastLine": 38,
+								"PrefixExp": {
+									"LastLine": 38,
+									"PrefixExp": {
+										"Line": 38,
+										"Name": "package"
+									},
+									"KeyExp": {
+										"Line": 38,
+										"Str": "searchpath"
+									}
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 38,
+										"Str": "xuxu"
+									},
+									{
+										"Line": 38,
+										"Name": "path"
+									}
+								]
+							}
+						]
+					},
+					{
+						"Line": 39,
+						"LastLine": 39,
+						"PrefixExp": {
+							"Line": 39,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 39,
+								"Op": 34,
+								"Exp1": {
+									"Line": 39,
+									"Op": 36,
+									"Exp": {
+										"Line": 39,
+										"Name": "s"
+									}
+								},
+								"Exp2": {
+									"Line": 39,
+									"LastLine": 39,
+									"PrefixExp": {
+										"LastLine": 39,
+										"PrefixExp": {
+											"Line": 39,
+											"Name": "string"
+										},
+										"KeyExp": {
+											"Line": 39,
+											"Str": "find"
+										}
+									},
+									"NameExp": null,
+									"Args": [
+										{
+											"Line": 39,
+											"Name": "err"
+										},
+										{
+											"Line": 39,
+											"LastLine": 39,
+											"PrefixExp": {
+												"LastLine": 39,
+												"PrefixExp": {
+													"Line": 39,
+													"Name": "string"
+												},
+												"KeyExp": {
+													"Line": 39,
+													"Str": "rep"
+												}
+											},
+											"NameExp": null,
+											"Args": [
+												{
+													"Line": 39,
+													"Str": "xuxu"
+												},
+												{
+													"Line": 39,
+													"Name": "max"
+												}
+											]
+										}
+									]
+								}
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"Block": {
+				"LastLine": 47,
+				"States": [
+					{
+						"LastLine": 43,
+						"NameList": [
+							"oldpath"
+						],
+						"ExpList": [
+							{
+								"LastLine": 43,
+								"PrefixExp": {
+									"Line": 43,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 43,
+									"Str": "path"
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 44,
+						"VarList": [
+							{
+								"LastLine": 44,
+								"PrefixExp": {
+									"Line": 44,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 44,
+									"Str": "path"
+								}
 							}
 						],
-						"RetExps": null
-					}
-				}
-			]
-		},
-		{
-			"LastLine": 134,
-			"VarList": [
-				{
-					"Line": 134,
-					"Name": "div1"
-				}
-			],
-			"ExpList": [
-				{
-					"Line": 134,
-					"LastLine": 136,
-					"ParList": [
-						"a",
-						"b"
-					],
-					"IsVararg": false,
-					"Block": {
-						"LastLine": 135,
-						"States": [],
-						"RetExps": [
+						"ExpList": [
 							{
-								"Line": 135,
-								"LastLine": 135,
+								"Line": 44,
+								"LastLine": 44,
+								"KeyExpList": null,
+								"ValExpList": null
+							}
+						]
+					},
+					{
+						"LastLine": 45,
+						"NameList": [
+							"s",
+							"err"
+						],
+						"ExpList": [
+							{
+								"Line": 45,
+								"LastLine": 45,
 								"PrefixExp": {
-									"Line": 135,
-									"Name": "div0"
+									"Line": 45,
+									"Name": "pcall"
 								},
 								"NameExp": null,
 								"Args": [
 									{
-										"Line": 135,
-										"Name": "a"
+										"Line": 45,
+										"Name": "require"
 									},
 									{
-										"Line": 135,
-										"Name": "b"
+										"Line": 45,
+										"Str": "no-such-file"
 									}
 								]
 							}
 						]
-					}
-				}
-			]
-		},
-		{
-			"LastLine": 138,
-			"VarList": [
-				{
-					"Line": 138,
-					"Name": "div2"
-				}
-			],
-			"ExpList": [
-				{
-					"Line": 138,
-					"LastLine": 140,
-					"ParList": [
-						"a",
-						"b"
-					],
-					"IsVararg": false,
-					"Block": {
-						"LastLine": 139,
-						"States": [],
-						"RetExps": [
+					},
+					{
+						"Line": 46,
+						"LastLine": 46,
+						"PrefixExp": {
+							"Line": 46,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
 							{
-								"Line": 139,
-								"LastLine": 139,
-								"PrefixExp": {
-									"Line": 139,
-									"Name": "div1"
-								},
-								"NameExp": null,
-								"Args": [
-									{
-										"Line": 139,
-										"Name": "a"
-									},
-									{
-										"Line": 139,
-										"Name": "b"
+								"Line": 46,
+								"Op": 34,
+								"Exp1": {
+									"Line": 46,
+									"Op": 36,
+									"Exp": {
+										"Line": 46,
+										"Name": "s"
 									}
-								]
+								},
+								"Exp2": {
+									"Line": 46,
+									"LastLine": 46,
+									"PrefixExp": {
+										"LastLine": 46,
+										"PrefixExp": {
+											"Line": 46,
+											"Name": "string"
+										},
+										"KeyExp": {
+											"Line": 46,
+											"Str": "find"
+										}
+									},
+									"NameExp": null,
+									"Args": [
+										{
+											"Line": 46,
+											"Name": "err"
+										},
+										{
+											"Line": 46,
+											"Str": "package.path"
+										}
+									]
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 47,
+						"VarList": [
+							{
+								"LastLine": 47,
+								"PrefixExp": {
+									"Line": 47,
+									"Name": "package"
+								},
+								"KeyExp": {
+									"Line": 47,
+									"Str": "path"
+								}
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 47,
+								"Name": "oldpath"
 							}
 						]
 					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"Line": 50,
+			"LastLine": 50,
+			"PrefixExp": {
+				"Line": 50,
+				"Name": "print"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 50,
+					"Str": "+"
 				}
 			]
 		},
 		{
-			"LastLine": 142,
+			"Line": 309,
+			"LastLine": 309,
+			"PrefixExp": {
+				"Line": 309,
+				"Name": "print"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 309,
+					"Str": "testing assignments, logical operators, and constructors"
+				}
+			]
+		},
+		{
+			"LastLine": 311,
+			"NameList": [
+				"res",
+				"res2"
+			],
+			"ExpList": [
+				{
+					"Line": 311,
+					"Val": 27
+				}
+			]
+		},
+		{
+			"LastLine": 313,
 			"VarList": [
 				{
-					"Line": 142,
-					"Name": "aa"
+					"Line": 313,
+					"Name": "a"
+				},
+				{
+					"Line": 313,
+					"Name": "b"
 				}
 			],
 			"ExpList": [
 				{
-					"Line": 142,
+					"Line": 313,
+					"Val": 1
+				},
+				{
+					"Line": 313,
 					"Val": 5
 				}
 			]
 		},
 		{
-			"LastLine": 143,
-			"VarList": [
-				{
-					"Line": 143,
-					"Name": "bb"
-				}
-			],
-			"ExpList": [
-				{
-					"Line": 143,
-					"Val": 32436
-				}
-			]
-		},
-		{
-			"LastLine": 144,
-			"VarList": [
-				{
-					"Line": 144,
-					"Name": "cc"
-				}
-			],
-			"ExpList": [
-				{
-					"Line": 144,
-					"Val": 2.1684767467585034e-27
-				}
-			]
-		},
-		{
-			"Line": 145,
-			"LastLine": 145,
+			"Line": 314,
+			"LastLine": 314,
 			"PrefixExp": {
-				"Line": 145,
-				"Name": "print"
+				"Line": 314,
+				"Name": "assert"
 			},
 			"NameExp": null,
 			"Args": [
 				{
-					"Line": 145,
-					"Name": "bb"
-				}
-			]
-		},
-		{
-			"Line": 146,
-			"LastLine": 146,
-			"PrefixExp": {
-				"Line": 146,
-				"Name": "print"
-			},
-			"NameExp": null,
-			"Args": [
-				{
-					"Line": 146,
-					"Name": "cc"
-				}
-			]
-		},
-		{
-			"LastLine": 147,
-			"VarList": [
-				{
-					"Line": 147,
-					"Name": "dd"
-				}
-			],
-			"ExpList": [
-				{
-					"Line": 147,
-					"LastLine": 147,
-					"KeyExpList": [
-						{
-							"Line": 147,
-							"Str": "a"
+					"Line": 314,
+					"Op": 34,
+					"Exp1": {
+						"Line": 314,
+						"Op": 31,
+						"Exp1": {
+							"Line": 314,
+							"Name": "a"
 						},
-						{
-							"Line": 147,
-							"Str": "b"
-						},
-						{
-							"Line": 147,
-							"Str": "aa"
-						},
-						null
-					],
-					"ValExpList": [
-						{
-							"Line": 147,
+						"Exp2": {
+							"Line": 314,
 							"Val": 1
-						},
-						{
-							"Line": 147,
-							"Val": 2
-						},
-						{
-							"Line": 147,
-							"Val": 3
-						},
-						{
-							"Line": 147,
-							"Val": 6
 						}
-					]
-				}
-			]
-		},
-		{
-			"Line": 148,
-			"LastLine": 148,
-			"PrefixExp": {
-				"Line": 148,
-				"Name": "print"
-			},
-			"NameExp": null,
-			"Args": [
-				{
-					"LastLine": 148,
-					"PrefixExp": {
-						"Line": 148,
-						"Name": "dd"
 					},
-					"KeyExp": {
-						"Line": 148,
-						"Val": 4
+					"Exp2": {
+						"Line": 314,
+						"Op": 31,
+						"Exp1": {
+							"Line": 314,
+							"Name": "b"
+						},
+						"Exp2": {
+							"Line": 314,
+							"Val": 5
+						}
 					}
 				}
 			]
 		},
 		{
-			"LastLine": 150,
+			"LastLine": 315,
 			"VarList": [
 				{
-					"Line": 150,
-					"Name": "ok"
-				},
-				{
-					"Line": 150,
-					"Name": "res"
+					"Line": 315,
+					"Name": "a"
 				}
 			],
 			"ExpList": [
 				{
-					"Line": 150,
-					"LastLine": 150,
-					"PrefixExp": {
-						"Line": 150,
-						"Name": "pcall"
-					},
-					"NameExp": null,
-					"Args": [
-						{
-							"Line": 150,
-							"Name": "div2"
-						},
-						{
-							"Line": 150,
-							"Val": 4
-						},
-						{
-							"Line": 150,
-							"Val": 2
-						}
-					]
+					"Line": 315,
+					"LastLine": 315,
+					"KeyExpList": null,
+					"ValExpList": null
 				}
 			]
 		},
 		{
-			"Line": 151,
-			"LastLine": 151,
+			"LastLine": 316,
+			"VarList": [
+				{
+					"Line": 316,
+					"Name": "f"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 316,
+					"LastLine": 316,
+					"ParList": null,
+					"IsVararg": false,
+					"Block": {
+						"LastLine": 316,
+						"States": [],
+						"RetExps": [
+							{
+								"Line": 316,
+								"Val": 10
+							},
+							{
+								"Line": 316,
+								"Val": 11
+							},
+							{
+								"Line": 316,
+								"Val": 12
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 317,
+			"VarList": [
+				{
+					"LastLine": 317,
+					"PrefixExp": {
+						"Line": 317,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 317,
+						"Str": "x"
+					}
+				},
+				{
+					"Line": 317,
+					"Name": "b"
+				},
+				{
+					"LastLine": 317,
+					"PrefixExp": {
+						"Line": 317,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 317,
+						"Val": 1
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 317,
+					"Val": 1
+				},
+				{
+					"Line": 317,
+					"Val": 2
+				},
+				{
+					"Line": 317,
+					"LastLine": 317,
+					"PrefixExp": {
+						"Line": 317,
+						"Name": "f"
+					},
+					"NameExp": null,
+					"Args": null
+				}
+			]
+		},
+		{
+			"Line": 318,
+			"LastLine": 318,
 			"PrefixExp": {
-				"Line": 151,
+				"Line": 318,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 318,
+					"Op": 34,
+					"Exp1": {
+						"Line": 318,
+						"Op": 34,
+						"Exp1": {
+							"Line": 318,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 318,
+								"PrefixExp": {
+									"Line": 318,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 318,
+									"Str": "x"
+								}
+							},
+							"Exp2": {
+								"Line": 318,
+								"Val": 1
+							}
+						},
+						"Exp2": {
+							"Line": 318,
+							"Op": 31,
+							"Exp1": {
+								"Line": 318,
+								"Name": "b"
+							},
+							"Exp2": {
+								"Line": 318,
+								"Val": 2
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 318,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 318,
+							"PrefixExp": {
+								"Line": 318,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 318,
+								"Val": 1
+							}
+						},
+						"Exp2": {
+							"Line": 318,
+							"Val": 10
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 319,
+			"VarList": [
+				{
+					"LastLine": 319,
+					"PrefixExp": {
+						"Line": 319,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 319,
+						"LastLine": 319,
+						"PrefixExp": {
+							"Line": 319,
+							"Name": "f"
+						},
+						"NameExp": null,
+						"Args": null
+					}
+				},
+				{
+					"Line": 319,
+					"Name": "b"
+				},
+				{
+					"LastLine": 319,
+					"PrefixExp": {
+						"Line": 319,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 319,
+						"Op": 16,
+						"Exp1": {
+							"Line": 319,
+							"LastLine": 319,
+							"PrefixExp": {
+								"Line": 319,
+								"Name": "f"
+							},
+							"NameExp": null,
+							"Args": null
+						},
+						"Exp2": {
+							"Line": 319,
+							"Val": 3
+						}
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 319,
+					"LastLine": 319,
+					"PrefixExp": {
+						"Line": 319,
+						"Name": "f"
+					},
+					"NameExp": null,
+					"Args": null
+				},
+				{
+					"Line": 319,
+					"Name": "a"
+				},
+				{
+					"Line": 319,
+					"Str": "x"
+				}
+			]
+		},
+		{
+			"Line": 320,
+			"LastLine": 320,
+			"PrefixExp": {
+				"Line": 320,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 320,
+					"Op": 34,
+					"Exp1": {
+						"Line": 320,
+						"Op": 34,
+						"Exp1": {
+							"Line": 320,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 320,
+								"PrefixExp": {
+									"Line": 320,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 320,
+									"Val": 10
+								}
+							},
+							"Exp2": {
+								"Line": 320,
+								"Val": 10
+							}
+						},
+						"Exp2": {
+							"Line": 320,
+							"Op": 31,
+							"Exp1": {
+								"Line": 320,
+								"Name": "b"
+							},
+							"Exp2": {
+								"Line": 320,
+								"Name": "a"
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 320,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 320,
+							"PrefixExp": {
+								"Line": 320,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 320,
+								"Val": 13
+							}
+						},
+						"Exp2": {
+							"Line": 320,
+							"Str": "x"
+						}
+					}
+				}
+			]
+		},
+		{
+			"Block": {
+				"LastLine": 333,
+				"States": [
+					{
+						"LastLine": 324,
+						"NameList": [
+							"f"
+						],
+						"ExpList": [
+							{
+								"Line": 323,
+								"LastLine": 324,
+								"ParList": [
+									"n"
+								],
+								"IsVararg": false,
+								"Block": {
+									"LastLine": 324,
+									"States": [
+										{
+											"LastLine": 323,
+											"NameList": [
+												"x"
+											],
+											"ExpList": [
+												{
+													"Line": 323,
+													"LastLine": 323,
+													"KeyExpList": null,
+													"ValExpList": null
+												}
+											]
+										},
+										{
+											"LineOfFor": 323,
+											"LineOfDo": 323,
+											"VarName": "i",
+											"InitExp": {
+												"Line": 323,
+												"Val": 1
+											},
+											"LimitExp": {
+												"Line": 323,
+												"Name": "n"
+											},
+											"StepExp": {
+												"Line": 323,
+												"Val": 1
+											},
+											"Block": {
+												"LastLine": 323,
+												"States": [
+													{
+														"LastLine": 323,
+														"VarList": [
+															{
+																"LastLine": 323,
+																"PrefixExp": {
+																	"Line": 323,
+																	"Name": "x"
+																},
+																"KeyExp": {
+																	"Line": 323,
+																	"Name": "i"
+																}
+															}
+														],
+														"ExpList": [
+															{
+																"Line": 323,
+																"Name": "i"
+															}
+														]
+													}
+												],
+												"RetExps": null
+											}
+										}
+									],
+									"RetExps": [
+										{
+											"Line": 324,
+											"LastLine": 324,
+											"PrefixExp": {
+												"LastLine": 324,
+												"PrefixExp": {
+													"Line": 324,
+													"Name": "table"
+												},
+												"KeyExp": {
+													"Line": 324,
+													"Str": "unpack"
+												}
+											},
+											"NameExp": null,
+											"Args": [
+												{
+													"Line": 324,
+													"Name": "x"
+												}
+											]
+										}
+									]
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 325,
+						"NameList": [
+							"a",
+							"b",
+							"c"
+						],
+						"ExpList": null
+					},
+					{
+						"LastLine": 326,
+						"VarList": [
+							{
+								"Line": 326,
+								"Name": "a"
+							},
+							{
+								"Line": 326,
+								"Name": "b"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 326,
+								"Val": 0
+							},
+							{
+								"Line": 326,
+								"LastLine": 326,
+								"PrefixExp": {
+									"Line": 326,
+									"Name": "f"
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 326,
+										"Val": 1
+									}
+								]
+							}
+						]
+					},
+					{
+						"Line": 327,
+						"LastLine": 327,
+						"PrefixExp": {
+							"Line": 327,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 327,
+								"Op": 34,
+								"Exp1": {
+									"Line": 327,
+									"Op": 31,
+									"Exp1": {
+										"Line": 327,
+										"Name": "a"
+									},
+									"Exp2": {
+										"Line": 327,
+										"Val": 0
+									}
+								},
+								"Exp2": {
+									"Line": 327,
+									"Op": 31,
+									"Exp1": {
+										"Line": 327,
+										"Name": "b"
+									},
+									"Exp2": {
+										"Line": 327,
+										"Val": 1
+									}
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 328,
+						"VarList": [
+							{
+								"Line": 328,
+								"Name": "A"
+							},
+							{
+								"Line": 328,
+								"Name": "b"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 328,
+								"Val": 0
+							},
+							{
+								"Line": 328,
+								"LastLine": 328,
+								"PrefixExp": {
+									"Line": 328,
+									"Name": "f"
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 328,
+										"Val": 1
+									}
+								]
+							}
+						]
+					},
+					{
+						"Line": 329,
+						"LastLine": 329,
+						"PrefixExp": {
+							"Line": 329,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 329,
+								"Op": 34,
+								"Exp1": {
+									"Line": 329,
+									"Op": 31,
+									"Exp1": {
+										"Line": 329,
+										"Name": "A"
+									},
+									"Exp2": {
+										"Line": 329,
+										"Val": 0
+									}
+								},
+								"Exp2": {
+									"Line": 329,
+									"Op": 31,
+									"Exp1": {
+										"Line": 329,
+										"Name": "b"
+									},
+									"Exp2": {
+										"Line": 329,
+										"Val": 1
+									}
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 330,
+						"VarList": [
+							{
+								"Line": 330,
+								"Name": "a"
+							},
+							{
+								"Line": 330,
+								"Name": "b"
+							},
+							{
+								"Line": 330,
+								"Name": "c"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 330,
+								"Val": 0
+							},
+							{
+								"Line": 330,
+								"Val": 5
+							},
+							{
+								"Line": 330,
+								"LastLine": 330,
+								"PrefixExp": {
+									"Line": 330,
+									"Name": "f"
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 330,
+										"Val": 4
+									}
+								]
+							}
+						]
+					},
+					{
+						"Line": 331,
+						"LastLine": 331,
+						"PrefixExp": {
+							"Line": 331,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 331,
+								"Op": 34,
+								"Exp1": {
+									"Line": 331,
+									"Op": 34,
+									"Exp1": {
+										"Line": 331,
+										"Op": 31,
+										"Exp1": {
+											"Line": 331,
+											"Name": "a"
+										},
+										"Exp2": {
+											"Line": 331,
+											"Val": 0
+										}
+									},
+									"Exp2": {
+										"Line": 331,
+										"Op": 31,
+										"Exp1": {
+											"Line": 331,
+											"Name": "b"
+										},
+										"Exp2": {
+											"Line": 331,
+											"Val": 5
+										}
+									}
+								},
+								"Exp2": {
+									"Line": 331,
+									"Op": 31,
+									"Exp1": {
+										"Line": 331,
+										"Name": "c"
+									},
+									"Exp2": {
+										"Line": 331,
+										"Val": 1
+									}
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 332,
+						"VarList": [
+							{
+								"Line": 332,
+								"Name": "a"
+							},
+							{
+								"Line": 332,
+								"Name": "b"
+							},
+							{
+								"Line": 332,
+								"Name": "c"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 332,
+								"Val": 0
+							},
+							{
+								"Line": 332,
+								"Val": 5
+							},
+							{
+								"Line": 332,
+								"LastLine": 332,
+								"PrefixExp": {
+									"Line": 332,
+									"Name": "f"
+								},
+								"NameExp": null,
+								"Args": [
+									{
+										"Line": 332,
+										"Val": 0
+									}
+								]
+							}
+						]
+					},
+					{
+						"Line": 333,
+						"LastLine": 333,
+						"PrefixExp": {
+							"Line": 333,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 333,
+								"Op": 34,
+								"Exp1": {
+									"Line": 333,
+									"Op": 34,
+									"Exp1": {
+										"Line": 333,
+										"Op": 31,
+										"Exp1": {
+											"Line": 333,
+											"Name": "a"
+										},
+										"Exp2": {
+											"Line": 333,
+											"Val": 0
+										}
+									},
+									"Exp2": {
+										"Line": 333,
+										"Op": 31,
+										"Exp1": {
+											"Line": 333,
+											"Name": "b"
+										},
+										"Exp2": {
+											"Line": 333,
+											"Val": 5
+										}
+									}
+								},
+								"Exp2": {
+									"Line": 333,
+									"Op": 31,
+									"Exp1": {
+										"Line": 333,
+										"Name": "c"
+									},
+									"Exp2": {
+										"Line": 333
+									}
+								}
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"LastLine": 336,
+			"VarList": [
+				{
+					"Line": 336,
+					"Name": "a"
+				},
+				{
+					"Line": 336,
+					"Name": "b"
+				},
+				{
+					"Line": 336,
+					"Name": "c"
+				},
+				{
+					"Line": 336,
+					"Name": "d"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 336
+				},
+				{
+					"Line": 336,
+					"Val": 1
+				},
+				{
+					"Line": 336,
+					"Val": 1
+				},
+				{
+					"Line": 336,
+					"Val": 6
+				}
+			]
+		},
+		{
+			"Line": 337,
+			"LastLine": 337,
+			"PrefixExp": {
+				"Line": 337,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 337,
+					"Op": 34,
+					"Exp1": {
+						"Line": 337,
+						"Op": 34,
+						"Exp1": {
+							"Line": 337,
+							"Op": 34,
+							"Exp1": {
+								"Line": 337,
+								"Op": 36,
+								"Exp": {
+									"Line": 337,
+									"Name": "a"
+								}
+							},
+							"Exp2": {
+								"Line": 337,
+								"Name": "b"
+							}
+						},
+						"Exp2": {
+							"Line": 337,
+							"Name": "c"
+						}
+					},
+					"Exp2": {
+						"Line": 337,
+						"Op": 31,
+						"Exp1": {
+							"Line": 337,
+							"Name": "d"
+						},
+						"Exp2": {
+							"Line": 337,
+							"Val": 6
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 339,
+			"VarList": [
+				{
+					"Line": 339,
+					"Name": "d"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 339,
+					"Val": 20
+				}
+			]
+		},
+		{
+			"LastLine": 340,
+			"VarList": [
+				{
+					"Line": 340,
+					"Name": "a"
+				},
+				{
+					"Line": 340,
+					"Name": "b"
+				},
+				{
+					"Line": 340,
+					"Name": "c"
+				},
+				{
+					"Line": 340,
+					"Name": "d"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 340,
+					"LastLine": 340,
+					"PrefixExp": {
+						"Line": 340,
+						"Name": "f"
+					},
+					"NameExp": null,
+					"Args": null
+				}
+			]
+		},
+		{
+			"Line": 341,
+			"LastLine": 341,
+			"PrefixExp": {
+				"Line": 341,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 341,
+					"Op": 34,
+					"Exp1": {
+						"Line": 341,
+						"Op": 34,
+						"Exp1": {
+							"Line": 341,
+							"Op": 34,
+							"Exp1": {
+								"Line": 341,
+								"Op": 31,
+								"Exp1": {
+									"Line": 341,
+									"Name": "a"
+								},
+								"Exp2": {
+									"Line": 341,
+									"Val": 10
+								}
+							},
+							"Exp2": {
+								"Line": 341,
+								"Op": 31,
+								"Exp1": {
+									"Line": 341,
+									"Name": "b"
+								},
+								"Exp2": {
+									"Line": 341,
+									"Val": 11
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 341,
+							"Op": 31,
+							"Exp1": {
+								"Line": 341,
+								"Name": "c"
+							},
+							"Exp2": {
+								"Line": 341,
+								"Val": 12
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 341,
+						"Op": 31,
+						"Exp1": {
+							"Line": 341,
+							"Name": "d"
+						},
+						"Exp2": {
+							"Line": 341
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 342,
+			"VarList": [
+				{
+					"Line": 342,
+					"Name": "a"
+				},
+				{
+					"Line": 342,
+					"Name": "b"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 342,
+					"LastLine": 342,
+					"PrefixExp": {
+						"Line": 342,
+						"Name": "f"
+					},
+					"NameExp": null,
+					"Args": null
+				},
+				{
+					"Line": 342,
+					"Val": 1
+				},
+				{
+					"Line": 342,
+					"Val": 2
+				},
+				{
+					"Line": 342,
+					"Val": 3
+				},
+				{
+					"Line": 342,
+					"LastLine": 342,
+					"PrefixExp": {
+						"Line": 342,
+						"Name": "f"
+					},
+					"NameExp": null,
+					"Args": null
+				}
+			]
+		},
+		{
+			"Line": 343,
+			"LastLine": 343,
+			"PrefixExp": {
+				"Line": 343,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 343,
+					"Op": 34,
+					"Exp1": {
+						"Line": 343,
+						"Op": 31,
+						"Exp1": {
+							"Line": 343,
+							"Name": "a"
+						},
+						"Exp2": {
+							"Line": 343,
+							"Val": 10
+						}
+					},
+					"Exp2": {
+						"Line": 343,
+						"Op": 31,
+						"Exp1": {
+							"Line": 343,
+							"Name": "b"
+						},
+						"Exp2": {
+							"Line": 343,
+							"Val": 1
+						}
+					}
+				}
+			]
+		},
+		{
+			"Line": 345,
+			"LastLine": 345,
+			"PrefixExp": {
+				"Line": 345,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 345,
+					"Op": 34,
+					"Exp1": {
+						"Line": 345,
+						"Op": 31,
+						"Exp1": {
+							"Line": 345,
+							"Op": 27,
+							"Exp1": {
+								"Line": 345,
+								"Name": "a"
+							},
+							"Exp2": {
+								"Line": 345,
+								"Name": "b"
+							}
+						},
+						"Exp2": {
+							"Line": 345
+						}
+					},
+					"Exp2": {
+						"Line": 345,
+						"Op": 31,
+						"Exp1": {
+							"Line": 345,
+							"Op": 29,
+							"Exp1": {
+								"Line": 345,
+								"Name": "a"
+							},
+							"Exp2": {
+								"Line": 345,
+								"Name": "b"
+							}
+						},
+						"Exp2": {
+							"Line": 345
+						}
+					}
+				}
+			]
+		},
+		{
+			"Line": 346,
+			"LastLine": 346,
+			"PrefixExp": {
+				"Line": 346,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 346,
+					"Op": 31,
+					"Exp1": {
+						"Line": 346,
+						"Val": 2
+					},
+					"Exp2": {
+						"Line": 346,
+						"Val": 2
+					}
+				}
+			]
+		},
+		{
+			"Line": 347,
+			"LastLine": 347,
+			"PrefixExp": {
+				"Line": 347,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 347,
+					"Op": 31,
+					"Exp1": {
+						"Line": 347,
+						"Val": 10
+					},
+					"Exp2": {
+						"Line": 347,
+						"Val": 10
+					}
+				}
+			]
+		},
+		{
+			"Line": 348,
+			"LastLine": 348,
+			"PrefixExp": {
+				"Line": 348,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 348,
+					"Op": 31,
+					"Exp1": {
+						"Line": 348,
+						"Val": 10
+					},
+					"Exp2": {
+						"Line": 348,
+						"Val": 10
+					}
+				}
+			]
+		},
+		{
+			"Line": 349,
+			"LastLine": 349,
+			"PrefixExp": {
+				"Line": 349,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 349
+				}
+			]
+		},
+		{
+			"Line": 350,
+			"LastLine": 350,
+			"PrefixExp": {
+				"Line": 350,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 350,
+					"Op": 31,
+					"Exp1": {
+						"Line": 350,
+						"Str": "alo"
+					},
+					"Exp2": {
+						"Line": 350,
+						"Str": "alo"
+					}
+				}
+			]
+		},
+		{
+			"Line": 351,
+			"LastLine": 351,
+			"PrefixExp": {
+				"Line": 351,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 351,
+					"Op": 31,
+					"Exp1": {
+						"Line": 351
+					},
+					"Exp2": {
+						"Line": 351
+					}
+				}
+			]
+		},
+		{
+			"Line": 352,
+			"LastLine": 352,
+			"PrefixExp": {
+				"Line": 352,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 352,
+					"Op": 31,
+					"Exp1": {
+						"Line": 352
+					},
+					"Exp2": {
+						"Line": 352
+					}
+				}
+			]
+		},
+		{
+			"Line": 353,
+			"LastLine": 353,
+			"PrefixExp": {
+				"Line": 353,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 353,
+					"Op": 31,
+					"Exp1": {
+						"Line": 353
+					},
+					"Exp2": {
+						"Line": 353
+					}
+				}
+			]
+		},
+		{
+			"Line": 354,
+			"LastLine": 354,
+			"PrefixExp": {
+				"Line": 354,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 354,
+					"Op": 31,
+					"Exp1": {
+						"Line": 354,
+						"Val": 10
+					},
+					"Exp2": {
+						"Line": 354,
+						"Val": 10
+					}
+				}
+			]
+		},
+		{
+			"Line": 355,
+			"LastLine": 355,
+			"PrefixExp": {
+				"Line": 355,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 355,
+					"Op": 32,
+					"Exp1": {
+						"Line": 355
+					},
+					"Exp2": {
+						"Line": 355
+					}
+				}
+			]
+		},
+		{
+			"Line": 356,
+			"LastLine": 356,
+			"PrefixExp": {
+				"Line": 356,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 356,
+					"Op": 32,
+					"Exp1": {
+						"Line": 356
+					},
+					"Exp2": {
+						"Line": 356
+					}
+				}
+			]
+		},
+		{
+			"Line": 357,
+			"LastLine": 357,
+			"PrefixExp": {
+				"Line": 357,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 357,
+					"Op": 31,
+					"Exp1": {
+						"Line": 357
+					},
+					"Exp2": {
+						"Line": 357
+					}
+				}
+			]
+		},
+		{
+			"Line": 358,
+			"LastLine": 358,
+			"PrefixExp": {
+				"Line": 358,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 358,
+					"Op": 31,
+					"Exp1": {
+						"Line": 358
+					},
+					"Exp2": {
+						"Line": 358
+					}
+				}
+			]
+		},
+		{
+			"Line": 359,
+			"LastLine": 359,
+			"PrefixExp": {
+				"Line": 359,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 359,
+					"Op": 31,
+					"Exp1": {
+						"Line": 359
+					},
+					"Exp2": {
+						"Line": 359
+					}
+				}
+			]
+		},
+		{
+			"Line": 360,
+			"LastLine": 360,
+			"PrefixExp": {
+				"Line": 360,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 360,
+					"Op": 31,
+					"Exp1": {
+						"Line": 360,
+						"Op": 36,
+						"Exp": {
+							"Line": 360,
+							"Op": 36,
+							"Exp": {
+								"Line": 360,
+								"Name": "a"
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 360
+					}
+				}
+			]
+		},
+		{
+			"Line": 361,
+			"LastLine": 361,
+			"PrefixExp": {
+				"Line": 361,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 361,
+					"Op": 31,
+					"Exp1": {
+						"Line": 361
+					},
+					"Exp2": {
+						"Line": 361
+					}
+				}
+			]
+		},
+		{
+			"Line": 362,
+			"LastLine": 362,
+			"PrefixExp": {
+				"Line": 362,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 362,
+					"Op": 31,
+					"Exp1": {
+						"Line": 362
+					},
+					"Exp2": {
+						"Line": 362
+					}
+				}
+			]
+		},
+		{
+			"Line": 363,
+			"LastLine": 363,
+			"PrefixExp": {
+				"Line": 363,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 363,
+					"Op": 31,
+					"Exp1": {
+						"Line": 363
+					},
+					"Exp2": {
+						"Line": 363
+					}
+				}
+			]
+		},
+		{
+			"Line": 364,
+			"LastLine": 364,
+			"PrefixExp": {
+				"Line": 364,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 364,
+					"Op": 31,
+					"Exp1": {
+						"Line": 364
+					},
+					"Exp2": {
+						"Line": 364
+					}
+				}
+			]
+		},
+		{
+			"Line": 365,
+			"LastLine": 365,
+			"PrefixExp": {
+				"Line": 365,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 365,
+					"Op": 31,
+					"Exp1": {
+						"Line": 365,
+						"Op": 36,
+						"Exp": {
+							"Line": 365,
+							"LastLine": 365,
+							"KeyExpList": null,
+							"ValExpList": null
+						}
+					},
+					"Exp2": {
+						"Line": 365
+					}
+				}
+			]
+		},
+		{
+			"Line": 366,
+			"LastLine": 366,
+			"PrefixExp": {
+				"Line": 366,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 366,
+					"Op": 31,
+					"Exp1": {
+						"Line": 366
+					},
+					"Exp2": {
+						"Line": 366
+					}
+				}
+			]
+		},
+		{
+			"Line": 367,
+			"LastLine": 367,
+			"PrefixExp": {
+				"Line": 367,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 367,
+					"Op": 31,
+					"Exp1": {
+						"Line": 367
+					},
+					"Exp2": {
+						"Line": 367
+					}
+				}
+			]
+		},
+		{
+			"Line": 369,
+			"LastLine": 369,
+			"PrefixExp": {
+				"Line": 369,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 369,
+					"Op": 32,
+					"Exp1": {
+						"Line": 369,
+						"LastLine": 369,
+						"KeyExpList": null,
+						"ValExpList": null
+					},
+					"Exp2": {
+						"Line": 369,
+						"LastLine": 369,
+						"KeyExpList": null,
+						"ValExpList": null
+					}
+				}
+			]
+		},
+		{
+			"Line": 370,
+			"LastLine": 370,
+			"PrefixExp": {
+				"Line": 370,
 				"Name": "print"
 			},
 			"NameExp": null,
 			"Args": [
 				{
-					"Line": 151,
-					"Name": "ok"
-				},
-				{
-					"Line": 151,
-					"Name": "res"
+					"Line": 370,
+					"Str": "+"
 				}
 			]
 		},
 		{
-			"LastLine": 152,
+			"LastLine": 372,
 			"VarList": [
 				{
-					"Line": 152,
-					"Name": "ok"
-				},
-				{
-					"Line": 152,
-					"Name": "res"
+					"Line": 372,
+					"Name": "a"
 				}
 			],
 			"ExpList": [
 				{
-					"Line": 152,
-					"LastLine": 152,
+					"Line": 372,
+					"LastLine": 372,
+					"KeyExpList": null,
+					"ValExpList": null
+				}
+			]
+		},
+		{
+			"LastLine": 373,
+			"VarList": [
+				{
+					"LastLine": 373,
 					"PrefixExp": {
-						"Line": 152,
-						"Name": "pcall"
+						"Line": 373,
+						"Name": "a"
 					},
-					"NameExp": null,
-					"Args": [
+					"KeyExp": {
+						"Line": 373
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 373,
+					"Val": 20
+				}
+			]
+		},
+		{
+			"LastLine": 374,
+			"VarList": [
+				{
+					"LastLine": 374,
+					"PrefixExp": {
+						"Line": 374,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 374
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 374,
+					"Val": 10
+				}
+			]
+		},
+		{
+			"Line": 375,
+			"LastLine": 375,
+			"PrefixExp": {
+				"Line": 375,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 375,
+					"Op": 34,
+					"Exp1": {
+						"Line": 375,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 375,
+							"PrefixExp": {
+								"Line": 375,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 375,
+								"Op": 27,
+								"Exp1": {
+									"Line": 375,
+									"Val": 1
+								},
+								"Exp2": {
+									"Line": 375,
+									"Val": 2
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 375,
+							"Val": 20
+						}
+					},
+					"Exp2": {
+						"Line": 375,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 375,
+							"PrefixExp": {
+								"Line": 375,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 375,
+								"Op": 29,
+								"Exp1": {
+									"Line": 375,
+									"Val": 1
+								},
+								"Exp2": {
+									"Line": 375,
+									"Val": 2
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 375,
+							"Val": 10
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 377,
+			"VarList": [
+				{
+					"Line": 377,
+					"Name": "f"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 377,
+					"LastLine": 377,
+					"ParList": [
+						"a"
+					],
+					"IsVararg": false,
+					"Block": {
+						"LastLine": 377,
+						"States": [],
+						"RetExps": [
+							{
+								"Line": 377,
+								"Name": "a"
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 379,
+			"NameList": [
+				"a"
+			],
+			"ExpList": [
+				{
+					"Line": 379,
+					"LastLine": 379,
+					"KeyExpList": null,
+					"ValExpList": null
+				}
+			]
+		},
+		{
+			"LineOfFor": 380,
+			"LineOfDo": 380,
+			"VarName": "i",
+			"InitExp": {
+				"Line": 380,
+				"Val": 3000
+			},
+			"LimitExp": {
+				"Line": 380,
+				"Val": -3000
+			},
+			"StepExp": {
+				"Line": 380,
+				"Val": -1
+			},
+			"Block": {
+				"LastLine": 380,
+				"States": [
+					{
+						"LastLine": 380,
+						"VarList": [
+							{
+								"LastLine": 380,
+								"PrefixExp": {
+									"Line": 380,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 380,
+									"Op": 16,
+									"Exp1": {
+										"Line": 380,
+										"Name": "i"
+									},
+									"Exp2": {
+										"Line": 380,
+										"Val": 0
+									}
+								}
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 380,
+								"Name": "i"
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"LastLine": 381,
+			"VarList": [
+				{
+					"LastLine": 381,
+					"PrefixExp": {
+						"Line": 381,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 381,
+						"Val": 1e+31
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 381,
+					"Str": "alo"
+				}
+			]
+		},
+		{
+			"LastLine": 381,
+			"VarList": [
+				{
+					"LastLine": 381,
+					"PrefixExp": {
+						"Line": 381,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 381
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 381,
+					"Val": 10
+				}
+			]
+		},
+		{
+			"LastLine": 381,
+			"VarList": [
+				{
+					"LastLine": 381,
+					"PrefixExp": {
+						"Line": 381,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 381
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 381,
+					"Val": 20
+				}
+			]
+		},
+		{
+			"Line": 382,
+			"LastLine": 382,
+			"PrefixExp": {
+				"Line": 382,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 382,
+					"Op": 34,
+					"Exp1": {
+						"Line": 382,
+						"Op": 34,
+						"Exp1": {
+							"Line": 382,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 382,
+								"PrefixExp": {
+									"Line": 382,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 382,
+									"Val": 1e+31
+								}
+							},
+							"Exp2": {
+								"Line": 382,
+								"Str": "alo"
+							}
+						},
+						"Exp2": {
+							"Line": 382,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 382,
+								"PrefixExp": {
+									"Line": 382,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 382
+								}
+							},
+							"Exp2": {
+								"Line": 382,
+								"Val": 20
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 382,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 382,
+							"PrefixExp": {
+								"Line": 382,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 382,
+								"Op": 27,
+								"Exp1": {
+									"Line": 382,
+									"Val": 10
+								},
+								"Exp2": {
+									"Line": 382,
+									"Val": 20
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 382,
+							"Val": 10
+						}
+					}
+				}
+			]
+		},
+		{
+			"LineOfFor": 383,
+			"LineOfDo": 383,
+			"VarName": "i",
+			"InitExp": {
+				"Line": 383,
+				"Val": 3000
+			},
+			"LimitExp": {
+				"Line": 383,
+				"Val": -3000
+			},
+			"StepExp": {
+				"Line": 383,
+				"Val": -1
+			},
+			"Block": {
+				"LastLine": 383,
+				"States": [
+					{
+						"Line": 383,
+						"LastLine": 383,
+						"PrefixExp": {
+							"Line": 383,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 383,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 383,
+									"PrefixExp": {
+										"Line": 383,
+										"Name": "a"
+									},
+									"KeyExp": {
+										"Line": 383,
+										"Name": "i"
+									}
+								},
+								"Exp2": {
+									"Line": 383,
+									"Name": "i"
+								}
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"LastLine": 384,
+			"VarList": [
+				{
+					"LastLine": 384,
+					"PrefixExp": {
+						"Line": 384,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 384,
+						"Name": "print"
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 384,
+					"Name": "assert"
+				}
+			]
+		},
+		{
+			"LastLine": 385,
+			"VarList": [
+				{
+					"LastLine": 385,
+					"PrefixExp": {
+						"Line": 385,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 385,
+						"Name": "f"
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 385,
+					"Name": "print"
+				}
+			]
+		},
+		{
+			"LastLine": 386,
+			"VarList": [
+				{
+					"LastLine": 386,
+					"PrefixExp": {
+						"Line": 386,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 386,
+						"Name": "a"
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 386,
+					"Name": "a"
+				}
+			]
+		},
+		{
+			"Line": 387,
+			"LastLine": 387,
+			"PrefixExp": {
+				"Line": 387,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 387,
+					"Op": 31,
+					"Exp1": {
+						"LastLine": 387,
+						"PrefixExp": {
+							"LastLine": 387,
+							"PrefixExp": {
+								"LastLine": 387,
+								"PrefixExp": {
+									"LastLine": 387,
+									"PrefixExp": {
+										"LastLine": 387,
+										"PrefixExp": {
+											"Line": 387,
+											"Name": "a"
+										},
+										"KeyExp": {
+											"Line": 387,
+											"Name": "a"
+										}
+									},
+									"KeyExp": {
+										"Line": 387,
+										"Name": "a"
+									}
+								},
+								"KeyExp": {
+									"Line": 387,
+									"Name": "a"
+								}
+							},
+							"KeyExp": {
+								"Line": 387,
+								"Name": "a"
+							}
+						},
+						"KeyExp": {
+							"Line": 387,
+							"Name": "print"
+						}
+					},
+					"Exp2": {
+						"Line": 387,
+						"Name": "assert"
+					}
+				}
+			]
+		},
+		{
+			"Line": 388,
+			"LastLine": 388,
+			"PrefixExp": {
+				"LastLine": 388,
+				"PrefixExp": {
+					"Line": 388,
+					"Name": "a"
+				},
+				"KeyExp": {
+					"Line": 388,
+					"Name": "print"
+				}
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 388,
+					"Op": 31,
+					"Exp1": {
+						"LastLine": 388,
+						"PrefixExp": {
+							"Line": 388,
+							"Name": "a"
+						},
+						"KeyExp": {
+							"LastLine": 388,
+							"PrefixExp": {
+								"Line": 388,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 388,
+								"Name": "f"
+							}
+						}
+					},
+					"Exp2": {
+						"LastLine": 388,
+						"PrefixExp": {
+							"Line": 388,
+							"Name": "a"
+						},
+						"KeyExp": {
+							"Line": 388,
+							"Name": "print"
+						}
+					}
+				}
+			]
+		},
+		{
+			"Line": 389,
+			"LastLine": 389,
+			"PrefixExp": {
+				"Line": 389,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 389,
+					"Op": 36,
+					"Exp": {
+						"Line": 389,
+						"LastLine": 389,
+						"PrefixExp": {
+							"Line": 389,
+							"Name": "pcall"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 389,
+								"LastLine": 389,
+								"ParList": null,
+								"IsVararg": false,
+								"Block": {
+									"LastLine": 389,
+									"States": [
+										{
+											"LastLine": 389,
+											"NameList": [
+												"a"
+											],
+											"ExpList": [
+												{
+													"Line": 389,
+													"LastLine": 389,
+													"KeyExpList": null,
+													"ValExpList": null
+												}
+											]
+										},
+										{
+											"LastLine": 389,
+											"VarList": [
+												{
+													"LastLine": 389,
+													"PrefixExp": {
+														"Line": 389,
+														"Name": "a"
+													},
+													"KeyExp": {
+														"Line": 389
+													}
+												}
+											],
+											"ExpList": [
+												{
+													"Line": 389,
+													"Val": 10
+												}
+											]
+										}
+									],
+									"RetExps": null
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"Line": 390,
+			"LastLine": 390,
+			"PrefixExp": {
+				"Line": 390,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 390,
+					"Op": 36,
+					"Exp": {
+						"Line": 390,
+						"LastLine": 390,
+						"PrefixExp": {
+							"Line": 390,
+							"Name": "pcall"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 390,
+								"LastLine": 390,
+								"ParList": null,
+								"IsVararg": false,
+								"Block": {
+									"LastLine": 390,
+									"States": [
+										{
+											"LastLine": 390,
+											"NameList": [
+												"a"
+											],
+											"ExpList": [
+												{
+													"Line": 390,
+													"LastLine": 390,
+													"KeyExpList": [
+														{
+															"Line": 390
+														}
+													],
+													"ValExpList": [
+														{
+															"Line": 390,
+															"Val": 10
+														}
+													]
+												}
+											]
+										}
+									],
+									"RetExps": null
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"Line": 391,
+			"LastLine": 391,
+			"PrefixExp": {
+				"Line": 391,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 391,
+					"Op": 31,
+					"Exp1": {
+						"LastLine": 391,
+						"PrefixExp": {
+							"Line": 391,
+							"Name": "a"
+						},
+						"KeyExp": {
+							"Line": 391
+						}
+					},
+					"Exp2": {
+						"Line": 391
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 392,
+			"VarList": [
+				{
+					"Line": 392,
+					"Name": "a"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 392
+				}
+			]
+		},
+		{
+			"LastLine": 394,
+			"VarList": [
+				{
+					"Line": 394,
+					"Name": "a"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 394,
+					"LastLine": 394,
+					"KeyExpList": [
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
 						{
-							"Line": 152,
-							"Name": "div2"
+							"Line": 394,
+							"Val": -3
 						},
 						{
-							"Line": 152,
+							"Line": 394,
+							"Name": "f"
+						},
+						{
+							"Line": 394,
+							"Str": "a"
+						},
+						{
+							"Line": 394,
+							"Str": "b"
+						}
+					],
+					"ValExpList": [
+						{
+							"Line": 394,
+							"Val": 10
+						},
+						{
+							"Line": 394,
+							"Val": 9
+						},
+						{
+							"Line": 394,
+							"Val": 8
+						},
+						{
+							"Line": 394,
+							"Val": 7
+						},
+						{
+							"Line": 394,
+							"Val": 6
+						},
+						{
+							"Line": 394,
 							"Val": 5
 						},
 						{
-							"Line": 152,
-							"Val": 0
+							"Line": 394,
+							"Val": 4
+						},
+						{
+							"Line": 394,
+							"Val": 3
+						},
+						{
+							"Line": 394,
+							"Val": 2
+						},
+						{
+							"Line": 394,
+							"Str": "a"
+						},
+						{
+							"Line": 394,
+							"Name": "print"
+						},
+						{
+							"Line": 394,
+							"Str": "a"
+						},
+						{
+							"Line": 394,
+							"Str": "ab"
 						}
 					]
 				}
 			]
 		},
 		{
-			"Line": 153,
-			"LastLine": 153,
-			"PrefixExp": {
-				"Line": 153,
-				"Name": "print"
-			},
-			"NameExp": null,
-			"Args": [
-				{
-					"Line": 153,
-					"Name": "ok"
-				},
-				{
-					"Line": 153,
-					"Name": "res"
-				}
-			]
-		},
-		{
-			"LastLine": 154,
+			"LastLine": 395,
 			"VarList": [
 				{
-					"Line": 154,
-					"Name": "ok"
+					"Line": 395,
+					"Name": "a"
 				},
 				{
-					"Line": 154,
-					"Name": "res"
+					"LastLine": 395,
+					"PrefixExp": {
+						"Line": 395,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 395,
+						"Str": "x"
+					}
+				},
+				{
+					"LastLine": 395,
+					"PrefixExp": {
+						"Line": 395,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 395,
+						"Str": "y"
+					}
 				}
 			],
 			"ExpList": [
 				{
-					"Line": 154,
-					"LastLine": 154,
+					"Line": 395,
+					"Name": "a"
+				},
+				{
+					"LastLine": 395,
 					"PrefixExp": {
-						"Line": 154,
-						"Name": "pcall"
+						"Line": 395,
+						"Name": "a"
 					},
-					"NameExp": null,
-					"Args": [
-						{
-							"Line": 154,
-							"Name": "div2"
-						},
-						{
-							"Line": 154,
-							"LastLine": 154,
-							"KeyExpList": null,
-							"ValExpList": null
-						},
-						{
-							"Line": 154,
-							"LastLine": 154,
-							"KeyExpList": null,
-							"ValExpList": null
-						}
-					]
+					"KeyExp": {
+						"Line": 395,
+						"Val": -3
+					}
 				}
 			]
 		},
 		{
-			"Line": 155,
-			"LastLine": 155,
+			"Line": 396,
+			"LastLine": 396,
 			"PrefixExp": {
-				"Line": 155,
+				"Line": 396,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 396,
+					"Op": 34,
+					"Exp1": {
+						"Line": 396,
+						"Op": 34,
+						"Exp1": {
+							"Line": 396,
+							"Op": 34,
+							"Exp1": {
+								"Line": 396,
+								"Op": 34,
+								"Exp1": {
+									"Line": 396,
+									"Op": 31,
+									"Exp1": {
+										"LastLine": 396,
+										"PrefixExp": {
+											"Line": 396,
+											"Name": "a"
+										},
+										"KeyExp": {
+											"Line": 396,
+											"Val": 1
+										}
+									},
+									"Exp2": {
+										"Line": 396,
+										"Val": 10
+									}
+								},
+								"Exp2": {
+									"Line": 396,
+									"Op": 31,
+									"Exp1": {
+										"LastLine": 396,
+										"PrefixExp": {
+											"Line": 396,
+											"Name": "a"
+										},
+										"KeyExp": {
+											"Line": 396,
+											"Val": -3
+										}
+									},
+									"Exp2": {
+										"LastLine": 396,
+										"PrefixExp": {
+											"Line": 396,
+											"Name": "a"
+										},
+										"KeyExp": {
+											"Line": 396,
+											"Str": "a"
+										}
+									}
+								}
+							},
+							"Exp2": {
+								"Line": 396,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 396,
+									"PrefixExp": {
+										"Line": 396,
+										"Name": "a"
+									},
+									"KeyExp": {
+										"Line": 396,
+										"Name": "f"
+									}
+								},
+								"Exp2": {
+									"Line": 396,
+									"Name": "print"
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 396,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 396,
+								"PrefixExp": {
+									"Line": 396,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 396,
+									"Str": "x"
+								}
+							},
+							"Exp2": {
+								"Line": 396,
+								"Str": "a"
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 396,
+						"Op": 36,
+						"Exp": {
+							"LastLine": 396,
+							"PrefixExp": {
+								"Line": 396,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 396,
+								"Str": "y"
+							}
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 397,
+			"VarList": [
+				{
+					"LastLine": 397,
+					"PrefixExp": {
+						"Line": 397,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 397,
+						"Val": 1
+					}
+				},
+				{
+					"LastLine": 397,
+					"PrefixExp": {
+						"Line": 397,
+						"LastLine": 397,
+						"PrefixExp": {
+							"Line": 397,
+							"Name": "f"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 397,
+								"Name": "a"
+							}
+						]
+					},
+					"KeyExp": {
+						"Line": 397,
+						"Val": 2
+					}
+				},
+				{
+					"Line": 397,
+					"Name": "b"
+				},
+				{
+					"Line": 397,
+					"Name": "c"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 397,
+					"LastLine": 397,
+					"KeyExpList": [
+						{
+							"Line": 397,
+							"Str": "alo"
+						}
+					],
+					"ValExpList": [
+						{
+							"Line": 397,
+							"Name": "assert"
+						}
+					]
+				},
+				{
+					"Line": 397,
+					"Val": 10
+				},
+				{
+					"LastLine": 397,
+					"PrefixExp": {
+						"Line": 397,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 397,
+						"Val": 1
+					}
+				},
+				{
+					"LastLine": 397,
+					"PrefixExp": {
+						"Line": 397,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 397,
+						"Name": "f"
+					}
+				},
+				{
+					"Line": 397,
+					"Val": 6
+				},
+				{
+					"Line": 397,
+					"Val": 10
+				},
+				{
+					"Line": 397,
+					"Val": 23
+				},
+				{
+					"Line": 397,
+					"LastLine": 397,
+					"PrefixExp": {
+						"Line": 397,
+						"Name": "f"
+					},
+					"NameExp": null,
+					"Args": [
+						{
+							"Line": 397,
+							"Name": "a"
+						}
+					]
+				},
+				{
+					"Line": 397,
+					"Val": 2
+				}
+			]
+		},
+		{
+			"Line": 398,
+			"LastLine": 398,
+			"PrefixExp": {
+				"LastLine": 398,
+				"PrefixExp": {
+					"LastLine": 398,
+					"PrefixExp": {
+						"Line": 398,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 398,
+						"Val": 1
+					}
+				},
+				"KeyExp": {
+					"Line": 398,
+					"Str": "alo"
+				}
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 398,
+					"Op": 34,
+					"Exp1": {
+						"Line": 398,
+						"Op": 34,
+						"Exp1": {
+							"Line": 398,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 398,
+								"PrefixExp": {
+									"Line": 398,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 398,
+									"Val": 2
+								}
+							},
+							"Exp2": {
+								"Line": 398,
+								"Val": 10
+							}
+						},
+						"Exp2": {
+							"Line": 398,
+							"Op": 31,
+							"Exp1": {
+								"Line": 398,
+								"Name": "b"
+							},
+							"Exp2": {
+								"Line": 398,
+								"Val": 10
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 398,
+						"Op": 31,
+						"Exp1": {
+							"Line": 398,
+							"Name": "c"
+						},
+						"Exp2": {
+							"Line": 398,
+							"Name": "print"
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 404,
+			"NameList": [
+				"maxint"
+			],
+			"ExpList": [
+				{
+					"LastLine": 404,
+					"PrefixExp": {
+						"Line": 404,
+						"Name": "math"
+					},
+					"KeyExp": {
+						"Line": 404,
+						"Str": "maxinteger"
+					}
+				}
+			]
+		},
+		{
+			"Exp": {
+				"Line": 406,
+				"Op": 31,
+				"Exp1": {
+					"Line": 406,
+					"Op": 14,
+					"Exp1": {
+						"Line": 406,
+						"Name": "maxint"
+					},
+					"Exp2": {
+						"Line": 406,
+						"Val": 1
+					}
+				},
+				"Exp2": {
+					"Line": 406,
+					"Op": 14,
+					"Exp1": {
+						"Line": 406,
+						"Name": "maxint"
+					},
+					"Exp2": {
+						"Line": 406,
+						"Val": 0
+					}
+				}
+			},
+			"Block": {
+				"LastLine": 407,
+				"States": [
+					{
+						"LastLine": 407,
+						"VarList": [
+							{
+								"Line": 407,
+								"Name": "maxint"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 407,
+								"Op": 19,
+								"Exp1": {
+									"Line": 407,
+									"Name": "maxint"
+								},
+								"Exp2": {
+									"Line": 407,
+									"Val": 2
+								}
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"LastLine": 410,
+			"VarList": [
+				{
+					"Line": 410,
+					"Name": "maxintF"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 410,
+					"Op": 16,
+					"Exp1": {
+						"Line": 410,
+						"Name": "maxint"
+					},
+					"Exp2": {
+						"Line": 410,
+						"Val": 0
+					}
+				}
+			]
+		},
+		{
+			"Line": 412,
+			"LastLine": 412,
+			"PrefixExp": {
+				"Line": 412,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 412,
+					"Op": 34,
+					"Exp1": {
+						"Line": 412,
+						"Op": 31,
+						"Exp1": {
+							"Line": 412,
+							"LastLine": 412,
+							"PrefixExp": {
+								"LastLine": 412,
+								"PrefixExp": {
+									"Line": 412,
+									"Name": "math"
+								},
+								"KeyExp": {
+									"Line": 412,
+									"Str": "type"
+								}
+							},
+							"NameExp": null,
+							"Args": [
+								{
+									"Line": 412,
+									"Name": "maxintF"
+								}
+							]
+						},
+						"Exp2": {
+							"Line": 412,
+							"Str": "float"
+						}
+					},
+					"Exp2": {
+						"Line": 412,
+						"Op": 30,
+						"Exp1": {
+							"Line": 412,
+							"Name": "maxintF"
+						},
+						"Exp2": {
+							"Line": 412,
+							"Val": 16384
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 415,
+			"VarList": [
+				{
+					"LastLine": 415,
+					"PrefixExp": {
+						"Line": 415,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 415,
+						"Name": "maxintF"
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 415,
+					"Val": 10
+				}
+			]
+		},
+		{
+			"LastLine": 415,
+			"VarList": [
+				{
+					"LastLine": 415,
+					"PrefixExp": {
+						"Line": 415,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 415,
+						"Op": 14,
+						"Exp1": {
+							"Line": 415,
+							"Name": "maxintF"
+						},
+						"Exp2": {
+							"Line": 415,
+							"Val": 1
+						}
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 415,
+					"Val": 11
+				}
+			]
+		},
+		{
+			"LastLine": 416,
+			"VarList": [
+				{
+					"LastLine": 416,
+					"PrefixExp": {
+						"Line": 416,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 416,
+						"Op": 14,
+						"Exp": {
+							"Line": 416,
+							"Name": "maxintF"
+						}
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 416,
+					"Val": 12
+				}
+			]
+		},
+		{
+			"LastLine": 416,
+			"VarList": [
+				{
+					"LastLine": 416,
+					"PrefixExp": {
+						"Line": 416,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 416,
+						"Op": 16,
+						"Exp1": {
+							"Line": 416,
+							"Op": 14,
+							"Exp": {
+								"Line": 416,
+								"Name": "maxintF"
+							}
+						},
+						"Exp2": {
+							"Line": 416,
+							"Val": 1
+						}
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 416,
+					"Val": 13
+				}
+			]
+		},
+		{
+			"Line": 418,
+			"LastLine": 419,
+			"PrefixExp": {
+				"Line": 418,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 419,
+					"Op": 34,
+					"Exp1": {
+						"Line": 418,
+						"Op": 34,
+						"Exp1": {
+							"Line": 418,
+							"Op": 34,
+							"Exp1": {
+								"Line": 418,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 418,
+									"PrefixExp": {
+										"Line": 418,
+										"Name": "a"
+									},
+									"KeyExp": {
+										"Line": 418,
+										"Name": "maxint"
+									}
+								},
+								"Exp2": {
+									"Line": 418,
+									"Val": 10
+								}
+							},
+							"Exp2": {
+								"Line": 418,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 418,
+									"PrefixExp": {
+										"Line": 418,
+										"Name": "a"
+									},
+									"KeyExp": {
+										"Line": 418,
+										"Op": 14,
+										"Exp1": {
+											"Line": 418,
+											"Name": "maxint"
+										},
+										"Exp2": {
+											"Line": 418,
+											"Val": 1
+										}
+									}
+								},
+								"Exp2": {
+									"Line": 418,
+									"Val": 11
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 419,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 419,
+								"PrefixExp": {
+									"Line": 419,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 419,
+									"Op": 14,
+									"Exp": {
+										"Line": 419,
+										"Name": "maxint"
+									}
+								}
+							},
+							"Exp2": {
+								"Line": 419,
+								"Val": 12
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 419,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 419,
+							"PrefixExp": {
+								"Line": 419,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 419,
+								"Op": 16,
+								"Exp1": {
+									"Line": 419,
+									"Op": 14,
+									"Exp": {
+										"Line": 419,
+										"Name": "maxint"
+									}
+								},
+								"Exp2": {
+									"Line": 419,
+									"Val": 1
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 419,
+							"Val": 13
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 421,
+			"VarList": [
+				{
+					"LastLine": 421,
+					"PrefixExp": {
+						"Line": 421,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 421,
+						"Name": "maxint"
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 421,
+					"Val": 20
+				}
+			]
+		},
+		{
+			"LastLine": 422,
+			"VarList": [
+				{
+					"LastLine": 422,
+					"PrefixExp": {
+						"Line": 422,
+						"Name": "a"
+					},
+					"KeyExp": {
+						"Line": 422,
+						"Op": 14,
+						"Exp": {
+							"Line": 422,
+							"Name": "maxint"
+						}
+					}
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 422,
+					"Val": 22
+				}
+			]
+		},
+		{
+			"Line": 424,
+			"LastLine": 425,
+			"PrefixExp": {
+				"Line": 424,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 425,
+					"Op": 34,
+					"Exp1": {
+						"Line": 424,
+						"Op": 34,
+						"Exp1": {
+							"Line": 424,
+							"Op": 34,
+							"Exp1": {
+								"Line": 424,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 424,
+									"PrefixExp": {
+										"Line": 424,
+										"Name": "a"
+									},
+									"KeyExp": {
+										"Line": 424,
+										"Name": "maxintF"
+									}
+								},
+								"Exp2": {
+									"Line": 424,
+									"Val": 20
+								}
+							},
+							"Exp2": {
+								"Line": 424,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 424,
+									"PrefixExp": {
+										"Line": 424,
+										"Name": "a"
+									},
+									"KeyExp": {
+										"Line": 424,
+										"Op": 14,
+										"Exp1": {
+											"Line": 424,
+											"Name": "maxintF"
+										},
+										"Exp2": {
+											"Line": 424,
+											"Val": 1
+										}
+									}
+								},
+								"Exp2": {
+									"Line": 424,
+									"Val": 11
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 425,
+							"Op": 31,
+							"Exp1": {
+								"LastLine": 425,
+								"PrefixExp": {
+									"Line": 425,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 425,
+									"Op": 14,
+									"Exp": {
+										"Line": 425,
+										"Name": "maxintF"
+									}
+								}
+							},
+							"Exp2": {
+								"Line": 425,
+								"Val": 22
+							}
+						}
+					},
+					"Exp2": {
+						"Line": 425,
+						"Op": 31,
+						"Exp1": {
+							"LastLine": 425,
+							"PrefixExp": {
+								"Line": 425,
+								"Name": "a"
+							},
+							"KeyExp": {
+								"Line": 425,
+								"Op": 16,
+								"Exp1": {
+									"Line": 425,
+									"Op": 14,
+									"Exp": {
+										"Line": 425,
+										"Name": "maxintF"
+									}
+								},
+								"Exp2": {
+									"Line": 425,
+									"Val": 1
+								}
+							}
+						},
+						"Exp2": {
+							"Line": 425,
+							"Val": 13
+						}
+					}
+				}
+			]
+		},
+		{
+			"LastLine": 427,
+			"VarList": [
+				{
+					"Line": 427,
+					"Name": "a"
+				}
+			],
+			"ExpList": [
+				{
+					"Line": 427
+				}
+			]
+		},
+		{
+			"Block": {
+				"LastLine": 436,
+				"States": [
+					{
+						"LastLine": 432,
+						"NameList": [
+							"a",
+							"i",
+							"j",
+							"b"
+						],
+						"ExpList": null
+					},
+					{
+						"LastLine": 433,
+						"VarList": [
+							{
+								"Line": 433,
+								"Name": "a"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 433,
+								"LastLine": 433,
+								"KeyExpList": [
+									null,
+									null
+								],
+								"ValExpList": [
+									{
+										"Line": 433,
+										"Str": "a"
+									},
+									{
+										"Line": 433,
+										"Str": "b"
+									}
+								]
+							}
+						]
+					},
+					{
+						"LastLine": 433,
+						"VarList": [
+							{
+								"Line": 433,
+								"Name": "i"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 433,
+								"Val": 1
+							}
+						]
+					},
+					{
+						"LastLine": 433,
+						"VarList": [
+							{
+								"Line": 433,
+								"Name": "j"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 433,
+								"Val": 2
+							}
+						]
+					},
+					{
+						"LastLine": 433,
+						"VarList": [
+							{
+								"Line": 433,
+								"Name": "b"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 433,
+								"Name": "a"
+							}
+						]
+					},
+					{
+						"LastLine": 434,
+						"VarList": [
+							{
+								"Line": 434,
+								"Name": "i"
+							},
+							{
+								"LastLine": 434,
+								"PrefixExp": {
+									"Line": 434,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 434,
+									"Name": "i"
+								}
+							},
+							{
+								"Line": 434,
+								"Name": "a"
+							},
+							{
+								"Line": 434,
+								"Name": "j"
+							},
+							{
+								"LastLine": 434,
+								"PrefixExp": {
+									"Line": 434,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 434,
+									"Name": "j"
+								}
+							},
+							{
+								"LastLine": 434,
+								"PrefixExp": {
+									"Line": 434,
+									"Name": "a"
+								},
+								"KeyExp": {
+									"Line": 434,
+									"Op": 16,
+									"Exp1": {
+										"Line": 434,
+										"Name": "i"
+									},
+									"Exp2": {
+										"Line": 434,
+										"Name": "j"
+									}
+								}
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 434,
+								"Name": "j"
+							},
+							{
+								"Line": 434,
+								"Name": "i"
+							},
+							{
+								"Line": 434,
+								"Name": "i"
+							},
+							{
+								"Line": 434,
+								"Name": "b"
+							},
+							{
+								"Line": 434,
+								"Name": "j"
+							},
+							{
+								"Line": 434,
+								"Name": "i"
+							}
+						]
+					},
+					{
+						"Line": 435,
+						"LastLine": 436,
+						"PrefixExp": {
+							"Line": 435,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 435,
+								"Op": 34,
+								"Exp1": {
+									"Line": 435,
+									"Op": 34,
+									"Exp1": {
+										"Line": 435,
+										"Op": 34,
+										"Exp1": {
+											"Line": 435,
+											"Op": 34,
+											"Exp1": {
+												"Line": 435,
+												"Op": 34,
+												"Exp1": {
+													"Line": 435,
+													"Op": 31,
+													"Exp1": {
+														"Line": 435,
+														"Name": "i"
+													},
+													"Exp2": {
+														"Line": 435,
+														"Val": 2
+													}
+												},
+												"Exp2": {
+													"Line": 435,
+													"Op": 31,
+													"Exp1": {
+														"LastLine": 435,
+														"PrefixExp": {
+															"Line": 435,
+															"Name": "b"
+														},
+														"KeyExp": {
+															"Line": 435,
+															"Val": 1
+														}
+													},
+													"Exp2": {
+														"Line": 435,
+														"Val": 1
+													}
+												}
+											},
+											"Exp2": {
+												"Line": 435,
+												"Op": 31,
+												"Exp1": {
+													"Line": 435,
+													"Name": "a"
+												},
+												"Exp2": {
+													"Line": 435,
+													"Val": 1
+												}
+											}
+										},
+										"Exp2": {
+											"Line": 435,
+											"Op": 31,
+											"Exp1": {
+												"Line": 435,
+												"Name": "j"
+											},
+											"Exp2": {
+												"Line": 435,
+												"Name": "b"
+											}
+										}
+									},
+									"Exp2": {
+										"Line": 435,
+										"Op": 31,
+										"Exp1": {
+											"LastLine": 435,
+											"PrefixExp": {
+												"Line": 435,
+												"Name": "b"
+											},
+											"KeyExp": {
+												"Line": 435,
+												"Val": 2
+											}
+										},
+										"Exp2": {
+											"Line": 435,
+											"Val": 2
+										}
+									}
+								},
+								"Exp2": {
+									"Line": 436,
+									"Op": 31,
+									"Exp1": {
+										"LastLine": 436,
+										"PrefixExp": {
+											"Line": 436,
+											"Name": "b"
+										},
+										"KeyExp": {
+											"Line": 436,
+											"Val": 3
+										}
+									},
+									"Exp2": {
+										"Line": 436,
+										"Val": 1
+									}
+								}
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"Block": {
+				"LastLine": 451,
+				"States": [
+					{
+						"LastLine": 441,
+						"NameList": [
+							"a",
+							"i",
+							"j",
+							"b"
+						],
+						"ExpList": null
+					},
+					{
+						"LastLine": 442,
+						"VarList": [
+							{
+								"Line": 442,
+								"Name": "a"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 442,
+								"LastLine": 442,
+								"KeyExpList": [
+									null,
+									null
+								],
+								"ValExpList": [
+									{
+										"Line": 442,
+										"Str": "a"
+									},
+									{
+										"Line": 442,
+										"Str": "b"
+									}
+								]
+							}
+						]
+					},
+					{
+						"LastLine": 442,
+						"VarList": [
+							{
+								"Line": 442,
+								"Name": "i"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 442,
+								"Val": 1
+							}
+						]
+					},
+					{
+						"LastLine": 442,
+						"VarList": [
+							{
+								"Line": 442,
+								"Name": "j"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 442,
+								"Val": 2
+							}
+						]
+					},
+					{
+						"LastLine": 442,
+						"VarList": [
+							{
+								"Line": 442,
+								"Name": "b"
+							}
+						],
+						"ExpList": [
+							{
+								"Line": 442,
+								"Name": "a"
+							}
+						]
+					},
+					{
+						"Name": "foo",
+						"Exp": {
+							"Line": 443,
+							"LastLine": 445,
+							"ParList": null,
+							"IsVararg": false,
+							"Block": {
+								"LastLine": 444,
+								"States": [
+									{
+										"LastLine": 444,
+										"VarList": [
+											{
+												"Line": 444,
+												"Name": "i"
+											},
+											{
+												"LastLine": 444,
+												"PrefixExp": {
+													"Line": 444,
+													"Name": "a"
+												},
+												"KeyExp": {
+													"Line": 444,
+													"Name": "i"
+												}
+											},
+											{
+												"Line": 444,
+												"Name": "a"
+											},
+											{
+												"Line": 444,
+												"Name": "j"
+											},
+											{
+												"LastLine": 444,
+												"PrefixExp": {
+													"Line": 444,
+													"Name": "a"
+												},
+												"KeyExp": {
+													"Line": 444,
+													"Name": "j"
+												}
+											},
+											{
+												"LastLine": 444,
+												"PrefixExp": {
+													"Line": 444,
+													"Name": "a"
+												},
+												"KeyExp": {
+													"Line": 444,
+													"Op": 16,
+													"Exp1": {
+														"Line": 444,
+														"Name": "i"
+													},
+													"Exp2": {
+														"Line": 444,
+														"Name": "j"
+													}
+												}
+											}
+										],
+										"ExpList": [
+											{
+												"Line": 444,
+												"Name": "j"
+											},
+											{
+												"Line": 444,
+												"Name": "i"
+											},
+											{
+												"Line": 444,
+												"Name": "i"
+											},
+											{
+												"Line": 444,
+												"Name": "b"
+											},
+											{
+												"Line": 444,
+												"Name": "j"
+											},
+											{
+												"Line": 444,
+												"Name": "i"
+											}
+										]
+									}
+								],
+								"RetExps": null
+							}
+						}
+					},
+					{
+						"Line": 446,
+						"LastLine": 446,
+						"PrefixExp": {
+							"Line": 446,
+							"Name": "foo"
+						},
+						"NameExp": null,
+						"Args": null
+					},
+					{
+						"Line": 447,
+						"LastLine": 448,
+						"PrefixExp": {
+							"Line": 447,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 447,
+								"Op": 34,
+								"Exp1": {
+									"Line": 447,
+									"Op": 34,
+									"Exp1": {
+										"Line": 447,
+										"Op": 34,
+										"Exp1": {
+											"Line": 447,
+											"Op": 34,
+											"Exp1": {
+												"Line": 447,
+												"Op": 34,
+												"Exp1": {
+													"Line": 447,
+													"Op": 31,
+													"Exp1": {
+														"Line": 447,
+														"Name": "i"
+													},
+													"Exp2": {
+														"Line": 447,
+														"Val": 2
+													}
+												},
+												"Exp2": {
+													"Line": 447,
+													"Op": 31,
+													"Exp1": {
+														"LastLine": 447,
+														"PrefixExp": {
+															"Line": 447,
+															"Name": "b"
+														},
+														"KeyExp": {
+															"Line": 447,
+															"Val": 1
+														}
+													},
+													"Exp2": {
+														"Line": 447,
+														"Val": 1
+													}
+												}
+											},
+											"Exp2": {
+												"Line": 447,
+												"Op": 31,
+												"Exp1": {
+													"Line": 447,
+													"Name": "a"
+												},
+												"Exp2": {
+													"Line": 447,
+													"Val": 1
+												}
+											}
+										},
+										"Exp2": {
+											"Line": 447,
+											"Op": 31,
+											"Exp1": {
+												"Line": 447,
+												"Name": "j"
+											},
+											"Exp2": {
+												"Line": 447,
+												"Name": "b"
+											}
+										}
+									},
+									"Exp2": {
+										"Line": 447,
+										"Op": 31,
+										"Exp1": {
+											"LastLine": 447,
+											"PrefixExp": {
+												"Line": 447,
+												"Name": "b"
+											},
+											"KeyExp": {
+												"Line": 447,
+												"Val": 2
+											}
+										},
+										"Exp2": {
+											"Line": 447,
+											"Val": 2
+										}
+									}
+								},
+								"Exp2": {
+									"Line": 448,
+									"Op": 31,
+									"Exp1": {
+										"LastLine": 448,
+										"PrefixExp": {
+											"Line": 448,
+											"Name": "b"
+										},
+										"KeyExp": {
+											"Line": 448,
+											"Val": 3
+										}
+									},
+									"Exp2": {
+										"Line": 448,
+										"Val": 1
+									}
+								}
+							}
+						]
+					},
+					{
+						"LastLine": 449,
+						"NameList": [
+							"t"
+						],
+						"ExpList": [
+							{
+								"Line": 449,
+								"LastLine": 449,
+								"KeyExpList": null,
+								"ValExpList": null
+							}
+						]
+					},
+					{
+						"Line": 450,
+						"LastLine": 450,
+						"PrefixExp": {
+							"Line": 450,
+							"LastLine": 450,
+							"ParList": [
+								"a"
+							],
+							"IsVararg": false,
+							"Block": {
+								"LastLine": 450,
+								"States": [
+									{
+										"LastLine": 450,
+										"VarList": [
+											{
+												"LastLine": 450,
+												"PrefixExp": {
+													"Line": 450,
+													"Name": "t"
+												},
+												"KeyExp": {
+													"Line": 450,
+													"Name": "a"
+												}
+											},
+											{
+												"Line": 450,
+												"Name": "a"
+											}
+										],
+										"ExpList": [
+											{
+												"Line": 450,
+												"Val": 10
+											},
+											{
+												"Line": 450,
+												"Val": 20
+											}
+										]
+									}
+								],
+								"RetExps": null
+							}
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 450,
+								"Val": 1
+							}
+						]
+					},
+					{
+						"Line": 451,
+						"LastLine": 451,
+						"PrefixExp": {
+							"Line": 451,
+							"Name": "assert"
+						},
+						"NameExp": null,
+						"Args": [
+							{
+								"Line": 451,
+								"Op": 31,
+								"Exp1": {
+									"LastLine": 451,
+									"PrefixExp": {
+										"Line": 451,
+										"Name": "t"
+									},
+									"KeyExp": {
+										"Line": 451,
+										"Val": 1
+									}
+								},
+								"Exp2": {
+									"Line": 451,
+									"Val": 10
+								}
+							}
+						]
+					}
+				],
+				"RetExps": null
+			}
+		},
+		{
+			"Name": "foo",
+			"Exp": {
+				"Line": 455,
+				"LastLine": 462,
+				"ParList": null,
+				"IsVararg": false,
+				"Block": {
+					"LastLine": 461,
+					"States": [
+						{
+							"LastLine": 456,
+							"NameList": [
+								"a"
+							],
+							"ExpList": null
+						}
+					],
+					"RetExps": [
+						{
+							"Line": 457,
+							"LastLine": 461,
+							"ParList": null,
+							"IsVararg": false,
+							"Block": {
+								"LastLine": 460,
+								"States": [
+									{
+										"LastLine": 458,
+										"NameList": [
+											"b"
+										],
+										"ExpList": null
+									},
+									{
+										"LastLine": 459,
+										"VarList": [
+											{
+												"Line": 459,
+												"Name": "a"
+											},
+											{
+												"Line": 459,
+												"Name": "b"
+											}
+										],
+										"ExpList": [
+											{
+												"Line": 459,
+												"Val": 3
+											},
+											{
+												"Line": 459,
+												"Val": 14
+											}
+										]
+									}
+								],
+								"RetExps": [
+									{
+										"Line": 460,
+										"Name": "a"
+									},
+									{
+										"Line": 460,
+										"Name": "b"
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		},
+		{
+			"LastLine": 464,
+			"NameList": [
+				"a",
+				"b"
+			],
+			"ExpList": [
+				{
+					"Line": 464,
+					"LastLine": 464,
+					"PrefixExp": {
+						"Line": 464,
+						"LastLine": 464,
+						"PrefixExp": {
+							"Line": 464,
+							"Name": "foo"
+						},
+						"NameExp": null,
+						"Args": null
+					},
+					"NameExp": null,
+					"Args": null
+				}
+			]
+		},
+		{
+			"Line": 465,
+			"LastLine": 465,
+			"PrefixExp": {
+				"Line": 465,
+				"Name": "assert"
+			},
+			"NameExp": null,
+			"Args": [
+				{
+					"Line": 465,
+					"Op": 34,
+					"Exp1": {
+						"Line": 465,
+						"Op": 31,
+						"Exp1": {
+							"Line": 465,
+							"Name": "a"
+						},
+						"Exp2": {
+							"Line": 465,
+							"Val": 3
+						}
+					},
+					"Exp2": {
+						"Line": 465,
+						"Op": 31,
+						"Exp1": {
+							"Line": 465,
+							"Name": "b"
+						},
+						"Exp2": {
+							"Line": 465,
+							"Val": 14
+						}
+					}
+				}
+			]
+		},
+		{
+			"Line": 467,
+			"LastLine": 467,
+			"PrefixExp": {
+				"Line": 467,
 				"Name": "print"
 			},
 			"NameExp": null,
 			"Args": [
 				{
-					"Line": 155,
-					"Name": "ok"
-				},
-				{
-					"Line": 155,
-					"Name": "res"
+					"Line": 467,
+					"Str": "OK"
 				}
 			]
 		}
 	],
-	"RetExps": null
+	"RetExps": [
+		{
+			"Line": 469,
+			"Name": "res"
+		}
+	]
 }

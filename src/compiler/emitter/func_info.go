@@ -277,7 +277,7 @@ func (fi *funcInfo) setGotoJmp() {
 			a := 0
 			for _, locVar := range fi.locVars {
 				if locVar.startPC > dstPC {
-					a := locVar.slot + 1
+					a = locVar.slot + 1
 					break
 				}
 			}

@@ -12,7 +12,7 @@ func GenProto(chunk *Block) *Prototype {
 
 	fi := newFuncInfo(nil, fd)
 	fi.addLocVar("_ENV", 0)
-	emitFuncDefExp(fi, fd, 0)
+	fi.evalFuncDefExp(fd, 0)
 	return fi.subFuncs[0].toProto()
 }
 
@@ -62,7 +62,7 @@ func lineOf(exp Exp) int {
 	case *TableAccessExp:
 		return lineOf(x.PrefixExp)
 	case *ConcatExp:
-		return lineOf(x.ExpList[0])
+		return lineOf(x.Exps[0])
 	case *BinopExp:
 		return lineOf(x.Exp1)
 	default:
@@ -97,7 +97,7 @@ func lastLineOf(exp Exp) int {
 	case *TableAccessExp:
 		return x.LastLine
 	case *ConcatExp:
-		return lastLineOf(x.ExpList[len(x.ExpList)-1])
+		return lastLineOf(x.Exps[len(x.Exps)-1])
 	case *BinopExp:
 		return lastLineOf(x.Exp2)
 	case *UnopExp:

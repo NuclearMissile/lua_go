@@ -18,212 +18,205 @@ var binOpMap = map[int]int{
 	TOKEN_OP_SHR:  OP_SHR,
 }
 
-func (self *funcInfo) setSBx(pc, sBx int) {
-	inst := self.insts[pc] << 18 >> 18
+type instBuf struct {
+	insts, lineNums []uint32
+}
+
+func (ib *instBuf) setSBx(pc, sBx int) {
+	inst := ib.insts[pc] << 18 >> 18
 	inst = inst | uint32(sBx+MAXARG_sBx)<<14
-	self.insts[pc] = inst
+	ib.insts[pc] = inst
 }
 
-func (self *funcInfo) setEndPC(name string, delta int) {
-	for i := len(self.locVars) - 1; i <= 0; i-- {
-		localVar := self.locVars[i]
-		if localVar.name == name {
-			localVar.endPC += delta
-			return
-		}
-	}
+func (ib *instBuf) pc() int {
+	return len(ib.insts) - 1
 }
 
-func (self *funcInfo) pc() int {
-	return len(self.insts) - 1
+func (ib *instBuf) emitABC(line, opcode, a, b, c int) {
+	ib.insts = append(ib.insts, uint32(b<<23|c<<14|a<<6|opcode))
+	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
-func (self *funcInfo) emitABC(line, opcode, a, b, c int) {
-	self.insts = append(self.insts, uint32(b<<23|c<<14|a<<6|opcode))
-	self.lineNums = append(self.lineNums, uint32(line))
+func (ib *instBuf) emitABx(line, opcode, a, bx int) {
+	ib.insts = append(ib.insts, uint32(bx<<14|a<<6|opcode))
+	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
-func (self *funcInfo) emitABx(line, opcode, a, bx int) {
-	self.insts = append(self.insts, uint32(bx<<14|a<<6|opcode))
-	self.lineNums = append(self.lineNums, uint32(line))
+func (ib *instBuf) emitAsBx(line, opcode, a, b int) {
+	ib.insts = append(ib.insts, uint32((b+MAXARG_sBx)<<14|a<<6|opcode))
+	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
-func (self *funcInfo) emitAsBx(line, opcode, a, b int) {
-	self.insts = append(self.insts, uint32((b+MAXARG_sBx)<<14|a<<6|opcode))
-	self.lineNums = append(self.lineNums, uint32(line))
-}
-
-func (self *funcInfo) emitAx(line, opcode, ax int) {
-	self.insts = append(self.insts, uint32(ax<<6|opcode))
-	self.lineNums = append(self.lineNums, uint32(line))
+func (ib *instBuf) emitAx(line, opcode, ax int) {
+	ib.insts = append(ib.insts, uint32(ax<<6|opcode))
+	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
 // r[a] = r[b]
-func (self *funcInfo) emitMove(line, a, b int) {
-	self.emitABC(line, OP_MOVE, a, b, 0)
+func (ib *instBuf) emitMove(line, a, b int) {
+	ib.emitABC(line, OP_MOVE, a, b, 0)
 }
 
 // r[a], r[a+1], ..., r[a+b] = nil
-func (self *funcInfo) emitLoadNil(line, a, n int) {
-	self.emitABC(line, OP_LOADNIL, a, n-1, 0)
+func (ib *instBuf) emitLoadNil(line, a, n int) {
+	ib.emitABC(line, OP_LOADNIL, a, n-1, 0)
 }
 
 // r[a] = (bool)b; if (c) pc++
-func (self *funcInfo) emitLoadBool(line, a, b, c int) {
-	self.emitABC(line, OP_LOADBOOL, a, b, c)
+func (ib *instBuf) emitLoadBool(line, a, b, c int) {
+	ib.emitABC(line, OP_LOADBOOL, a, b, c)
 }
 
 // r[a] = kst[bx]
-func (self *funcInfo) emitLoadK(line, a int, k interface{}) {
-	idx := self.indexOfConstant(k)
+func (ib *instBuf) emitLoadK(line, a, idx int) {
 	if idx < (1 << 18) {
-		self.emitABx(line, OP_LOADK, a, idx)
+		ib.emitABx(line, OP_LOADK, a, idx)
 	} else {
-		self.emitABx(line, OP_LOADKX, a, 0)
-		self.emitAx(line, OP_EXTRAARG, idx)
+		ib.emitABx(line, OP_LOADKX, a, 0)
+		ib.emitAx(line, OP_EXTRAARG, idx)
 	}
 }
 
 // r[a], r[a+1], ..., r[a+b-2] = vararg
-func (self *funcInfo) emitVararg(line, a, n int) {
-	self.emitABC(line, OP_VARARG, a, n+1, 0)
+func (ib *instBuf) emitVararg(line, a, n int) {
+	ib.emitABC(line, OP_VARARG, a, n+1, 0)
 }
 
 // r[a] = emitClosure(proto[bx])
-func (self *funcInfo) emitClosure(line, a, bx int) {
-	self.emitABx(line, OP_CLOSURE, a, bx)
+func (ib *instBuf) emitClosure(line, a, bx int) {
+	ib.emitABx(line, OP_CLOSURE, a, bx)
 }
 
 // r[a] = {}
-func (self *funcInfo) emitNewTable(line, a, nArr, nRec int) {
-	self.emitABC(line, OP_NEWTABLE,
+func (ib *instBuf) emitNewTable(line, a, nArr, nRec int) {
+	ib.emitABC(line, OP_NEWTABLE,
 		a, Int2FloatByte(nArr), Int2FloatByte(nRec))
 }
 
 // r[a][(c-1)*FPF+i] := r[a+i], 1 <= i <= b
-func (self *funcInfo) emitSetList(line, a, b, c int) {
-	self.emitABC(line, OP_SETLIST, a, b, c)
+func (ib *instBuf) emitSetList(line, a, b, c int) {
+	ib.emitABC(line, OP_SETLIST, a, b, c)
 }
 
 // r[a] := r[b][rk(c)]
-func (self *funcInfo) emitGetTable(line, a, b, c int) {
-	self.emitABC(line, OP_GETTABLE, a, b, c)
+func (ib *instBuf) emitGetTable(line, a, b, c int) {
+	ib.emitABC(line, OP_GETTABLE, a, b, c)
 }
 
 // r[a][rk(b)] = rk(c)
-func (self *funcInfo) emitSetTable(line, a, b, c int) {
-	self.emitABC(line, OP_SETTABLE, a, b, c)
+func (ib *instBuf) emitSetTable(line, a, b, c int) {
+	ib.emitABC(line, OP_SETTABLE, a, b, c)
 }
 
 // r[a] = upval[b]
-func (self *funcInfo) emitGetUpval(line, a, b int) {
-	self.emitABC(line, OP_GETUPVAL, a, b, 0)
+func (ib *instBuf) emitGetUpval(line, a, b int) {
+	ib.emitABC(line, OP_GETUPVAL, a, b, 0)
 }
 
 // upval[b] = r[a]
-func (self *funcInfo) emitSetUpval(line, a, b int) {
-	self.emitABC(line, OP_SETUPVAL, a, b, 0)
+func (ib *instBuf) emitSetUpval(line, a, b int) {
+	ib.emitABC(line, OP_SETUPVAL, a, b, 0)
 }
 
 // r[a] = upval[b][rk(c)]
-func (self *funcInfo) emitGetTabUp(line, a, b, c int) {
-	self.emitABC(line, OP_GETTABUP, a, b, c)
+func (ib *instBuf) emitGetTabUp(line, a, b, c int) {
+	ib.emitABC(line, OP_GETTABUP, a, b, c)
 }
 
 // upval[a][rk(b)] = rk(c)
-func (self *funcInfo) emitSetTabUp(line, a, b, c int) {
-	self.emitABC(line, OP_SETTABUP, a, b, c)
+func (ib *instBuf) emitSetTabUp(line, a, b, c int) {
+	ib.emitABC(line, OP_SETTABUP, a, b, c)
 }
 
 // r[a], ..., r[a+c-2] = r[a](r[a+1], ..., r[a+b-1])
-func (self *funcInfo) emitCall(line, a, nArgs, nRet int) {
-	self.emitABC(line, OP_CALL, a, nArgs+1, nRet+1)
+func (ib *instBuf) emitCall(line, a, nArgs, nRet int) {
+	ib.emitABC(line, OP_CALL, a, nArgs+1, nRet+1)
 }
 
 // return r[a](r[a+1], ... ,r[a+b-1])
-func (self *funcInfo) emitTailCall(line, a, nArgs int) {
-	self.emitABC(line, OP_TAILCALL, a, nArgs+1, 0)
+func (ib *instBuf) emitTailCall(line, a, nArgs int) {
+	ib.emitABC(line, OP_TAILCALL, a, nArgs+1, 0)
 }
 
 // return r[a], ... ,r[a+b-2]
-func (self *funcInfo) emitReturn(line, a, n int) {
-	self.emitABC(line, OP_RETURN, a, n+1, 0)
+func (ib *instBuf) emitReturn(line, a, n int) {
+	ib.emitABC(line, OP_RETURN, a, n+1, 0)
 }
 
 // r[a+1] := r[b]; r[a] := r[b][rk(c)]
-func (self *funcInfo) emitSelf(line, a, b, c int) {
-	self.emitABC(line, OP_SELF, a, b, c)
+func (ib *instBuf) emitSelf(line, a, b, c int) {
+	ib.emitABC(line, OP_SELF, a, b, c)
 }
 
 // pc+=sBx; if (a) close all upvalues >= r[a - 1]
-func (self *funcInfo) emitJmp(line, a, sBx int) int {
-	self.emitAsBx(line, OP_JMP, a, sBx)
-	return len(self.insts) - 1
+func (ib *instBuf) emitJmp(line, a, sBx int) int {
+	ib.emitAsBx(line, OP_JMP, a, sBx)
+	return len(ib.insts) - 1
 }
 
 // if not (r[a] <=> c) then pc++
-func (self *funcInfo) emitTest(line, a, c int) {
-	self.emitABC(line, OP_TEST, a, 0, c)
+func (ib *instBuf) emitTest(line, a, c int) {
+	ib.emitABC(line, OP_TEST, a, 0, c)
 }
 
 // if (r[b] <=> c) then r[a] := r[b] else pc++
-func (self *funcInfo) emitTestSet(line, a, b, c int) {
-	self.emitABC(line, OP_TESTSET, a, b, c)
+func (ib *instBuf) emitTestSet(line, a, b, c int) {
+	ib.emitABC(line, OP_TESTSET, a, b, c)
 }
 
-func (self *funcInfo) emitForPrep(line, a, sBx int) int {
-	self.emitAsBx(line, OP_FORPREP, a, sBx)
-	return len(self.insts) - 1
+func (ib *instBuf) emitForPrep(line, a, sBx int) int {
+	ib.emitAsBx(line, OP_FORPREP, a, sBx)
+	return len(ib.insts) - 1
 }
 
-func (self *funcInfo) emitForLoop(line, a, sBx int) int {
-	self.emitAsBx(line, OP_FORLOOP, a, sBx)
-	return len(self.insts) - 1
+func (ib *instBuf) emitForLoop(line, a, sBx int) int {
+	ib.emitAsBx(line, OP_FORLOOP, a, sBx)
+	return len(ib.insts) - 1
 }
 
-func (self *funcInfo) emitTForCall(line, a, c int) {
-	self.emitABC(line, OP_TFORCALL, a, 0, c)
+func (ib *instBuf) emitTForCall(line, a, c int) {
+	ib.emitABC(line, OP_TFORCALL, a, 0, c)
 }
 
-func (self *funcInfo) emitTForLoop(line, a, sBx int) {
-	self.emitAsBx(line, OP_TFORLOOP, a, sBx)
+func (ib *instBuf) emitTForLoop(line, a, sBx int) {
+	ib.emitAsBx(line, OP_TFORLOOP, a, sBx)
 }
 
 // r[a] = op r[b]
-func (self *funcInfo) emitUnaryOp(line, op, a, b int) {
+func (ib *instBuf) emitUnaryOp(line, op, a, b int) {
 	switch op {
 	case TOKEN_OP_NOT:
-		self.emitABC(line, OP_NOT, a, b, 0)
+		ib.emitABC(line, OP_NOT, a, b, 0)
 	case TOKEN_OP_BNOT:
-		self.emitABC(line, OP_BNOT, a, b, 0)
+		ib.emitABC(line, OP_BNOT, a, b, 0)
 	case TOKEN_OP_LEN:
-		self.emitABC(line, OP_LEN, a, b, 0)
+		ib.emitABC(line, OP_LEN, a, b, 0)
 	case TOKEN_OP_UNM:
-		self.emitABC(line, OP_UNM, a, b, 0)
+		ib.emitABC(line, OP_UNM, a, b, 0)
 	}
 }
 
 // r[a] = rk[b] op rk[c]
-func (self *funcInfo) emitBinaryOp(line, op, a, b, c int) {
+func (ib *instBuf) emitBinaryOp(line, op, a, b, c int) {
 	if opcode, found := binOpMap[op]; found {
-		self.emitABC(line, opcode, a, b, c)
+		ib.emitABC(line, opcode, a, b, c)
 	} else {
 		switch op {
 		case TOKEN_OP_EQ:
-			self.emitABC(line, OP_EQ, 1, b, c)
+			ib.emitABC(line, OP_EQ, 1, b, c)
 		case TOKEN_OP_NE:
-			self.emitABC(line, OP_EQ, 0, b, c)
+			ib.emitABC(line, OP_EQ, 0, b, c)
 		case TOKEN_OP_LT:
-			self.emitABC(line, OP_LT, 1, b, c)
+			ib.emitABC(line, OP_LT, 1, b, c)
 		case TOKEN_OP_GT:
-			self.emitABC(line, OP_LT, 1, c, b)
+			ib.emitABC(line, OP_LT, 1, c, b)
 		case TOKEN_OP_LE:
-			self.emitABC(line, OP_LE, 1, b, c)
+			ib.emitABC(line, OP_LE, 1, b, c)
 		case TOKEN_OP_GE:
-			self.emitABC(line, OP_LE, 1, c, b)
+			ib.emitABC(line, OP_LE, 1, c, b)
 		}
-		self.emitJmp(line, 0, 1)
-		self.emitLoadBool(line, a, 0, 1)
-		self.emitLoadBool(line, a, 1, 0)
+		ib.emitJmp(line, 0, 1)
+		ib.emitLoadBool(line, a, 0, 1)
+		ib.emitLoadBool(line, a, 1, 0)
 	}
 }

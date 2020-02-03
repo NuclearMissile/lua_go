@@ -2,16 +2,16 @@ package emitter
 
 import . "compiler/ast"
 
-func emitBlock(fi *funcInfo, block *Block) {
+func (fi *funcInfo) evalBlock(block *Block) {
 	for _, stat := range block.States {
-		emitStat(fi, stat)
+		fi.evalStat(stat)
 	}
 	if block.RetExps != nil {
-		emitRetStat(fi, block.RetExps, block.LastLine)
+		fi.evalRetStat(block.RetExps, block.LastLine)
 	}
 }
 
-func emitRetStat(fi *funcInfo, retExps []Exp, lastLine int) {
+func (fi *funcInfo) evalRetStat(retExps []Exp, lastLine int) {
 	n := len(retExps)
 	if n == 0 {
 		fi.emitReturn(lastLine, 0, 0)
@@ -26,7 +26,7 @@ func emitRetStat(fi *funcInfo, retExps []Exp, lastLine int) {
 		}
 		if fcExp, ok := retExps[0].(*FuncCallExp); ok {
 			r := fi.allocReg()
-			emitTailCallExp(fi, fcExp, r)
+			fi.evalTailCallExp(fcExp, r)
 			fi.freeReg()
 			fi.emitReturn(lastLine, r, -1)
 			return
@@ -37,13 +37,12 @@ func emitRetStat(fi *funcInfo, retExps []Exp, lastLine int) {
 	for i, exp := range retExps {
 		r := fi.allocReg()
 		if i == n-1 && multRet {
-			emitExp(fi, exp, r, -1)
+			fi.evalExp(exp, r, -1)
 		} else {
-			emitExp(fi, exp, r, 1)
+			fi.evalExp(exp, r, 1)
 		}
 	}
 	fi.freeRegs(n)
-
 	a := fi.usedRegs
 	if multRet {
 		fi.emitReturn(lastLine, a, -1)

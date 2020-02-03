@@ -121,7 +121,7 @@ func parseExp5(lexer *Lexer) Exp {
 		line, _, _ = lexer.NextToken()
 		exps = append(exps, parseExp4(lexer))
 	}
-	return &ConcatExp{Line: line, ExpList: exps}
+	return &ConcatExp{Line: line, Exps: exps}
 }
 
 func parseExp4(lexer *Lexer) Exp {
@@ -219,7 +219,7 @@ func parseFuncDefExp(lexer *Lexer) *FuncDefExp {
 	lexer.NextTokenOfKind(TOKEN_SEP_RPAREN)            // )
 	block := parseBlock(lexer)                         // block
 	lastLine, _ := lexer.NextTokenOfKind(TOKEN_KW_END) // end
-	return &FuncDefExp{Line: line, LastLine: lastLine, ParList: parList, IsVararg: isVararg, Block: block}
+	return &FuncDefExp{Line: line, LastLine: lastLine, Params: parList, IsVararg: isVararg, Block: block}
 }
 
 // [parlist]
@@ -256,7 +256,7 @@ func parseTableConstructorExp(lexer *Lexer) *TableCtorExp {
 	keyExps, valExps := parseFieldList(lexer) // [fieldlist]
 	lexer.NextTokenOfKind(TOKEN_SEP_RCURLY)   // }
 	lastLine := lexer.Line()
-	return &TableCtorExp{Line: line, LastLine: lastLine, KeyExpList: keyExps, ValExpList: valExps}
+	return &TableCtorExp{Line: line, LastLine: lastLine, KeyExps: keyExps, ValExps: valExps}
 }
 
 // fieldlist ::= field {fieldsep field} [fieldsep]

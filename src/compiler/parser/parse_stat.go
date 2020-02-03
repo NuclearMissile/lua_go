@@ -66,16 +66,16 @@ func parseBreakStat(lexer *Lexer) *BreakStat {
 // ‘::’ Name ‘::’
 func parseLabelStat(lexer *Lexer) *LabelStat {
 	lexer.NextTokenOfKind(TOKEN_SEP_LABEL) // ::
-	_, name := lexer.NextIdentifier()      // name
+	line, name := lexer.NextIdentifier()   // name
 	lexer.NextTokenOfKind(TOKEN_SEP_LABEL) // ::
-	return &LabelStat{Name: name}
+	return &LabelStat{Line: line, Name: name}
 }
 
 // goto Name
 func parseGotoStat(lexer *Lexer) *GotoStat {
 	lexer.NextTokenOfKind(TOKEN_KW_GOTO) // goto
-	_, name := lexer.NextIdentifier()    // name
-	return &GotoStat{Name: name}
+	line, name := lexer.NextIdentifier() // name
+	return &GotoStat{Line: line, Name: name}
 }
 
 // do block end
@@ -141,7 +141,7 @@ func parseForStat(lexer *Lexer) Stat {
 	if lexer.LookAhead() == TOKEN_OP_ASSIGN {
 		return _finishForNumStat(lexer, lineOfFor, name)
 	} else {
-		return _finishForInStat(lexer, name)
+		return _finishForInStat(lexer, lineOfFor, name)
 	}
 }
 
@@ -171,14 +171,14 @@ func _finishForNumStat(lexer *Lexer, lineOfFor int, varName string) *ForNumStat 
 // for namelist in explist do block end
 // namelist ::= Name {‘,’ Name}
 // explist ::= exp {‘,’ exp}
-func _finishForInStat(lexer *Lexer, name0 string) *ForInStat {
+func _finishForInStat(lexer *Lexer, lineOfFor int, name0 string) *ForInStat {
 	nameList := _finishNameList(lexer, name0)         // for namelist
 	lexer.NextTokenOfKind(TOKEN_KW_IN)                // in
 	expList := parseExpList(lexer)                    // explist
 	lineOfDo, _ := lexer.NextTokenOfKind(TOKEN_KW_DO) // do
 	block := parseBlock(lexer)                        // block
 	lexer.NextTokenOfKind(TOKEN_KW_END)               // end
-	return &ForInStat{lineOfDo, nameList, expList, block}
+	return &ForInStat{lineOfFor, lineOfDo, nameList, expList, block}
 }
 
 // namelist ::= Name {‘,’ Name}
@@ -289,15 +289,15 @@ func parseFuncDefStat(lexer *Lexer) *AssignStat {
 	fnExp, hasColon := _parseFuncName(lexer) // funcname
 	fdExp := parseFuncDefExp(lexer)          // funcbody
 	if hasColon {                            // insert self
-		fdExp.ParList = append(fdExp.ParList, "")
-		copy(fdExp.ParList[1:], fdExp.ParList)
-		fdExp.ParList[0] = "self"
+		fdExp.Params = append(fdExp.Params, "")
+		copy(fdExp.Params[1:], fdExp.Params)
+		fdExp.Params[0] = "self"
 	}
 
 	return &AssignStat{
 		LastLine: fdExp.Line,
-		VarList:  []Exp{fnExp},
-		ExpList:  []Exp{fdExp},
+		Vars:     []Exp{fnExp},
+		Exps:     []Exp{fdExp},
 	}
 }
 

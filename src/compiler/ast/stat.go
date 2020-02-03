@@ -9,10 +9,12 @@ type BreakStat struct {
 }
 
 type LabelStat struct {
+	Line int
 	Name string
 }
 
 type GotoStat struct {
+	Line int
 	Name string
 }
 
@@ -33,8 +35,8 @@ type RepeatStat struct {
 }
 
 type IfStat struct {
-	ExpList   []Exp
-	BlockList []*Block
+	Exps   []Exp
+	Blocks []*Block
 }
 
 type ForNumStat struct {
@@ -48,22 +50,22 @@ type ForNumStat struct {
 }
 
 type ForInStat struct {
-	LineOfDo int
-	NameList []string
-	ExpList  []Exp
-	Block    *Block
+	LineOfFor, LineOfDo int
+	Names               []string
+	Exps                []Exp
+	Block               *Block
 }
 
 type LocalVarDeclStat struct {
 	LastLine int
-	NameList []string
-	ExpList  []Exp
+	Names    []string
+	Exps     []Exp
 }
 
 type AssignStat struct {
 	LastLine int
-	VarList  []Exp
-	ExpList  []Exp
+	Vars     []Exp
+	Exps     []Exp
 }
 
 type LocalFuncDefStat struct {

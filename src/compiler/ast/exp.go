@@ -11,6 +11,7 @@ type IntegerExp struct {
 	Line int
 	Val  int64
 }
+
 type FloatExp struct {
 	Line int
 	Val  float64
@@ -35,21 +36,21 @@ type BinopExp struct {
 }
 
 type ConcatExp struct {
-	Line    int // line of last ..
-	ExpList []Exp
+	Line int // line of last ..
+	Exps []Exp
 }
 
 type TableCtorExp struct {
-	Line       int // line of `{` ?
-	LastLine   int // line of `}`
-	KeyExpList []Exp
-	ValExpList []Exp
+	Line     int // line of `{` ?
+	LastLine int // line of `}`
+	KeyExps  []Exp
+	ValExps  []Exp
 }
 
 type FuncDefExp struct {
 	Line     int
 	LastLine int // line of `end`
-	ParList  []string
+	Params   []string
 	IsVararg bool
 	Block    *Block
 }

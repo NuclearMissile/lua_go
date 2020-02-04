@@ -321,3 +321,42 @@ func (fi *funcInfo) setEndPC(name string, delta int) {
 		}
 	}
 }
+
+// alloc temp value for the result of exp
+func (fi *funcInfo) expToOpArg(exp ast.Exp, argKinds int) (arg, argKind int) {
+	if argKinds&ArgConst > 0 {
+		idx := -1
+		switch x := exp.(type) {
+		case *ast.NilExp:
+			idx = fi.indexOfConstant(nil)
+		case *ast.FalseExp:
+			idx = fi.indexOfConstant(false)
+		case *ast.TrueExp:
+			idx = fi.indexOfConstant(true)
+		case *ast.IntegerExp:
+			idx = fi.indexOfConstant(x.Val)
+		case *ast.FloatExp:
+			idx = fi.indexOfConstant(x.Val)
+		case *ast.StringExp:
+			idx = fi.indexOfConstant(x.Str)
+		}
+		if idx >= 0 && idx < 0xff {
+			return 0x100 + idx, ArgConst
+		}
+	}
+	if nameExp, ok := exp.(*ast.NameExp); ok {
+		if argKinds&ArgReg > 0 {
+			if r := fi.slotOfLocalVar(nameExp.Name); r >= 0 {
+				return r, ArgReg
+			}
+		}
+		if argKinds&ArgUpval > 0 {
+			if idx := fi.indexOfUpval(nameExp.Name); idx >= 0 {
+				return idx, ArgUpval
+			}
+		}
+	}
+	ret := fi.allocReg()
+	fi.evalExp(exp, ret, 1)
+	return ret, ArgReg
+}

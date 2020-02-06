@@ -436,7 +436,7 @@
 			"Args": [
 				{
 					"Line": 19,
-					"ExpList": [
+					"Exps": [
 						{
 							"Line": 19,
 							"Str": "package config: "
@@ -488,10 +488,10 @@
 				"States": [
 					{
 						"LastLine": 24,
-						"NameList": [
+						"Names": [
 							"max"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 24,
 								"Op": 35,
@@ -516,15 +516,15 @@
 					},
 					{
 						"LastLine": 25,
-						"NameList": [
+						"Names": [
 							"t"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 25,
 								"LastLine": 25,
-								"KeyExpList": null,
-								"ValExpList": null
+								"KeyExps": null,
+								"ValExps": null
 							}
 						]
 					},
@@ -549,7 +549,7 @@
 							"States": [
 								{
 									"LastLine": 26,
-									"VarList": [
+									"Vars": [
 										{
 											"LastLine": 26,
 											"PrefixExp": {
@@ -562,7 +562,7 @@
 											}
 										}
 									],
-									"ExpList": [
+									"Exps": [
 										{
 											"Line": 26,
 											"LastLine": 26,
@@ -613,7 +613,7 @@
 					},
 					{
 						"LastLine": 27,
-						"VarList": [
+						"Vars": [
 							{
 								"LastLine": 27,
 								"PrefixExp": {
@@ -638,7 +638,7 @@
 								}
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 27,
 								"Str": ";"
@@ -647,10 +647,10 @@
 					},
 					{
 						"LastLine": 28,
-						"NameList": [
+						"Names": [
 							"path"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 28,
 								"LastLine": 28,
@@ -681,11 +681,11 @@
 					},
 					{
 						"LastLine": 30,
-						"NameList": [
+						"Names": [
 							"s",
 							"err"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 30,
 								"LastLine": 30,
@@ -833,10 +833,10 @@
 					},
 					{
 						"LastLine": 37,
-						"NameList": [
+						"Names": [
 							"path"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 37,
 								"LastLine": 37,
@@ -867,11 +867,11 @@
 					},
 					{
 						"LastLine": 38,
-						"NameList": [
+						"Names": [
 							"s",
 							"err"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 38,
 								"LastLine": 38,
@@ -981,10 +981,10 @@
 				"States": [
 					{
 						"LastLine": 43,
-						"NameList": [
+						"Names": [
 							"oldpath"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"LastLine": 43,
 								"PrefixExp": {
@@ -1000,7 +1000,7 @@
 					},
 					{
 						"LastLine": 44,
-						"VarList": [
+						"Vars": [
 							{
 								"LastLine": 44,
 								"PrefixExp": {
@@ -1013,22 +1013,22 @@
 								}
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 44,
 								"LastLine": 44,
-								"KeyExpList": null,
-								"ValExpList": null
+								"KeyExps": null,
+								"ValExps": null
 							}
 						]
 					},
 					{
 						"LastLine": 45,
-						"NameList": [
+						"Names": [
 							"s",
 							"err"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 45,
 								"LastLine": 45,
@@ -1101,7 +1101,7 @@
 					},
 					{
 						"LastLine": 47,
-						"VarList": [
+						"Vars": [
 							{
 								"LastLine": 47,
 								"PrefixExp": {
@@ -1114,7 +1114,7 @@
 								}
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 47,
 								"Name": "oldpath"
@@ -1157,11 +1157,11 @@
 		},
 		{
 			"LastLine": 311,
-			"NameList": [
+			"Names": [
 				"res",
 				"res2"
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 311,
 					"Val": 27
@@ -1170,7 +1170,7 @@
 		},
 		{
 			"LastLine": 313,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 313,
 					"Name": "a"
@@ -1180,7 +1180,7 @@
 					"Name": "b"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 313,
 					"Val": 1
@@ -1232,34 +1232,34 @@
 		},
 		{
 			"LastLine": 315,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 315,
 					"Name": "a"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 315,
 					"LastLine": 315,
-					"KeyExpList": null,
-					"ValExpList": null
+					"KeyExps": null,
+					"ValExps": null
 				}
 			]
 		},
 		{
 			"LastLine": 316,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 316,
 					"Name": "f"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 316,
 					"LastLine": 316,
-					"ParList": null,
+					"Params": null,
 					"IsVararg": false,
 					"Block": {
 						"LastLine": 316,
@@ -1284,7 +1284,7 @@
 		},
 		{
 			"LastLine": 317,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 317,
 					"PrefixExp": {
@@ -1312,7 +1312,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 317,
 					"Val": 1
@@ -1404,7 +1404,7 @@
 		},
 		{
 			"LastLine": 319,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 319,
 					"PrefixExp": {
@@ -1452,7 +1452,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 319,
 					"LastLine": 319,
@@ -1548,14 +1548,14 @@
 				"States": [
 					{
 						"LastLine": 324,
-						"NameList": [
+						"Names": [
 							"f"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 323,
 								"LastLine": 324,
-								"ParList": [
+								"Params": [
 									"n"
 								],
 								"IsVararg": false,
@@ -1564,15 +1564,15 @@
 									"States": [
 										{
 											"LastLine": 323,
-											"NameList": [
+											"Names": [
 												"x"
 											],
-											"ExpList": [
+											"Exps": [
 												{
 													"Line": 323,
 													"LastLine": 323,
-													"KeyExpList": null,
-													"ValExpList": null
+													"KeyExps": null,
+													"ValExps": null
 												}
 											]
 										},
@@ -1597,7 +1597,7 @@
 												"States": [
 													{
 														"LastLine": 323,
-														"VarList": [
+														"Vars": [
 															{
 																"LastLine": 323,
 																"PrefixExp": {
@@ -1610,7 +1610,7 @@
 																}
 															}
 														],
-														"ExpList": [
+														"Exps": [
 															{
 																"Line": 323,
 																"Name": "i"
@@ -1652,16 +1652,16 @@
 					},
 					{
 						"LastLine": 325,
-						"NameList": [
+						"Names": [
 							"a",
 							"b",
 							"c"
 						],
-						"ExpList": null
+						"Exps": null
 					},
 					{
 						"LastLine": 326,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 326,
 								"Name": "a"
@@ -1671,7 +1671,7 @@
 								"Name": "b"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 326,
 								"Val": 0
@@ -1734,7 +1734,7 @@
 					},
 					{
 						"LastLine": 328,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 328,
 								"Name": "A"
@@ -1744,7 +1744,7 @@
 								"Name": "b"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 328,
 								"Val": 0
@@ -1807,7 +1807,7 @@
 					},
 					{
 						"LastLine": 330,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 330,
 								"Name": "a"
@@ -1821,7 +1821,7 @@
 								"Name": "c"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 330,
 								"Val": 0
@@ -1904,7 +1904,7 @@
 					},
 					{
 						"LastLine": 332,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 332,
 								"Name": "a"
@@ -1918,7 +1918,7 @@
 								"Name": "c"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 332,
 								"Val": 0
@@ -2004,7 +2004,7 @@
 		},
 		{
 			"LastLine": 336,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 336,
 					"Name": "a"
@@ -2022,7 +2022,7 @@
 					"Name": "d"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 336
 				},
@@ -2093,13 +2093,13 @@
 		},
 		{
 			"LastLine": 339,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 339,
 					"Name": "d"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 339,
 					"Val": 20
@@ -2108,7 +2108,7 @@
 		},
 		{
 			"LastLine": 340,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 340,
 					"Name": "a"
@@ -2126,7 +2126,7 @@
 					"Name": "d"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 340,
 					"LastLine": 340,
@@ -2211,7 +2211,7 @@
 		},
 		{
 			"LastLine": 342,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 342,
 					"Name": "a"
@@ -2221,7 +2221,7 @@
 					"Name": "b"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 342,
 					"LastLine": 342,
@@ -2777,8 +2777,8 @@
 						"Exp": {
 							"Line": 365,
 							"LastLine": 365,
-							"KeyExpList": null,
-							"ValExpList": null
+							"KeyExps": null,
+							"ValExps": null
 						}
 					},
 					"Exp2": {
@@ -2844,14 +2844,14 @@
 					"Exp1": {
 						"Line": 369,
 						"LastLine": 369,
-						"KeyExpList": null,
-						"ValExpList": null
+						"KeyExps": null,
+						"ValExps": null
 					},
 					"Exp2": {
 						"Line": 369,
 						"LastLine": 369,
-						"KeyExpList": null,
-						"ValExpList": null
+						"KeyExps": null,
+						"ValExps": null
 					}
 				}
 			]
@@ -2873,24 +2873,24 @@
 		},
 		{
 			"LastLine": 372,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 372,
 					"Name": "a"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 372,
 					"LastLine": 372,
-					"KeyExpList": null,
-					"ValExpList": null
+					"KeyExps": null,
+					"ValExps": null
 				}
 			]
 		},
 		{
 			"LastLine": 373,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 373,
 					"PrefixExp": {
@@ -2902,7 +2902,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 373,
 					"Val": 20
@@ -2911,7 +2911,7 @@
 		},
 		{
 			"LastLine": 374,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 374,
 					"PrefixExp": {
@@ -2923,7 +2923,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 374,
 					"Val": 10
@@ -3001,17 +3001,17 @@
 		},
 		{
 			"LastLine": 377,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 377,
 					"Name": "f"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 377,
 					"LastLine": 377,
-					"ParList": [
+					"Params": [
 						"a"
 					],
 					"IsVararg": false,
@@ -3030,15 +3030,15 @@
 		},
 		{
 			"LastLine": 379,
-			"NameList": [
+			"Names": [
 				"a"
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 379,
 					"LastLine": 379,
-					"KeyExpList": null,
-					"ValExpList": null
+					"KeyExps": null,
+					"ValExps": null
 				}
 			]
 		},
@@ -3063,7 +3063,7 @@
 				"States": [
 					{
 						"LastLine": 380,
-						"VarList": [
+						"Vars": [
 							{
 								"LastLine": 380,
 								"PrefixExp": {
@@ -3084,7 +3084,7 @@
 								}
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 380,
 								"Name": "i"
@@ -3097,7 +3097,7 @@
 		},
 		{
 			"LastLine": 381,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 381,
 					"PrefixExp": {
@@ -3110,7 +3110,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 381,
 					"Str": "alo"
@@ -3119,7 +3119,7 @@
 		},
 		{
 			"LastLine": 381,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 381,
 					"PrefixExp": {
@@ -3131,7 +3131,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 381,
 					"Val": 10
@@ -3140,7 +3140,7 @@
 		},
 		{
 			"LastLine": 381,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 381,
 					"PrefixExp": {
@@ -3152,7 +3152,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 381,
 					"Val": 20
@@ -3297,7 +3297,7 @@
 		},
 		{
 			"LastLine": 384,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 384,
 					"PrefixExp": {
@@ -3310,7 +3310,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 384,
 					"Name": "assert"
@@ -3319,7 +3319,7 @@
 		},
 		{
 			"LastLine": 385,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 385,
 					"PrefixExp": {
@@ -3332,7 +3332,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 385,
 					"Name": "print"
@@ -3341,7 +3341,7 @@
 		},
 		{
 			"LastLine": 386,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 386,
 					"PrefixExp": {
@@ -3354,7 +3354,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 386,
 					"Name": "a"
@@ -3494,28 +3494,28 @@
 							{
 								"Line": 389,
 								"LastLine": 389,
-								"ParList": null,
+								"Params": null,
 								"IsVararg": false,
 								"Block": {
 									"LastLine": 389,
 									"States": [
 										{
 											"LastLine": 389,
-											"NameList": [
+											"Names": [
 												"a"
 											],
-											"ExpList": [
+											"Exps": [
 												{
 													"Line": 389,
 													"LastLine": 389,
-													"KeyExpList": null,
-													"ValExpList": null
+													"KeyExps": null,
+													"ValExps": null
 												}
 											]
 										},
 										{
 											"LastLine": 389,
-											"VarList": [
+											"Vars": [
 												{
 													"LastLine": 389,
 													"PrefixExp": {
@@ -3527,7 +3527,7 @@
 													}
 												}
 											],
-											"ExpList": [
+											"Exps": [
 												{
 													"Line": 389,
 													"Val": 10
@@ -3567,26 +3567,26 @@
 							{
 								"Line": 390,
 								"LastLine": 390,
-								"ParList": null,
+								"Params": null,
 								"IsVararg": false,
 								"Block": {
 									"LastLine": 390,
 									"States": [
 										{
 											"LastLine": 390,
-											"NameList": [
+											"Names": [
 												"a"
 											],
-											"ExpList": [
+											"Exps": [
 												{
 													"Line": 390,
 													"LastLine": 390,
-													"KeyExpList": [
+													"KeyExps": [
 														{
 															"Line": 390
 														}
 													],
-													"ValExpList": [
+													"ValExps": [
 														{
 															"Line": 390,
 															"Val": 10
@@ -3634,13 +3634,13 @@
 		},
 		{
 			"LastLine": 392,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 392,
 					"Name": "a"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 392
 				}
@@ -3648,17 +3648,17 @@
 		},
 		{
 			"LastLine": 394,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 394,
 					"Name": "a"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 394,
 					"LastLine": 394,
-					"KeyExpList": [
+					"KeyExps": [
 						null,
 						null,
 						null,
@@ -3685,7 +3685,7 @@
 							"Str": "b"
 						}
 					],
-					"ValExpList": [
+					"ValExps": [
 						{
 							"Line": 394,
 							"Val": 10
@@ -3744,7 +3744,7 @@
 		},
 		{
 			"LastLine": 395,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 395,
 					"Name": "a"
@@ -3772,7 +3772,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 395,
 					"Name": "a"
@@ -3917,7 +3917,7 @@
 		},
 		{
 			"LastLine": 397,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 397,
 					"PrefixExp": {
@@ -3960,17 +3960,17 @@
 					"Name": "c"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 397,
 					"LastLine": 397,
-					"KeyExpList": [
+					"KeyExps": [
 						{
 							"Line": 397,
 							"Str": "alo"
 						}
 					],
-					"ValExpList": [
+					"ValExps": [
 						{
 							"Line": 397,
 							"Name": "assert"
@@ -4114,10 +4114,10 @@
 		},
 		{
 			"LastLine": 404,
-			"NameList": [
+			"Names": [
 				"maxint"
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"LastLine": 404,
 					"PrefixExp": {
@@ -4165,13 +4165,13 @@
 				"States": [
 					{
 						"LastLine": 407,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 407,
 								"Name": "maxint"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 407,
 								"Op": 19,
@@ -4192,13 +4192,13 @@
 		},
 		{
 			"LastLine": 410,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 410,
 					"Name": "maxintF"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 410,
 					"Op": 16,
@@ -4272,7 +4272,7 @@
 		},
 		{
 			"LastLine": 415,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 415,
 					"PrefixExp": {
@@ -4285,7 +4285,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 415,
 					"Val": 10
@@ -4294,7 +4294,7 @@
 		},
 		{
 			"LastLine": 415,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 415,
 					"PrefixExp": {
@@ -4315,7 +4315,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 415,
 					"Val": 11
@@ -4324,7 +4324,7 @@
 		},
 		{
 			"LastLine": 416,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 416,
 					"PrefixExp": {
@@ -4341,7 +4341,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 416,
 					"Val": 12
@@ -4350,7 +4350,7 @@
 		},
 		{
 			"LastLine": 416,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 416,
 					"PrefixExp": {
@@ -4375,7 +4375,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 416,
 					"Val": 13
@@ -4507,7 +4507,7 @@
 		},
 		{
 			"LastLine": 421,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 421,
 					"PrefixExp": {
@@ -4520,7 +4520,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 421,
 					"Val": 20
@@ -4529,7 +4529,7 @@
 		},
 		{
 			"LastLine": 422,
-			"VarList": [
+			"Vars": [
 				{
 					"LastLine": 422,
 					"PrefixExp": {
@@ -4546,7 +4546,7 @@
 					}
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 422,
 					"Val": 22
@@ -4678,13 +4678,13 @@
 		},
 		{
 			"LastLine": 427,
-			"VarList": [
+			"Vars": [
 				{
 					"Line": 427,
 					"Name": "a"
 				}
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 427
 				}
@@ -4696,31 +4696,31 @@
 				"States": [
 					{
 						"LastLine": 432,
-						"NameList": [
+						"Names": [
 							"a",
 							"i",
 							"j",
 							"b"
 						],
-						"ExpList": null
+						"Exps": null
 					},
 					{
 						"LastLine": 433,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 433,
 								"Name": "a"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 433,
 								"LastLine": 433,
-								"KeyExpList": [
+								"KeyExps": [
 									null,
 									null
 								],
-								"ValExpList": [
+								"ValExps": [
 									{
 										"Line": 433,
 										"Str": "a"
@@ -4735,13 +4735,13 @@
 					},
 					{
 						"LastLine": 433,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 433,
 								"Name": "i"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 433,
 								"Val": 1
@@ -4750,13 +4750,13 @@
 					},
 					{
 						"LastLine": 433,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 433,
 								"Name": "j"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 433,
 								"Val": 2
@@ -4765,13 +4765,13 @@
 					},
 					{
 						"LastLine": 433,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 433,
 								"Name": "b"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 433,
 								"Name": "a"
@@ -4780,7 +4780,7 @@
 					},
 					{
 						"LastLine": 434,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 434,
 								"Name": "i"
@@ -4835,7 +4835,7 @@
 								}
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 434,
 								"Name": "j"
@@ -4996,31 +4996,31 @@
 				"States": [
 					{
 						"LastLine": 441,
-						"NameList": [
+						"Names": [
 							"a",
 							"i",
 							"j",
 							"b"
 						],
-						"ExpList": null
+						"Exps": null
 					},
 					{
 						"LastLine": 442,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 442,
 								"Name": "a"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 442,
 								"LastLine": 442,
-								"KeyExpList": [
+								"KeyExps": [
 									null,
 									null
 								],
-								"ValExpList": [
+								"ValExps": [
 									{
 										"Line": 442,
 										"Str": "a"
@@ -5035,13 +5035,13 @@
 					},
 					{
 						"LastLine": 442,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 442,
 								"Name": "i"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 442,
 								"Val": 1
@@ -5050,13 +5050,13 @@
 					},
 					{
 						"LastLine": 442,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 442,
 								"Name": "j"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 442,
 								"Val": 2
@@ -5065,13 +5065,13 @@
 					},
 					{
 						"LastLine": 442,
-						"VarList": [
+						"Vars": [
 							{
 								"Line": 442,
 								"Name": "b"
 							}
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 442,
 								"Name": "a"
@@ -5083,14 +5083,14 @@
 						"Exp": {
 							"Line": 443,
 							"LastLine": 445,
-							"ParList": null,
+							"Params": null,
 							"IsVararg": false,
 							"Block": {
 								"LastLine": 444,
 								"States": [
 									{
 										"LastLine": 444,
-										"VarList": [
+										"Vars": [
 											{
 												"Line": 444,
 												"Name": "i"
@@ -5145,7 +5145,7 @@
 												}
 											}
 										],
-										"ExpList": [
+										"Exps": [
 											{
 												"Line": 444,
 												"Name": "j"
@@ -5313,15 +5313,15 @@
 					},
 					{
 						"LastLine": 449,
-						"NameList": [
+						"Names": [
 							"t"
 						],
-						"ExpList": [
+						"Exps": [
 							{
 								"Line": 449,
 								"LastLine": 449,
-								"KeyExpList": null,
-								"ValExpList": null
+								"KeyExps": null,
+								"ValExps": null
 							}
 						]
 					},
@@ -5331,7 +5331,7 @@
 						"PrefixExp": {
 							"Line": 450,
 							"LastLine": 450,
-							"ParList": [
+							"Params": [
 								"a"
 							],
 							"IsVararg": false,
@@ -5340,7 +5340,7 @@
 								"States": [
 									{
 										"LastLine": 450,
-										"VarList": [
+										"Vars": [
 											{
 												"LastLine": 450,
 												"PrefixExp": {
@@ -5357,7 +5357,7 @@
 												"Name": "a"
 											}
 										],
-										"ExpList": [
+										"Exps": [
 											{
 												"Line": 450,
 												"Val": 10
@@ -5419,38 +5419,38 @@
 			"Exp": {
 				"Line": 455,
 				"LastLine": 462,
-				"ParList": null,
+				"Params": null,
 				"IsVararg": false,
 				"Block": {
 					"LastLine": 461,
 					"States": [
 						{
 							"LastLine": 456,
-							"NameList": [
+							"Names": [
 								"a"
 							],
-							"ExpList": null
+							"Exps": null
 						}
 					],
 					"RetExps": [
 						{
 							"Line": 457,
 							"LastLine": 461,
-							"ParList": null,
+							"Params": null,
 							"IsVararg": false,
 							"Block": {
 								"LastLine": 460,
 								"States": [
 									{
 										"LastLine": 458,
-										"NameList": [
+										"Names": [
 											"b"
 										],
-										"ExpList": null
+										"Exps": null
 									},
 									{
 										"LastLine": 459,
-										"VarList": [
+										"Vars": [
 											{
 												"Line": 459,
 												"Name": "a"
@@ -5460,7 +5460,7 @@
 												"Name": "b"
 											}
 										],
-										"ExpList": [
+										"Exps": [
 											{
 												"Line": 459,
 												"Val": 3
@@ -5490,11 +5490,11 @@
 		},
 		{
 			"LastLine": 464,
-			"NameList": [
+			"Names": [
 				"a",
 				"b"
 			],
-			"ExpList": [
+			"Exps": [
 				{
 					"Line": 464,
 					"LastLine": 464,

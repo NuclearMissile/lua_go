@@ -117,13 +117,14 @@ func (fi *funcInfo) indexOfUpval(name string) int {
 				upvalIndex: -1,
 				index:      idx,
 			}
+			localVar.isCaptured = true
 			return idx
 		}
-		if upvalIdx, ok := fi.upvalues[name]; ok {
+		if uvIdx := fi.parent.indexOfUpval(name); uvIdx >= 0 {
 			idx := len(fi.upvalues)
 			fi.upvalues[name] = upvalInfo{
 				locValSlot: -1,
-				upvalIndex: upvalIdx.index,
+				upvalIndex: uvIdx,
 				index:      idx,
 			}
 			return idx
@@ -193,18 +194,18 @@ func (fi *funcInfo) enterScope(breakable bool) {
 }
 
 func (fi *funcInfo) exitScope(endPC int) {
-	tempBreakJmps := fi.breaks[len(fi.breaks)-1]
+	pending := fi.breaks[len(fi.breaks)-1]
 	fi.breaks = fi.breaks[:len(fi.breaks)-1]
 	a := fi.getJmpArgA()
-	for _, pc := range tempBreakJmps {
+	for _, pc := range pending {
 		sBx := fi.pc() - pc
 		i := (sBx+vm.MAXARG_sBx)<<14 | a<<6 | vm.OP_JMP
 		fi.insts[pc] = uint32(i)
 	}
 	fi.setGotoJmp()
 	fi.scopeLv--
-	for _, localVar := range fi.locVars {
-		if fi.scopeLv < localVar.scopeLv {
+	for _, localVar := range fi.locVarNames {
+		if localVar.scopeLv > fi.scopeLv {
 			localVar.endPC = endPC
 			fi.removeLocalVar(localVar)
 		}
@@ -313,7 +314,7 @@ func (fi *funcInfo) getGotoDst(lable string) int {
 
 // debug info
 func (fi *funcInfo) setEndPC(name string, delta int) {
-	for i := len(fi.locVars) - 1; i <= 0; i-- {
+	for i := len(fi.locVars) - 1; i >= 0; i-- {
 		localVar := fi.locVars[i]
 		if localVar.name == name {
 			localVar.endPC += delta

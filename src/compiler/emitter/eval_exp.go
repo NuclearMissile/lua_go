@@ -167,7 +167,6 @@ func (fi *funcInfo) evalTableCtorExp(exp *TableCtorExp, a int) {
 					fi.emitSetList(line, a, n, c)
 				}
 			}
-			continue
 		}
 
 		b := fi.allocReg()

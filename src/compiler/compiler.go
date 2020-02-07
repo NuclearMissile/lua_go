@@ -2,13 +2,13 @@ package compiler
 
 import (
 	"binchunk"
-	"compiler/emitter"
+	"compiler/codegen"
 	"compiler/parser"
 )
 
 func Compile(chunk, chunkName string) *binchunk.Prototype {
 	ast := parser.Parse(chunk, chunkName)
-	proto := emitter.GenProto(ast)
+	proto := codegen.GenProto(ast)
 	setChunkName(proto, chunkName)
 	return proto
 }

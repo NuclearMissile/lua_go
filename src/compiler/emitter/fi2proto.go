@@ -2,26 +2,26 @@ package emitter
 
 import . "binchunk"
 
-func (self *funcInfo) toProto() *Prototype {
+func (fi *funcInfo) toProto() *Prototype {
 	proto := &Prototype{
-		LineDefined:     uint32(self.line),
-		LastLineDefined: uint32(self.lastLine),
-		NumParams:       byte(self.numParams),
-		Code:            self.insts,
-		Constants:       self.getConstants(),
-		Upvalues:        self.getUpvalues(),
-		Protos:          toProtos(self.subFuncs),
-		LineInfo:        self.lineNums,
-		LocVars:         self.getLocVars(),
-		UpvalueNames:    self.getUpvalueNames(),
+		LineDefined:     uint32(fi.line),
+		LastLineDefined: uint32(fi.lastLine),
+		NumParams:       byte(fi.numParams),
+		Code:            fi.insts,
+		Constants:       fi.getConstants(),
+		Upvalues:        fi.getUpvalues(),
+		Protos:          toProtos(fi.subFuncs),
+		LineInfo:        fi.lineNums,
+		LocVars:         fi.getLocVars(),
+		UpvalueNames:    fi.getUpvalueNames(),
 	}
-	if self.line == 0 {
+	if fi.line == 0 {
 		proto.LastLineDefined = 0
 	}
 	if proto.MaxStackSize < 2 {
 		proto.MaxStackSize = 2
 	}
-	if self.isVararg {
+	if fi.isVararg {
 		proto.IsVararg = 1
 	}
 	return proto
@@ -35,17 +35,17 @@ func toProtos(fis []*funcInfo) []*Prototype {
 	return protos
 }
 
-func (self *funcInfo) getConstants() []interface{} {
-	consts := make([]interface{}, len(self.constants))
-	for k, idx := range self.constants {
+func (fi *funcInfo) getConstants() []interface{} {
+	consts := make([]interface{}, len(fi.constants))
+	for k, idx := range fi.constants {
 		consts[idx] = k
 	}
 	return consts
 }
 
-func (self *funcInfo) getUpvalues() []Upvalue {
-	upvals := make([]Upvalue, len(self.upvalues))
-	for _, uv := range self.upvalues {
+func (fi *funcInfo) getUpvalues() []Upvalue {
+	upvals := make([]Upvalue, len(fi.upvalues))
+	for _, uv := range fi.upvalues {
 		if uv.locValSlot >= 0 {
 			upvals[uv.index] = Upvalue{
 				Instack: 1,
@@ -61,9 +61,9 @@ func (self *funcInfo) getUpvalues() []Upvalue {
 	return upvals
 }
 
-func (self *funcInfo) getLocVars() []LocVar {
-	locVars := make([]LocVar, len(self.locVars))
-	for i, locVar := range self.locVars {
+func (fi *funcInfo) getLocVars() []LocVar {
+	locVars := make([]LocVar, len(fi.locVars))
+	for i, locVar := range fi.locVars {
 		locVars[i] = LocVar{
 			VarName: locVar.name,
 			StartPC: uint32(locVar.startPC),
@@ -73,9 +73,9 @@ func (self *funcInfo) getLocVars() []LocVar {
 	return locVars
 }
 
-func (self *funcInfo) getUpvalueNames() []string {
-	names := make([]string, len(self.upvalues))
-	for name, uv := range self.upvalues {
+func (fi *funcInfo) getUpvalueNames() []string {
+	names := make([]string, len(fi.upvalues))
+	for name, uv := range fi.upvalues {
 		names[uv.index] = name
 	}
 	return names

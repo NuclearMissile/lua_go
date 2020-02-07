@@ -7,17 +7,18 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"state"
 )
 
-func main() {
-	if len(os.Args) > 1 {
-		data, err := ioutil.ReadFile(os.Args[1])
-		if err != nil {
-			panic(err)
-		}
-		testParser(string(data), os.Args[1])
-	}
-}
+//func main() {
+//	if len(os.Args) > 1 {
+//		data, err := ioutil.ReadFile(os.Args[1])
+//		if err != nil {
+//			panic(err)
+//		}
+//		testParser(string(data), os.Args[1])
+//	}
+//}
 
 func testParser(chunk, chunkName string) {
 	ast := parser.Parse(chunk, chunkName)
@@ -32,25 +33,25 @@ func testParser(chunk, chunkName string) {
 	fmt.Println(string(d))
 }
 
-//func main() {
-//	if len(os.Args) > 1 {
-//		data, err := ioutil.ReadFile(os.Args[1])
-//		if err != nil {
-//			panic(err)
-//		}
-//		ls := state.New()
-//		ls.Register("print", _print)
-//		ls.Register("getmetatable", getMetatable)
-//		ls.Register("setmetatable", setMetatable)
-//		ls.Register("next", next)
-//		ls.Register("pairs", pairs)
-//		ls.Register("ipairs", iPairs)
-//		ls.Register("pcall", pCall)
-//		ls.Register("error", _error)
-//		ls.Load(data, os.Args[1], "b")
-//		ls.Call(0, 0)
-//	}
-//}
+func main() {
+	if len(os.Args) > 1 {
+		data, err := ioutil.ReadFile(os.Args[1])
+		if err != nil {
+			panic(err)
+		}
+		ls := state.New()
+		ls.Register("print", _print)
+		ls.Register("getmetatable", getMetatable)
+		ls.Register("setmetatable", setMetatable)
+		ls.Register("next", next)
+		ls.Register("pairs", pairs)
+		ls.Register("ipairs", iPairs)
+		ls.Register("pcall", pCall)
+		ls.Register("error", _error)
+		ls.Load(data, os.Args[1], "b")
+		ls.Call(0, 0)
+	}
+}
 
 func pCall(ls api.LuaState) int {
 	nArgs := ls.GetTop() - 1

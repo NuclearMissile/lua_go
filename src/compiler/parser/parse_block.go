@@ -5,7 +5,7 @@ import . "compiler/lexer"
 
 func parseBlock(lexer *Lexer) *Block {
 	return &Block{
-		States:   parseStats(lexer),
+		Stats:    parseStats(lexer),
 		RetExps:  parseRetExps(lexer),
 		LastLine: lexer.Line(),
 	}

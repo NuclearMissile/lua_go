@@ -24,7 +24,7 @@ const (
 type Instruction uint32
 
 func (self Instruction) Execute(vm api.LuaVM) {
-	action := opcodes[self.Opcode()].action
+	action := opcodes[self.OpCode()].action
 	if action != nil {
 		action(self, vm)
 	} else {
@@ -32,7 +32,7 @@ func (self Instruction) Execute(vm api.LuaVM) {
 	}
 }
 
-func (self Instruction) Opcode() int {
+func (self Instruction) OpCode() int {
 	return int(self & 0x3F)
 }
 
@@ -59,17 +59,17 @@ func (self Instruction) Ax() int {
 }
 
 func (self Instruction) OpName() string {
-	return opcodes[self.Opcode()].name
+	return opcodes[self.OpCode()].name
 }
 
 func (self Instruction) OpMode() byte {
-	return opcodes[self.Opcode()].opMode
+	return opcodes[self.OpCode()].opMode
 }
 
 func (self Instruction) BMode() byte {
-	return opcodes[self.Opcode()].argBMode
+	return opcodes[self.OpCode()].argBMode
 }
 
 func (self Instruction) CMode() byte {
-	return opcodes[self.Opcode()].argCMode
+	return opcodes[self.OpCode()].argCMode
 }

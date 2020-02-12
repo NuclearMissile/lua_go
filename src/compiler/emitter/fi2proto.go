@@ -7,6 +7,7 @@ func (fi *funcInfo) toProto() *Prototype {
 		LineDefined:     uint32(fi.line),
 		LastLineDefined: uint32(fi.lastLine),
 		NumParams:       byte(fi.numParams),
+		MaxStackSize:    byte(fi.maxRegs),
 		Code:            fi.insts,
 		Constants:       fi.getConstants(),
 		Upvalues:        fi.getUpvalues(),

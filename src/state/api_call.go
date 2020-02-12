@@ -49,7 +49,7 @@ func (self *luaState) runLuaClosure() {
 	for {
 		inst := vm.Instruction(self.Fetch())
 		inst.Execute(self)
-		if inst.Opcode() == vm.OP_RETURN {
+		if inst.OpCode() == vm.OP_RETURN {
 			break
 		}
 	}

@@ -68,6 +68,19 @@ func Undump(data []byte) *Prototype {
 	return reader.readProto("")
 }
 
+func Dump(proto *Prototype) []byte {
+	w := &writer{}
+	w.writeHeader()
+	w.writeByte(byte(len(proto.Upvalues)))
+	w.writeProto(proto, "")
+	return w.data()
+}
+
+func List(proto *Prototype, full bool) string {
+	p := &printer{buf: make([]string, 0, 64)}
+	return p.printFunc(proto, full)
+}
+
 func IsBinaryChunk(data []byte) bool {
 	return len(data) > 4 && string(data[:4]) == LUA_SIGNATURE
 }

@@ -2,6 +2,8 @@ package main
 
 import (
 	"api"
+	"binchunk"
+	"compiler"
 	"compiler/parser"
 	"encoding/json"
 	"fmt"
@@ -10,27 +12,30 @@ import (
 	"state"
 )
 
-//func main() {
-//	if len(os.Args) > 1 {
-//		data, err := ioutil.ReadFile(os.Args[1])
-//		if err != nil {
-//			panic(err)
-//		}
-//		testParser(string(data), os.Args[1])
-//	}
-//}
+func main1() {
+	if len(os.Args) > 1 {
+		data, err := ioutil.ReadFile(os.Args[1])
+		if err != nil {
+			panic(err)
+		}
+		testParser(string(data), os.Args[1])
+	}
+}
 
-func testParser(chunk, chunkName string) {
-	ast := parser.Parse(chunk, chunkName)
-	d, err := json.MarshalIndent(ast, "", "\t")
-	if err != nil {
-		panic(err)
+func main2() {
+	if len(os.Args) > 1 {
+		data, err := ioutil.ReadFile(os.Args[1])
+		if err != nil {
+			panic(err)
+		}
+		var proto *binchunk.Prototype
+		if binchunk.IsBinaryChunk(data) {
+			proto = binchunk.Undump(data)
+		} else {
+			proto = compiler.Compile(string(data), "@"+os.Args[1])
+		}
+		fmt.Println(binchunk.List(proto, true))
 	}
-	err = ioutil.WriteFile("ast.json", d, 0644)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(d))
 }
 
 func main() {
@@ -48,9 +53,22 @@ func main() {
 		ls.Register("ipairs", iPairs)
 		ls.Register("pcall", pCall)
 		ls.Register("error", _error)
-		ls.Load(data, os.Args[1], "b")
+		ls.Load(data, os.Args[1], "t")
 		ls.Call(0, 0)
 	}
+}
+
+func testParser(chunk, chunkName string) {
+	ast := parser.Parse(chunk, chunkName)
+	d, err := json.MarshalIndent(ast, "", "\t")
+	if err != nil {
+		panic(err)
+	}
+	err = ioutil.WriteFile("ast.json", d, 0644)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(d))
 }
 
 func pCall(ls api.LuaState) int {
@@ -135,7 +153,7 @@ func _print(ls api.LuaState) int {
 //	for {
 //		pc := ls.PC()
 //		inst := vm.Instruction(ls.Fetch())
-//		if inst.Opcode() != vm.OP_RETURN {
+//		if inst.OpCode() != vm.OP_RETURN {
 //			inst.Execute(ls)
 //			fmt.Printf("[%02d] %s ", pc+1, inst.OpName())
 //			printStack(ls)

@@ -4,8 +4,75 @@
 --- DateTime: 2020/2/7 18:18
 ---
 
-a = 5.0;
-b = "123";
-print(a);
-print(b);
-d = { 1, 2, 3, 4 , a="a"};
+--a = 5.0;
+--b = "123";
+--print(a);
+--print(b);
+--d = { 1, 2, 3 };
+--
+--function a(a, b)
+--    return a + b
+--end
+--
+--print(a(d[1], d[2]))
+
+--a = "Hello, "
+--b = "World!"
+--print(a .. b)
+--print(#a)
+--print(#"Test")
+--print(#(a .. b))
+--
+function abs(x)
+    if x < 0 then
+        return -x
+    end
+    return x
+end
+
+delta = 1e-6    -- tolerance
+
+function bisect(f, a, b, fa, fb)
+    local c = (a + b) / 2
+    if c == a or c == b or abs(a - b) < delta then
+        return c, b - a
+    end
+    n = n + 1
+    local fc = f(c)
+    if fa * fc < 0 then
+        return bisect(f, a, c, fa, fc)
+    else
+        return bisect(f, c, b, fc, fb)
+    end
+end
+
+-- find root of f in the inverval [a,b]. needs f(a)*f(b)<0
+function solve(f, a, b)
+    n = 0
+    local z, e = bisect(f, a, b, f(a), f(b))
+    print(n)
+    print(z)
+    print(e)
+    print(f(z))
+end
+
+-- our function
+function f(x)
+    return x * x * x - x - 1
+end
+
+-- find zero in [1,2]
+solve(f, 1, 2)
+
+-- account.lua
+-- from PiL 1, Chapter 16
+
+Account = { balance = 0 }
+
+function Account:new (o, name)
+    o = o or { name = name }
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+

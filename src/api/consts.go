@@ -21,6 +21,18 @@ const (
 	LUA_TTHREAD
 )
 
+// lua-5.3.4/src/lobject.h
+/* type variants */
+const (
+	LUA_TNUMFLT = LUA_TNUMBER | (0 << 4)   // float numbers
+	LUA_TNUMINT = LUA_TNUMBER | (1 << 4)   // integer numbers
+	LUA_TSHRSTR = LUA_TSTRING | (0 << 4)   // short strings
+	LUA_TLNGSTR = LUA_TSTRING | (1 << 4)   // long strings
+	LUA_TLCL    = LUA_TFUNCTION | (0 << 4) // Lua closure
+	LUA_TLGF    = LUA_TFUNCTION | (1 << 4) // light Go function
+	LUA_TGCL    = LUA_TFUNCTION | (2 << 4) // Go closure
+)
+
 /* arithmetic functions */
 const (
 	LUA_OPADD  = iota // +

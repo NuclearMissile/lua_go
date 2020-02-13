@@ -1,54 +1,51 @@
 package emitter
 
-import . "vm"
-import . "compiler/lexer"
-
-var binOpMap = map[int]int{
-	TOKEN_OP_ADD:  OP_ADD,
-	TOKEN_OP_SUB:  OP_SUB,
-	TOKEN_OP_MUL:  OP_MUL,
-	TOKEN_OP_MOD:  OP_MOD,
-	TOKEN_OP_POW:  OP_POW,
-	TOKEN_OP_DIV:  OP_DIV,
-	TOKEN_OP_IDIV: OP_IDIV,
-	TOKEN_OP_BAND: OP_BAND,
-	TOKEN_OP_BOR:  OP_BOR,
-	TOKEN_OP_BXOR: OP_BXOR,
-	TOKEN_OP_SHL:  OP_SHL,
-	TOKEN_OP_SHR:  OP_SHR,
-}
+import (
+	. "compiler/lexer"
+	. "vm"
+)
 
 type instBuf struct {
-	insts, lineNums []uint32
-}
-
-func (ib *instBuf) setSBx(pc, sBx int) {
-	inst := ib.insts[pc] << 18 >> 18
-	inst = inst | uint32(sBx+MAXARG_sBx)<<14
-	ib.insts[pc] = inst
+	insts    []uint32
+	lineNums []uint32
 }
 
 func (ib *instBuf) pc() int {
 	return len(ib.insts) - 1
 }
 
+func (ib *instBuf) fixSbx(pc, sBx int) {
+	if sBx > 0 && sBx > MAXARG_sBx || sBx < 0 && -sBx > MAXARG_sBx {
+		panic("control structure too long")
+	}
+
+	i := ib.insts[pc]
+	i = i << 18 >> 18                  // clear sBx
+	i = i | uint32(sBx+MAXARG_sBx)<<14 // reset sBx
+	ib.insts[pc] = i
+}
+
 func (ib *instBuf) emitABC(line, opcode, a, b, c int) {
-	ib.insts = append(ib.insts, uint32(b<<23|c<<14|a<<6|opcode))
+	i := b<<23 | c<<14 | a<<6 | opcode
+	ib.insts = append(ib.insts, uint32(i))
 	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
 func (ib *instBuf) emitABx(line, opcode, a, bx int) {
-	ib.insts = append(ib.insts, uint32(bx<<14|a<<6|opcode))
+	i := bx<<14 | a<<6 | opcode
+	ib.insts = append(ib.insts, uint32(i))
 	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
-func (ib *instBuf) emitAsBx(line, opcode, a, b int) {
-	ib.insts = append(ib.insts, uint32((b+MAXARG_sBx)<<14|a<<6|opcode))
+func (ib *instBuf) emitAsBx(line, opcode, a, sBx int) {
+	i := (sBx+MAXARG_sBx)<<14 | a<<6 | opcode
+	ib.insts = append(ib.insts, uint32(i))
 	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
 func (ib *instBuf) emitAx(line, opcode, ax int) {
-	ib.insts = append(ib.insts, uint32(ax<<6|opcode))
+	i := ax<<6 | opcode
+	ib.insts = append(ib.insts, uint32(i))
 	ib.lineNums = append(ib.lineNums, uint32(line))
 }
 
@@ -68,7 +65,7 @@ func (ib *instBuf) emitLoadBool(line, a, b, c int) {
 }
 
 // r[a] = kst[bx]
-func (ib *instBuf) emitLoadK(line, a, idx int) {
+func (ib *instBuf) emitLoadK(line, a int, idx int) {
 	if idx < (1 << 18) {
 		ib.emitABx(line, OP_LOADK, a, idx)
 	} else {
@@ -197,8 +194,9 @@ func (ib *instBuf) emitUnaryOp(line, op, a, b int) {
 }
 
 // r[a] = rk[b] op rk[c]
+// arith & bitwise & relational
 func (ib *instBuf) emitBinaryOp(line, op, a, b, c int) {
-	if opcode, found := binOpMap[op]; found {
+	if opcode, found := arithAndBitwiseBinops[op]; found {
 		ib.emitABC(line, opcode, a, b, c)
 	} else {
 		switch op {

@@ -8,6 +8,11 @@ type ThreadStatus = int
 type GoFunction func(LuaState) int
 
 type LuaState interface {
+	// AuxLib
+	BasicAPI
+}
+
+type BasicAPI interface {
 	// stack manipulations
 	GetTop() int
 	AbsIndex(idx int) int
@@ -44,6 +49,7 @@ type LuaState interface {
 	PushInteger(i int64)
 	PushNumber(f float64)
 	PushString(s string)
+	PushFString(fmt string, a ...interface{}) string
 	// arithmetic functions
 	Arith(op ArithOp)
 	Compare(idx1, idx2 int, op CompareOp) bool

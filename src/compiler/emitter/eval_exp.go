@@ -1,12 +1,10 @@
 package emitter
 
-import (
-	. "compiler/ast"
-	"compiler/lexer"
-	"vm"
-)
+import . "compiler/ast"
+import . "compiler/lexer"
+import . "vm"
 
-// type of operands
+// kind of operands
 const (
 	ArgConst = 1 // const index
 	ArgReg   = 2 // register index
@@ -15,7 +13,7 @@ const (
 	ArgRU    = ArgReg | ArgUpval
 )
 
-func (fi *funcInfo) evalExp(node Exp, a, n int) {
+func evalExp(fi *funcInfo, node Exp, a, n int) {
 	switch exp := node.(type) {
 	case *NilExp:
 		fi.emitLoadNil(exp.Line, a, n)
@@ -30,150 +28,100 @@ func (fi *funcInfo) evalExp(node Exp, a, n int) {
 	case *StringExp:
 		fi.emitLoadK(exp.Line, a, fi.indexOfConstant(exp.Str))
 	case *ParensExp:
-		fi.evalExp(exp.Exp, a, 1)
+		evalExp(fi, exp.Exp, a, 1)
 	case *VarargExp:
-		fi.evalVarargExp(exp, a, n)
+		evalVarargExp(fi, exp, a, n)
 	case *FuncDefExp:
-		fi.evalFuncDefExp(exp, a)
+		evalFuncDefExp(fi, exp, a)
 	case *TableCtorExp:
-		fi.evalTableCtorExp(exp, a)
+		evalTableCtorExp(fi, exp, a)
 	case *UnopExp:
-		fi.evalUnopExp(exp, a)
+		evalUnopExp(fi, exp, a)
 	case *BinopExp:
-		fi.evalBinopExp(exp, a)
+		evalBinopExp(fi, exp, a)
 	case *ConcatExp:
-		fi.evalConcatExp(exp, a)
+		evalConcatExp(fi, exp, a)
 	case *NameExp:
-		fi.evalNameExp(exp, a)
+		evalNameExp(fi, exp, a)
 	case *TableAccessExp:
-		fi.evalTableAccessExp(exp, a)
+		evalTableAccessExp(fi, exp, a)
 	case *FuncCallExp:
-		fi.evalFuncCallExp(exp, a, n)
+		evalFuncCallExp(fi, exp, a, n)
 	}
 }
 
-func (fi *funcInfo) evalFuncCallExp(exp *FuncCallExp, a int, n int) {
-	nArgs := fi.prepFuncCall(exp, a)
-	fi.emitCall(exp.Line, a, nArgs, n)
-}
-
-func (fi *funcInfo) evalTableAccessExp(exp *TableAccessExp, a int) {
-	regsBefore := fi.usedRegs
-	b, kindB := fi.expToOpArg(exp.PrefixExp, ArgRU)
-	c, _ := fi.expToOpArg(exp.KeyExp, ArgRK)
-	fi.usedRegs = regsBefore
-
-	if kindB == ArgUpval {
-		fi.emitGetTabUp(exp.LastLine, a, b, c)
-	} else {
-		fi.emitGetTable(exp.LastLine, a, b, c)
+func evalVarargExp(fi *funcInfo, node *VarargExp, a, n int) {
+	if !fi.isVararg {
+		panic("cannot use '...' outside a vararg function")
 	}
+	fi.emitVararg(node.Line, a, n)
 }
 
-func (fi *funcInfo) evalNameExp(exp *NameExp, a int) {
-	if r := fi.slotOfLocalVar(exp.Name); r >= 0 {
-		fi.emitMove(exp.Line, a, r)
-	} else if idx := fi.indexOfUpval(exp.Name); idx >= 0 {
-		fi.emitGetUpval(exp.Line, a, idx)
-	} else {
-		fi.evalTableAccessExp(&TableAccessExp{
-			LastLine: exp.Line,
-			PrefixExp: &NameExp{
-				Line: exp.Line,
-				Name: "_ENV",
-			},
-			KeyExp: &StringExp{
-				Line: exp.Line,
-				Str:  exp.Name,
-			},
-		}, a)
+// f[a] := function(args) body end
+func evalFuncDefExp(fi *funcInfo, node *FuncDefExp, a int) {
+	subFI := newFuncInfo(fi, node)
+	fi.subFuncs = append(fi.subFuncs, subFI)
+
+	for _, param := range node.Params {
+		subFI.addLocVar(param, 0)
 	}
+
+	evalBlock(subFI, node.Block)
+	subFI.exitScope(subFI.pc() + 2)
+	subFI.emitReturn(node.LastLine, 0, 0)
+
+	bx := len(fi.subFuncs) - 1
+	fi.emitClosure(node.LastLine, a, bx)
 }
 
-func (fi *funcInfo) evalConcatExp(exp *ConcatExp, a int) {
-	for _, subExp := range exp.Exps {
-		a := fi.allocReg()
-		fi.evalExp(subExp, a, 1)
-	}
-	c := fi.usedRegs - 1
-	b := c - len(exp.Exps) + 1
-	fi.freeRegs(c - b + 1)
-	fi.emitABC(exp.Line, vm.OP_CONCAT, a, b, c)
-}
-
-func (fi *funcInfo) evalUnopExp(exp *UnopExp, a int) {
-	regsBefore := fi.usedRegs
-	b, _ := fi.expToOpArg(exp.Exp, ArgReg)
-	fi.emitUnaryOp(exp.Line, exp.Op, a, b)
-	fi.usedRegs = regsBefore
-}
-
-func (fi *funcInfo) evalBinopExp(exp *BinopExp, a int) {
-	switch exp.Op {
-	case lexer.TOKEN_OP_AND, lexer.TOKEN_OP_OR:
-		regsBefore := fi.usedRegs
-		b, _ := fi.expToOpArg(exp.Exp1, ArgReg)
-		fi.usedRegs = regsBefore
-		if exp.Op == lexer.TOKEN_OP_AND {
-			fi.emitTestSet(exp.Line, a, b, 0)
-		} else {
-			fi.emitTestSet(exp.Line, a, b, 1)
-		}
-		pcJmp := fi.emitJmp(exp.Line, 0, 0)
-		fi.usedRegs = regsBefore
-		fi.emitMove(exp.Line, a, b)
-		fi.setSBx(pcJmp, fi.pc()-pcJmp)
-	default:
-		regsBefore := fi.usedRegs
-		b, _ := fi.expToOpArg(exp.Exp1, ArgRK)
-		c, _ := fi.expToOpArg(exp.Exp2, ArgRK)
-		fi.emitBinaryOp(exp.Line, exp.Op, a, b, c)
-		fi.usedRegs = regsBefore
-	}
-}
-
-func (fi *funcInfo) evalTableCtorExp(exp *TableCtorExp, a int) {
+func evalTableCtorExp(fi *funcInfo, node *TableCtorExp, a int) {
 	nArr := 0
-	for _, keyExp := range exp.KeyExps {
+	for _, keyExp := range node.KeyExps {
 		if keyExp == nil {
 			nArr++
 		}
 	}
-	nExps := len(exp.KeyExps)
-	multRet := nExps > 0 && isVarargOrFuncCall(exp.ValExps[nExps-1])
-	fi.emitNewTable(exp.Line, a, nArr, nExps-nArr)
+	nExps := len(node.KeyExps)
+	multRet := nExps > 0 &&
+		isVarargOrFuncCall(node.ValExps[nExps-1])
+
+	fi.emitNewTable(node.Line, a, nArr, nExps-nArr)
+
 	arrIdx := 0
-	for i, keyExp := range exp.KeyExps {
-		valExp := exp.ValExps[i]
+	for i, keyExp := range node.KeyExps {
+		valExp := node.ValExps[i]
+
 		if keyExp == nil {
 			arrIdx++
 			tmp := fi.allocReg()
 			if i == nExps-1 && multRet {
-				fi.evalExp(valExp, tmp, -1)
+				evalExp(fi, valExp, tmp, -1)
 			} else {
-				fi.evalExp(valExp, tmp, 1)
+				evalExp(fi, valExp, tmp, 1)
 			}
-			if arrIdx%50 == 0 || arrIdx == nArr {
+
+			if arrIdx%50 == 0 || arrIdx == nArr { // LFIELDS_PER_FLUSH
 				n := arrIdx % 50
 				if n == 0 {
 					n = 50
 				}
 				fi.freeRegs(n)
 				line := lastLineOf(valExp)
-				c := (arrIdx-1)/50 + 1
+				c := (arrIdx-1)/50 + 1 // todo: c > 0xFF
 				if i == nExps-1 && multRet {
 					fi.emitSetList(line, a, 0, c)
 				} else {
 					fi.emitSetList(line, a, n, c)
 				}
 			}
+
 			continue
 		}
 
 		b := fi.allocReg()
-		fi.evalExp(keyExp, b, 1)
+		evalExp(fi, keyExp, b, 1)
 		c := fi.allocReg()
-		fi.evalExp(valExp, c, 1)
+		evalExp(fi, valExp, c, 1)
 		fi.freeRegs(2)
 
 		line := lastLineOf(valExp)
@@ -181,62 +129,168 @@ func (fi *funcInfo) evalTableCtorExp(exp *TableCtorExp, a int) {
 	}
 }
 
-func (fi *funcInfo) evalFuncDefExp(exp *FuncDefExp, a int) {
-	subFunc := newFuncInfo(fi, exp)
-	fi.subFuncs = append(fi.subFuncs, subFunc)
+// r[a] := op exp
+func evalUnopExp(fi *funcInfo, node *UnopExp, a int) {
+	oldRegs := fi.usedRegs
+	b, _ := expToOpArg(fi, node.Exp, ArgReg)
+	fi.emitUnaryOp(node.Line, node.Op, a, b)
+	fi.usedRegs = oldRegs
+}
 
-	for _, param := range exp.Params {
-		subFunc.addLocVar(param, 0)
+// r[a] := exp1 op exp2
+func evalBinopExp(fi *funcInfo, node *BinopExp, a int) {
+	switch node.Op {
+	case TOKEN_OP_AND, TOKEN_OP_OR:
+		oldRegs := fi.usedRegs
+
+		b, _ := expToOpArg(fi, node.Exp1, ArgReg)
+		fi.usedRegs = oldRegs
+		if node.Op == TOKEN_OP_AND {
+			fi.emitTestSet(node.Line, a, b, 0)
+		} else {
+			fi.emitTestSet(node.Line, a, b, 1)
+		}
+		pcOfJmp := fi.emitJmp(node.Line, 0, 0)
+
+		b, _ = expToOpArg(fi, node.Exp2, ArgReg)
+		fi.usedRegs = oldRegs
+		fi.emitMove(node.Line, a, b)
+		fi.fixSbx(pcOfJmp, fi.pc()-pcOfJmp)
+	default:
+		oldRegs := fi.usedRegs
+		b, _ := expToOpArg(fi, node.Exp1, ArgRK)
+		c, _ := expToOpArg(fi, node.Exp2, ArgRK)
+		fi.emitBinaryOp(node.Line, node.Op, a, b, c)
+		fi.usedRegs = oldRegs
+	}
+}
+
+// r[a] := exp1 .. exp2
+func evalConcatExp(fi *funcInfo, node *ConcatExp, a int) {
+	for _, subExp := range node.Exps {
+		a := fi.allocReg()
+		evalExp(fi, subExp, a, 1)
 	}
 
-	subFunc.evalBlock(exp.Block)
-	subFunc.exitScope(subFunc.pc() + 2)
-	subFunc.emitReturn(exp.LastLine, 0, 0)
-	fi.emitClosure(exp.LastLine, a, len(fi.subFuncs)-1)
+	c := fi.usedRegs - 1
+	b := c - len(node.Exps) + 1
+	fi.freeRegs(c - b + 1)
+	fi.emitABC(node.Line, OP_CONCAT, a, b, c)
 }
 
-func (fi *funcInfo) evalVarargExp(exp *VarargExp, a int, n int) {
-	if !fi.isVararg {
-		panic("cannot use '...' outside a vararg function")
+// r[a] := name
+func evalNameExp(fi *funcInfo, node *NameExp, a int) {
+	if r := fi.slotOfLocVar(node.Name); r >= 0 {
+		fi.emitMove(node.Line, a, r)
+	} else if idx := fi.indexOfUpval(node.Name); idx >= 0 {
+		fi.emitGetUpval(node.Line, a, idx)
+	} else { // x => _ENV['x']
+		taExp := &TableAccessExp{
+			LastLine:  node.Line,
+			PrefixExp: &NameExp{node.Line, "_ENV"},
+			KeyExp:    &StringExp{node.Line, node.Name},
+		}
+		evalTableAccessExp(fi, taExp, a)
 	}
-	fi.emitVararg(exp.Line, a, n)
 }
 
-func (fi *funcInfo) evalTailCallExp(exp *FuncCallExp, a int) {
-	nArgs := fi.prepFuncCall(exp, a)
-	fi.emitTailCall(exp.Line, a, nArgs)
+// r[a] := prefix[key]
+func evalTableAccessExp(fi *funcInfo, node *TableAccessExp, a int) {
+	oldRegs := fi.usedRegs
+	b, kindB := expToOpArg(fi, node.PrefixExp, ArgRU)
+	c, _ := expToOpArg(fi, node.KeyExp, ArgRK)
+	fi.usedRegs = oldRegs
+
+	if kindB == ArgUpval {
+		fi.emitGetTabUp(node.LastLine, a, b, c)
+	} else {
+		fi.emitGetTable(node.LastLine, a, b, c)
+	}
 }
 
-func (fi *funcInfo) prepFuncCall(exp *FuncCallExp, a int) int {
-	nArgs := len(exp.Args)
+// r[a] := f(args)
+func evalFuncCallExp(fi *funcInfo, node *FuncCallExp, a, n int) {
+	nArgs := prepFuncCall(fi, node, a)
+	fi.emitCall(node.Line, a, nArgs, n)
+}
+
+// return f(args)
+func cgTailCallExp(fi *funcInfo, node *FuncCallExp, a int) {
+	nArgs := prepFuncCall(fi, node, a)
+	fi.emitTailCall(node.Line, a, nArgs)
+}
+
+func prepFuncCall(fi *funcInfo, node *FuncCallExp, a int) int {
+	nArgs := len(node.Args)
 	lastArgIsVarargOrFuncCall := false
 
-	fi.evalExp(exp.PrefixExp, a, 1)
-	if exp.NameExp != nil {
+	evalExp(fi, node.PrefixExp, a, 1)
+	if node.NameExp != nil {
 		fi.allocReg()
-		c, k := fi.expToOpArg(exp.NameExp, ArgRK)
-		fi.emitSelf(exp.Line, a, a, c)
+		c, k := expToOpArg(fi, node.NameExp, ArgRK)
+		fi.emitSelf(node.Line, a, a, c)
 		if k == ArgReg {
-			fi.freeReg()
+			fi.freeRegs(1)
 		}
 	}
-
-	for i, arg := range exp.Args {
+	for i, arg := range node.Args {
 		tmp := fi.allocReg()
 		if i == nArgs-1 && isVarargOrFuncCall(arg) {
 			lastArgIsVarargOrFuncCall = true
-			fi.evalExp(arg, tmp, -1)
+			evalExp(fi, arg, tmp, -1)
 		} else {
-			fi.evalExp(arg, tmp, 1)
+			evalExp(fi, arg, tmp, 1)
 		}
 	}
 	fi.freeRegs(nArgs)
-	if exp.NameExp != nil {
+
+	if node.NameExp != nil {
 		fi.freeReg()
 		nArgs++
 	}
 	if lastArgIsVarargOrFuncCall {
 		nArgs = -1
 	}
+
 	return nArgs
+}
+
+func expToOpArg(fi *funcInfo, node Exp, argKinds int) (arg, argKind int) {
+	if argKinds&ArgConst > 0 {
+		idx := -1
+		switch x := node.(type) {
+		case *NilExp:
+			idx = fi.indexOfConstant(nil)
+		case *FalseExp:
+			idx = fi.indexOfConstant(false)
+		case *TrueExp:
+			idx = fi.indexOfConstant(true)
+		case *IntegerExp:
+			idx = fi.indexOfConstant(x.Val)
+		case *FloatExp:
+			idx = fi.indexOfConstant(x.Val)
+		case *StringExp:
+			idx = fi.indexOfConstant(x.Str)
+		}
+		if idx >= 0 && idx <= 0xFF {
+			return 0x100 + idx, ArgConst
+		}
+	}
+
+	if nameExp, ok := node.(*NameExp); ok {
+		if argKinds&ArgReg > 0 {
+			if r := fi.slotOfLocVar(nameExp.Name); r >= 0 {
+				return r, ArgReg
+			}
+		}
+		if argKinds&ArgUpval > 0 {
+			if idx := fi.indexOfUpval(nameExp.Name); idx >= 0 {
+				return idx, ArgUpval
+			}
+		}
+	}
+
+	a := fi.allocReg()
+	evalExp(fi, node, a, 1)
+	return a, ArgReg
 }

@@ -1,14 +1,15 @@
 package binchunk
 
 import (
-	"api"
+	. "api"
 	"encoding/binary"
 	"math"
 )
 
 type writer struct {
-	buf      []byte
-	idx, cap int
+	buf []byte
+	idx int
+	cap int
 }
 
 func (w *writer) data() []byte {
@@ -30,10 +31,10 @@ func (w *writer) writeByte(b byte) {
 	w.idx += 1
 }
 
-func (w *writer) writeBytes(bs []byte) {
-	w.grow(len(bs))
-	copy(w.buf[w.idx:], bs)
-	w.idx += len(bs)
+func (w *writer) writeBytes(s []byte) {
+	w.grow(len(s))
+	copy(w.buf[w.idx:], s)
+	w.idx += len(s)
 }
 
 func (w *writer) writeUint32(i uint32) {
@@ -64,10 +65,10 @@ func (w *writer) writeString(s string) {
 	}
 
 	size += 1
-	if size < 0xff {
+	if size < 0xFF {
 		w.writeByte(byte(size))
 	} else {
-		w.writeByte(0xff)
+		w.writeByte(0xFF)
 		w.writeUint64(uint64(size))
 	}
 	w.writeBytes([]byte(s))
@@ -79,6 +80,7 @@ func (w *writer) writeHeader() {
 	w.writeByte(LUAC_FORMAT)
 	w.writeBytes([]byte(LUAC_DATA))
 	w.writeByte(CINT_SIZE)
+	w.writeByte(CSIZET_SIZE)
 	w.writeByte(INSTRUCTION_SIZE)
 	w.writeByte(LUA_INTEGER_SIZE)
 	w.writeByte(LUA_NUMBER_SIZE)
@@ -86,13 +88,12 @@ func (w *writer) writeHeader() {
 	w.writeLuaNumber(LUAC_NUM)
 }
 
-func (w writer) writeProto(proto *Prototype, parentSource string) {
+func (w *writer) writeProto(proto *Prototype, parentSource string) {
 	if proto.Source == parentSource {
 		w.writeString("")
 	} else {
 		w.writeString(proto.Source)
 	}
-
 	w.writeUint32(proto.LineDefined)
 	w.writeUint32(proto.LastLineDefined)
 	w.writeByte(proto.NumParams)
@@ -124,25 +125,25 @@ func (w *writer) writeConstants(constants []interface{}) {
 func (w *writer) writeConstant(constant interface{}) {
 	switch x := constant.(type) {
 	case nil:
-		w.writeByte(byte(api.LUA_TNIL))
+		w.writeByte(byte(LUA_TNIL))
 	case bool:
-		w.writeByte(byte(api.LUA_TBOOLEAN))
+		w.writeByte(byte(LUA_TBOOLEAN))
 		if x {
 			w.writeByte(1)
 		} else {
 			w.writeByte(0)
 		}
 	case int64:
-		w.writeByte(byte(api.LUA_TNUMINT))
+		w.writeByte(byte(LUA_TNUMINT))
 		w.writeLuaInteger(x)
 	case float64:
-		w.writeByte(byte(api.LUA_TNUMFLT))
+		w.writeByte(byte(LUA_TNUMFLT))
 		w.writeLuaNumber(x)
-	case string:
-		w.writeByte(byte(api.LUA_TSHRSTR))
+	case string: // todo
+		w.writeByte(byte(LUA_TSHRSTR))
 		w.writeString(x)
 	default:
-		panic("unreachable")
+		panic("unreachable!")
 	}
 }
 
@@ -154,16 +155,23 @@ func (w *writer) writeUpvalues(upvalues []Upvalue) {
 	}
 }
 
-func (w *writer) writeLineInfo(info []uint32) {
-	w.writeUint32(uint32(len(info)))
-	for _, line := range info {
-		w.writeUint32(line)
+func (w *writer) writeProtos(protos []*Prototype, parentSource string) {
+	w.writeUint32(uint32(len(protos)))
+	for _, proto := range protos {
+		w.writeProto(proto, parentSource)
 	}
 }
 
-func (w *writer) writeLocVars(vars []LocVar) {
-	w.writeUint32(uint32(len(vars)))
-	for _, locVar := range vars {
+func (w *writer) writeLineInfo(lineInfo []uint32) {
+	w.writeUint32(uint32(len(lineInfo)))
+	for _, line := range lineInfo {
+		w.writeUint32(line) // todo
+	}
+}
+
+func (w *writer) writeLocVars(locVars []LocVar) {
+	w.writeUint32(uint32(len(locVars)))
+	for _, locVar := range locVars {
 		w.writeString(locVar.VarName)
 		w.writeUint32(locVar.StartPC)
 		w.writeUint32(locVar.EndPC)
@@ -174,12 +182,5 @@ func (w *writer) writeUpvalueNames(names []string) {
 	w.writeUint32(uint32(len(names)))
 	for _, name := range names {
 		w.writeString(name)
-	}
-}
-
-func (w *writer) writeProtos(protos []*Prototype, source string) {
-	w.writeUint32(uint32(len(protos)))
-	for _, proto := range protos {
-		w.writeProto(proto, source)
 	}
 }

@@ -1,7 +1,9 @@
 package emitter
 
-import . "compiler/ast"
-import . "binchunk"
+import (
+	. "binchunk"
+	. "compiler/ast"
+)
 
 func GenProto(chunk *Block) *Prototype {
 	fd := &FuncDefExp{
@@ -12,8 +14,8 @@ func GenProto(chunk *Block) *Prototype {
 
 	fi := newFuncInfo(nil, fd)
 	fi.addLocVar("_ENV", 0)
-	fi.evalFuncDefExp(fd, 0)
-	return fi.subFuncs[0].toProto()
+	evalFuncDefExp(fi, fd, 0)
+	return toProto(fi.subFuncs[0])
 }
 
 func isVarargOrFuncCall(exp Exp) bool {

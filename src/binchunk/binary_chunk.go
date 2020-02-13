@@ -14,15 +14,6 @@ const (
 	LUAC_NUM         = 370.5
 )
 
-const (
-	TAG_NIL       = 0x00
-	TAG_BOOLEAN   = 0x01
-	TAG_NUMBER    = 0x03
-	TAG_INTEGER   = 0x13
-	TAG_SHORT_STR = 0x04
-	TAG_LONG_STR  = 0x14
-)
-
 type Upvalue struct {
 	Instack, Idx byte
 }
@@ -43,12 +34,6 @@ type Prototype struct {
 	LineInfo                          []uint32
 	LocVars                           []LocVar
 	UpvalueNames                      []string
-}
-
-type binaryChunk struct {
-	header
-	sizeUpvalues byte
-	mainFunc     *Prototype
 }
 
 type header struct {
@@ -83,4 +68,14 @@ func List(proto *Prototype, full bool) string {
 
 func IsBinaryChunk(data []byte) bool {
 	return len(data) > 4 && string(data[:4]) == LUA_SIGNATURE
+}
+
+func StripDebug(proto *Prototype) {
+	proto.Source = ""
+	proto.LineInfo = nil
+	proto.LocVars = nil
+	proto.UpvalueNames = nil
+	for _, p := range proto.Protos {
+		StripDebug(p)
+	}
 }

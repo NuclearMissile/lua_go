@@ -13,7 +13,7 @@ func parseBlock(lexer *Lexer) *Block {
 
 func parseStats(lexer *Lexer) []Stat {
 	stats := make([]Stat, 0, 8)
-	for !_isReturnOrBlockEnd(lexer.LookAhead()) {
+	for !isReturnOrBlockEnd(lexer.LookAhead()) {
 		stat := parseStat(lexer)
 		if _, ok := stat.(*EmptyStat); !ok {
 			stats = append(stats, stat)
@@ -22,7 +22,7 @@ func parseStats(lexer *Lexer) []Stat {
 	return stats
 }
 
-func _isReturnOrBlockEnd(tokenKind int) bool {
+func isReturnOrBlockEnd(tokenKind int) bool {
 	switch tokenKind {
 	case TOKEN_KW_RETURN, TOKEN_EOF, TOKEN_KW_END,
 		TOKEN_KW_ELSE, TOKEN_KW_ELSEIF, TOKEN_KW_UNTIL:

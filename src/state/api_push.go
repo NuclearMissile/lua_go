@@ -1,6 +1,9 @@
 package state
 
-import "api"
+import (
+	"api"
+	"fmt"
+)
 
 func (self *luaState) PushNil() {
 	self.stack.push(nil)
@@ -16,6 +19,12 @@ func (self *luaState) PushInteger(n int64) {
 
 func (self *luaState) PushNumber(n float64) {
 	self.stack.push(n)
+}
+
+func (self *luaState) PushFString(fmtS string, a ...interface{}) string {
+	str := fmt.Sprintf(fmtS, a...)
+	self.stack.push(str)
+	return str
 }
 
 func (self *luaState) PushString(s string) {

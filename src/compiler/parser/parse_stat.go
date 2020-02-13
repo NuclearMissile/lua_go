@@ -139,14 +139,14 @@ func parseForStat(lexer *Lexer) Stat {
 	lineOfFor, _ := lexer.NextTokenOfKind(TOKEN_KW_FOR)
 	_, name := lexer.NextIdentifier()
 	if lexer.LookAhead() == TOKEN_OP_ASSIGN {
-		return _finishForNumStat(lexer, lineOfFor, name)
+		return finishForNumStat(lexer, lineOfFor, name)
 	} else {
-		return _finishForInStat(lexer, lineOfFor, name)
+		return finishForInStat(lexer, lineOfFor, name)
 	}
 }
 
 // for Name ‘=’ exp ‘,’ exp [‘,’ exp] do block end
-func _finishForNumStat(lexer *Lexer, lineOfFor int, varName string) *ForNumStat {
+func finishForNumStat(lexer *Lexer, lineOfFor int, varName string) *ForNumStat {
 	lexer.NextTokenOfKind(TOKEN_OP_ASSIGN) // for name =
 	initExp := parseExp(lexer)             // exp
 	lexer.NextTokenOfKind(TOKEN_SEP_COMMA) // ,
@@ -157,7 +157,7 @@ func _finishForNumStat(lexer *Lexer, lineOfFor int, varName string) *ForNumStat 
 		lexer.NextToken()         // ,
 		stepExp = parseExp(lexer) // exp
 	} else {
-		stepExp = &IntegerExp{lexer.Line(), 1}
+		stepExp = &IntegerExp{Line: lexer.Line(), Val: 1}
 	}
 
 	lineOfDo, _ := lexer.NextTokenOfKind(TOKEN_KW_DO) // do
@@ -171,8 +171,8 @@ func _finishForNumStat(lexer *Lexer, lineOfFor int, varName string) *ForNumStat 
 // for namelist in explist do block end
 // namelist ::= Name {‘,’ Name}
 // explist ::= exp {‘,’ exp}
-func _finishForInStat(lexer *Lexer, lineOfFor int, name0 string) *ForInStat {
-	nameList := _finishNameList(lexer, name0)         // for namelist
+func finishForInStat(lexer *Lexer, lineOfFor int, name0 string) *ForInStat {
+	nameList := finishNameList(lexer, name0)          // for namelist
 	lexer.NextTokenOfKind(TOKEN_KW_IN)                // in
 	expList := parseExpList(lexer)                    // explist
 	lineOfDo, _ := lexer.NextTokenOfKind(TOKEN_KW_DO) // do
@@ -182,7 +182,7 @@ func _finishForInStat(lexer *Lexer, lineOfFor int, name0 string) *ForInStat {
 }
 
 // namelist ::= Name {‘,’ Name}
-func _finishNameList(lexer *Lexer, name0 string) []string {
+func finishNameList(lexer *Lexer, name0 string) []string {
 	names := []string{name0}
 	for lexer.LookAhead() == TOKEN_SEP_COMMA {
 		lexer.NextToken()                 // ,
@@ -197,9 +197,9 @@ func _finishNameList(lexer *Lexer, name0 string) []string {
 func parseLocalAssignOrFuncDefStat(lexer *Lexer) Stat {
 	lexer.NextTokenOfKind(TOKEN_KW_LOCAL)
 	if lexer.LookAhead() == TOKEN_KW_FUNCTION {
-		return _finishLocalFuncDefStat(lexer)
+		return finishLocalFuncDefStat(lexer)
 	} else {
-		return _finishLocalVarDeclStat(lexer)
+		return finishLocalVarDeclStat(lexer)
 	}
 }
 
@@ -218,7 +218,7 @@ not to `local f = function () body end`
  contains references to f.)
 */
 // local function Name funcbody
-func _finishLocalFuncDefStat(lexer *Lexer) *LocalFuncDefStat {
+func finishLocalFuncDefStat(lexer *Lexer) *LocalFuncDefStat {
 	lexer.NextTokenOfKind(TOKEN_KW_FUNCTION) // local function
 	_, name := lexer.NextIdentifier()        // name
 	fdExp := parseFuncDefExp(lexer)          // funcbody
@@ -226,9 +226,9 @@ func _finishLocalFuncDefStat(lexer *Lexer) *LocalFuncDefStat {
 }
 
 // local namelist [‘=’ explist]
-func _finishLocalVarDeclStat(lexer *Lexer) *LocalVarDeclStat {
-	_, name0 := lexer.NextIdentifier()        // local Name
-	nameList := _finishNameList(lexer, name0) // { , Name }
+func finishLocalVarDeclStat(lexer *Lexer) *LocalVarDeclStat {
+	_, name0 := lexer.NextIdentifier()       // local Name
+	nameList := finishNameList(lexer, name0) // { , Name }
 	var expList []Exp = nil
 	if lexer.LookAhead() == TOKEN_OP_ASSIGN {
 		lexer.NextToken()             // ==
@@ -251,7 +251,7 @@ func parseAssignOrFuncCallStat(lexer *Lexer) Stat {
 
 // varlist ‘=’ explist |
 func parseAssignStat(lexer *Lexer, var0 Exp) *AssignStat {
-	varList := _finishVarList(lexer, var0) // varlist
+	varList := finishVarList(lexer, var0)  // varlist
 	lexer.NextTokenOfKind(TOKEN_OP_ASSIGN) // =
 	expList := parseExpList(lexer)         // explist
 	lastLine := lexer.Line()
@@ -259,18 +259,18 @@ func parseAssignStat(lexer *Lexer, var0 Exp) *AssignStat {
 }
 
 // varlist ::= var {‘,’ var}
-func _finishVarList(lexer *Lexer, var0 Exp) []Exp {
-	vars := []Exp{_checkVar(lexer, var0)}      // var
+func finishVarList(lexer *Lexer, var0 Exp) []Exp {
+	vars := []Exp{checkVar(lexer, var0)}       // var
 	for lexer.LookAhead() == TOKEN_SEP_COMMA { // {
-		lexer.NextToken()                          // ,
-		exp := parsePrefixExp(lexer)               // var
-		vars = append(vars, _checkVar(lexer, exp)) //
+		lexer.NextToken()                         // ,
+		exp := parsePrefixExp(lexer)              // var
+		vars = append(vars, checkVar(lexer, exp)) //
 	} // }
 	return vars
 }
 
 // var ::=  Name | prefixexp ‘[’ exp ‘]’ | prefixexp ‘.’ Name
-func _checkVar(lexer *Lexer, exp Exp) Exp {
+func checkVar(lexer *Lexer, exp Exp) Exp {
 	switch exp.(type) {
 	case *NameExp, *TableAccessExp:
 		return exp

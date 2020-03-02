@@ -10,8 +10,14 @@ import (
 func (self *luaState) Load(chunk []byte, name, mode string) int {
 	var proto *binchunk.Prototype
 	if binchunk.IsBinaryChunk(chunk) {
+		if mode != "b" {
+			panic("Source mode is not 'b'")
+		}
 		proto = binchunk.Undump(chunk)
 	} else {
+		if mode != "t" {
+			panic("Source mode is not 't'")
+		}
 		proto = compiler.Compile(string(chunk), name)
 	}
 	c := newLuaClosure(proto)

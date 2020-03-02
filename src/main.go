@@ -53,6 +53,7 @@ func main() {
 		ls.Register("ipairs", iPairs)
 		ls.Register("pcall", pCall)
 		ls.Register("error", _error)
+		ls.Register("type", _type)
 		ls.Load(data, os.Args[1], "t")
 		ls.Call(0, 0)
 	}
@@ -125,6 +126,12 @@ func getMetatable(ls api.LuaState) int {
 
 func setMetatable(ls api.LuaState) int {
 	ls.SetMetatable(1)
+	return 1
+}
+
+func _type(ls api.LuaState) int {
+	t := ls.Type(1)
+	ls.PushString(ls.TypeName(t))
 	return 1
 }
 

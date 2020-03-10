@@ -116,7 +116,11 @@ function testFun(tab, fun)
 end
 
 tab = { key1 = "val1", key2 = "val2" };
-testFun(tab,
-        function(key, val)
-            return key .. "=" .. val;
-        end);
+testFun(tab, function(key, val)
+    return key .. "=" .. val;
+end);
+
+print("\n---test13---")
+x = 10
+print(_ENV.x)
+print(type(_ENV))

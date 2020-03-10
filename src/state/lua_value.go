@@ -45,7 +45,7 @@ func typeOf(val luaValue) api.LuaType {
 	case *luaState:
 		return api.LUA_TTHREAD
 	default:
-		panic("unkonwn type!")
+		panic("unknown type!")
 	}
 }
 

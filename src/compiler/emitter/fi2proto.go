@@ -21,10 +21,10 @@ func toProto(fi *funcInfo) *Prototype {
 		proto.LastLineDefined = 0
 	}
 	if proto.MaxStackSize < 2 {
-		proto.MaxStackSize = 2 // todo
+		proto.MaxStackSize = 2
 	}
 	if fi.isVararg {
-		proto.IsVararg = 1 // todo
+		proto.IsVararg = 1
 	}
 
 	return proto
